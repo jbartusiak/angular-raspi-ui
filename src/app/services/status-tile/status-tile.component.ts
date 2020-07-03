@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ServiceStatus } from "../state/services.reducer";
 
 @Component({
   selector: 'app-status-tile',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
     <mat-card class="Card">
       <mat-card-header>
         <div mat-card-avatar class="Avatar"><img alt="icon" class="Icon" src="{{ icon }}"></div>
-        <mat-card-title>{{title}} <app-blinker></app-blinker></mat-card-title>
+        <mat-card-title>{{title}} <app-blinker [status]="status"></app-blinker></mat-card-title>
         <mat-card-subtitle class="Subtitle">
           Service address:
           <a mat-button href="{{ href }}">{{ href }}</a>
@@ -31,6 +32,7 @@ export class StatusTileComponent implements OnInit {
   @Input() href: string;
   @Input() description: string;
   @Input() icon: string;
+  @Input() status: ServiceStatus;
 
   constructor() {
   }

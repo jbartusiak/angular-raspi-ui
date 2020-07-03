@@ -6,6 +6,7 @@
         [title]="server?.name"
         [href]="createURL(server)"
         [icon]="'../../../assets/raspi-icon.png'"
+        [status]="server?.actuator?.status"
         [showActions]="false">
       </app-status-tile>
     </div>
@@ -17,6 +18,7 @@
           [title]="service.name"
           [href]="createURL(service)"
           [icon]="service.icon"
+          [status]="server?.actuator?.status"
         ></app-status-tile>
       </div>
     </div>
