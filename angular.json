@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-raspi-ui2"
+    }
+  },
+  "defaultProject": "angular-raspi-ui2",
+  "cli": {
+    "analytics": "a29fea86-8119-482c-a679-a5639ae86846"
+  }
 }

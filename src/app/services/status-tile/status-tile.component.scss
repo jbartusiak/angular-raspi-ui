@@ -1,0 +1,12 @@
+.Card {
+  margin: 8px;
+  @media (max-width: 959px) {
+    min-width: 300px;
+  }
+}
+
+.button-row {
+  display: inline-flex;
+  min-width: 250px;
+  justify-content: space-evenly;
+}
