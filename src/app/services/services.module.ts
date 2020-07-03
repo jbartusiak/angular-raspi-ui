@@ -22,7 +22,7 @@ import { ServiceEffects } from "./state/services.effect";
     EffectsModule.forFeature([ServiceEffects]),
     MaterialModule,
     SharedModule,
-    StoreModule.forFeature('services', [reducer]),
+    StoreModule.forFeature('services', reducer),
     RouterModule.forChild(routes),
   ]
 })

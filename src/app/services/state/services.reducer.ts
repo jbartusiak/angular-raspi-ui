@@ -43,32 +43,46 @@ export interface State extends fromRoot.State {
 }
 
 export interface IServicesState {
-  [name: string]: IService;
+  error: string | null;
+  list: {
+    [name: string]: IService;
+  }
 }
 
 const initialState: IServicesState = {
-  'Raspi Backend Service': {
-    name: 'Raspi Backend Service',
-    uri: '192.168.0.254',
-    port: '8888',
-    actuator: {
-      status: ServiceStatus.UNKNOWN,
-      health: '/actuator/health',
-      parseStatus: /(status).*(UP)/,
+  error: null,
+  list: {
+    'Raspi Backend Service': {
+      name: 'Raspi Backend Service',
+      uri: '192.168.0.254',
+      port: '8888',
+      actuator: {
+        status: ServiceStatus.UNKNOWN,
+        health: '/actuator/health',
+        parseStatus: /(status).*(UP)/,
+      },
+      start: '',
+      stop: '',
+      restart: '',
     },
-    start: '',
-    stop: '',
-    restart: '',
-  },
+  }
 };
 
 export const reducer = (state = initialState, action: ServicesActions): IServicesState => {
   switch (action.type) {
-    case ServiceActionTypes.Load:
+    case ServiceActionTypes.LoadSuccess:
       return {
-        ...state
+        ...state,
+        list: {
+          ...action.payload
+        }
+      }
+    case ServiceActionTypes.LoadFail:
+      return {
+        ...state,
+        error: action.payload,
       }
     default:
-      return state;
+      return {...state};
   }
 }

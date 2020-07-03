@@ -12,9 +12,9 @@ export class Load implements Action {
 }
 
 export class LoadSuccess implements Action {
-  readonly type = ServiceActionTypes.Load;
+  readonly type = ServiceActionTypes.LoadSuccess;
 
-  constructor(public payload: IService[]) {
+  constructor(public payload: { [name: string]: IService }) {
   }
 }
 
