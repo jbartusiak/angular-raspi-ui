@@ -3,10 +3,7 @@
     <div fxFlex="100" fxFlex.gt-sm="30">
       <h1 class="Heading">Server</h1>
       <app-status-tile
-        [title]="server?.name"
-        [href]="createURL(server)"
-        [icon]="'../../../assets/raspi-icon.png'"
-        [status]="server?.actuator?.status"
+        [service]="server"
         [showActions]="false">
       </app-status-tile>
     </div>
@@ -15,10 +12,7 @@
       <div>
         <app-status-tile
           *ngFor="let service of services"
-          [title]="service.name"
-          [href]="createURL(service)"
-          [icon]="service.icon"
-          [status]="server?.actuator?.status"
+          [service]="service"
         ></app-status-tile>
       </div>
     </div>

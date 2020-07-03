@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../shared/material.module';
 
 import { ServicesComponent } from './services.component';
-import { StatusTileComponent } from './status-tile/status-tile.component';
+import { StatusTileComponent } from './containers/status-tile/status-tile.component';
 
 import { routes } from './routes';
 import { SharedModule } from '../shared/shared.module';

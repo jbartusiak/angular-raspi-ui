@@ -1,16 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ServiceStatus } from "../state/services.reducer";
+import { IService, ServiceStatus } from "../../state/services.reducer";
+import { Store } from "@ngrx/store";
+import * as actions from './../../state/services.actions';
 
 @Component({
   selector: 'app-status-tile',
   template: `
     <mat-card class="Card">
       <mat-card-header>
-        <div mat-card-avatar class="Avatar"><img alt="icon" class="Icon" src="{{ icon }}"></div>
-        <mat-card-title>{{title}} <app-blinker [status]="status"></app-blinker></mat-card-title>
+        <div mat-card-avatar class="Avatar"><img alt="icon" class="Icon" src="{{ service.icon }}"></div>
+        <mat-card-title>{{service.name}} <app-blinker [status]="service.actuator.status"></app-blinker></mat-card-title>
         <mat-card-subtitle class="Subtitle">
           Service address:
-          <a mat-button href="{{ href }}">{{ href }}</a>
+          <a mat-button href="{{ service.uri }}">{{ service.uri }}</a>
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
@@ -28,16 +30,13 @@ import { ServiceStatus } from "../state/services.reducer";
 export class StatusTileComponent implements OnInit {
 
   @Input() showActions: boolean;
-  @Input() title: string;
-  @Input() href: string;
-  @Input() description: string;
-  @Input() icon: string;
-  @Input() status: ServiceStatus;
+  @Input() service: IService;
 
-  constructor() {
+  constructor(private store: Store<ServiceStatus>) {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(new actions.GetServiceStatus(this.service));
   }
 
 }

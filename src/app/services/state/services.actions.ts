@@ -4,7 +4,10 @@ import { IService } from "./services.reducer";
 export enum ServiceActionTypes {
   Load = '[SERVICES] Load',
   LoadSuccess = '[SERVICES] Load Success',
-  LoadFail = '[SERVICES] Load Fail'
+  LoadFail = '[SERVICES] Load Fail',
+  GetServiceStatus = '[SERVICES] Get Status',
+  GetServiceStatusSuccess = '[SERVICES] Get Status Success',
+  GetServiceStatusFail = '[SERVICES] Get Status Fail',
 }
 
 export class Load implements Action {
@@ -25,5 +28,22 @@ export class LoadFail implements Action {
   }
 }
 
+export class GetServiceStatus implements Action {
+  readonly type = ServiceActionTypes.GetServiceStatus;
+  constructor(public payload: IService) {
+  }
+}
+
+export class GetServiceStatusSuccess implements Action {
+  readonly type = ServiceActionTypes.GetServiceStatusSuccess;
+}
+
+export class GetServiceStatusFail implements Action {
+  readonly type = ServiceActionTypes.GetServiceStatusFail;
+
+  constructor(public payload: string) {
+  }
+}
+
 export type ServicesActions =
-  Load | LoadSuccess | LoadFail;
+  Load | LoadSuccess | LoadFail | GetServiceStatus | GetServiceStatusSuccess | GetServiceStatusFail;
