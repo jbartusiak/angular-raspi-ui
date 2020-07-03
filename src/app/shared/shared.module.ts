@@ -9,6 +9,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BlinkerComponent } from './components/blinker/blinker.component';
 import { HttpClientModule } from "@angular/common/http";
+import { StoreModule } from "@ngrx/store";
+import * as fromServices from './../services/state/services.reducer';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { HttpClientModule } from "@angular/common/http";
     HttpClientModule,
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    StoreModule.forFeature('services', fromServices.reducer)
   ]
 })
 export class SharedModule {

@@ -1,47 +1,35 @@
-import { Component, Input } from '@angular/core';
-import { NavbarItem } from './navbar.types';
+import { AfterContentInit, Component, OnDestroy } from '@angular/core';
+import { select, Store } from "@ngrx/store";
+import { IFeatureRoute, IServicesState } from "../../../services/state/services.reducer";
+import { Subscription } from "rxjs";
+import * as servicesSelectors from './../../../services/state/service.selectors';
+import { flatMap } from "rxjs/operators";
 
 @Component({
   selector: 'navbar-component',
-  template: `
-    <mat-toolbar class="Toolbar" color="primary">
-      <mat-toolbar-row>
-        <button
-          mat-icon-button
-          class="example-icon"
-          aria-label="Example icon-button with menu icon"
-          (click)="panelOpened = !panelOpened"
-        >
-          <mat-icon>menu</mat-icon>
-        </button>
-        <span>{{name}}</span>
-        <span style="flex: 1 1 auto;"></span>
-        <mat-slide-toggle (click)="swapTheme()" color="accent">
-          <mat-icon>brightness_high</mat-icon>
-        </mat-slide-toggle>
-      </mat-toolbar-row>
-      <mat-toolbar-row
-        class="Navbar"
-        [class.Hidden]="!panelOpened"
-        [class.Show]="panelOpened"
-      >
-        <div *ngFor="let item of items">
-        <button
-          mat-button
-          [routerLink]="item.link"
-          [disabled]="item.disabled"
-        >
-          {{ item.label }}</button>
-        </div>
-      </mat-toolbar-row>
-    </mat-toolbar>
-  `,
-  styleUrls: ['./navbar.component.scss'],
+  templateUrl: './navbar.component.html',
+  styleUrls: [ './navbar.component.scss' ],
 })
-export class NavbarComponent {
-  @Input() items: NavbarItem[];
+export class NavbarComponent implements AfterContentInit, OnDestroy {
+  items: IFeatureRoute[];
   name = 'Raspberry PI';
   panelOpened = false;
+
+  subscription$: Subscription;
+
+  constructor(private store: Store<IServicesState>) {
+  }
+
+  ngAfterContentInit(): void {
+    this.subscription$ = this.store.pipe(
+      select(servicesSelectors.getServices),
+      flatMap(res => Object.values(res).map(el=>el.featureRoutes)),
+    ).subscribe(res => this.items = res);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
+  }
 
   swapTheme(): void {
     window.document.body.classList.toggle('theme-dark');

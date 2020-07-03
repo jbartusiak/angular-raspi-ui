@@ -4,7 +4,7 @@ import { NavbarItem } from './shared/components/navbar/navbar.types';
 @Component({
   selector: 'app-root',
   template: `
-    <navbar-component [items]="navitems"></navbar-component>
+    <navbar-component></navbar-component>
     <router-outlet></router-outlet>
   `,
 })
