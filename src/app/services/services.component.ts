@@ -15,7 +15,7 @@ export class ServicesComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('hello');
-    this.store.dispatch(new productActions.FetchConfiguration());
+    this.store.dispatch(new productActions.Load());
   }
 
 }

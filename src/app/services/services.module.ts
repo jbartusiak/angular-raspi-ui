@@ -10,6 +10,8 @@ import { routes } from './routes';
 import { SharedModule } from '../shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from "./state/services.reducer";
+import { EffectsModule } from "@ngrx/effects";
+import { ServiceEffects } from "./state/services.effect";
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { reducer } from "./state/services.reducer";
     StatusTileComponent,
   ],
   imports: [
+    EffectsModule.forFeature([ServiceEffects]),
     MaterialModule,
     SharedModule,
     StoreModule.forFeature('services', [reducer]),

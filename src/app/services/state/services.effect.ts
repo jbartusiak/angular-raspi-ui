@@ -13,8 +13,8 @@ export class ServiceEffects {
   }
 
   @Effect()
-  fetchConfiguration$ = this.$actions.pipe(
-    ofType(productActions.ServiceActionTypes.FetchConfiguration),
+  loadServices$ = this.$actions.pipe(
+    ofType(productActions.ServiceActionTypes.Load),
     mergeMap(() => this.configurationService.$fetchConfiguration().pipe(
       map(result => console.log(result))
     ))

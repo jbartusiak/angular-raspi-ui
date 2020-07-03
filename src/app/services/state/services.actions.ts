@@ -1,11 +1,29 @@
 import { Action } from '@ngrx/store';
+import { IService } from "./services.reducer";
 
 export enum ServiceActionTypes {
-  FetchConfiguration = '[SERVICES] Fetch Configuration'
+  Load = '[SERVICES] Load',
+  LoadSuccess = '[SERVICES] Load Success',
+  LoadFail = '[SERVICES] Load Fail'
 }
 
-export class FetchConfiguration implements Action {
-  readonly type = ServiceActionTypes.FetchConfiguration;
+export class Load implements Action {
+  readonly type = ServiceActionTypes.Load;
 }
 
-export type ServicesActions = FetchConfiguration;
+export class LoadSuccess implements Action {
+  readonly type = ServiceActionTypes.Load;
+
+  constructor(public payload: IService[]) {
+  }
+}
+
+export class LoadFail implements Action {
+  readonly type = ServiceActionTypes.LoadFail;
+
+  constructor(public payload: string) {
+  }
+}
+
+export type ServicesActions =
+  Load | LoadSuccess | LoadFail;

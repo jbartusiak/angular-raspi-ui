@@ -64,7 +64,7 @@ const initialState: IServicesState = {
 
 export const reducer = (state = initialState, action: ServicesActions): IServicesState => {
   switch (action.type) {
-    case ServiceActionTypes.FetchConfiguration:
+    case ServiceActionTypes.Load:
       return {
         ...state
       }
