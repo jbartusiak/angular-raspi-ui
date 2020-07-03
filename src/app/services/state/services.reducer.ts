@@ -74,6 +74,7 @@ export const reducer = (state = initialState, action: ServicesActions): IService
       return {
         ...state,
         list: {
+          ...state.list,
           ...action.payload
         }
       }

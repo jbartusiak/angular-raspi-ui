@@ -6,8 +6,11 @@ import { Component, Input, OnInit } from '@angular/core';
     <mat-card class="Card">
       <mat-card-header>
         <div mat-card-avatar><app-blinker></app-blinker></div>
-        <mat-card-title>Item title</mat-card-title>
-        <mat-card-subtitle>Subtitle</mat-card-subtitle>
+        <mat-card-title>{{title}}</mat-card-title>
+        <mat-card-subtitle>
+          Service address:
+          <a mat-button href="{{ href }}">{{ href }}</a>
+        </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <p>Serves configuration and applies actions</p>
@@ -24,6 +27,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class StatusTileComponent implements OnInit {
 
   @Input() showActions: boolean;
+  @Input() title: string;
+  @Input() href: string;
 
   constructor() {
   }
