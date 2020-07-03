@@ -5,7 +5,9 @@
       <app-status-tile
         [title]="server?.name"
         [href]="createURL(server)"
-        [showActions]="false"></app-status-tile>
+        [icon]="'../../../assets/raspi-icon.png'"
+        [showActions]="false">
+      </app-status-tile>
     </div>
     <div fxFlex="100" fxFlex.gt-sm="70">
       <h1 class="Heading">Services</h1>
@@ -14,6 +16,7 @@
           *ngFor="let service of services"
           [title]="service.name"
           [href]="createURL(service)"
+          [icon]="service.icon"
         ></app-status-tile>
       </div>
     </div>
