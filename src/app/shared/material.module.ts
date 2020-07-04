@@ -12,6 +12,8 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
+import { MatTableModule } from "@angular/material/table";
+import { MatSortModule } from "@angular/material/sort";
 
 @NgModule({
   imports: [
@@ -27,6 +29,8 @@ import { MatSelectModule } from "@angular/material/select";
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatTableModule,
+    MatSortModule,
   ],
   exports: [
     MatToolbarModule,
@@ -41,6 +45,8 @@ import { MatSelectModule } from "@angular/material/select";
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatTableModule,
+    MatSortModule,
   ]
 })
 export class MaterialModule { }
