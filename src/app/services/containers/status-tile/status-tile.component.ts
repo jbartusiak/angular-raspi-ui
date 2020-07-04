@@ -1,32 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IService, ServiceStatus } from "../../state/services.reducer";
+import { IService, IServicesState, ServiceStatus } from "../../state/services.reducer";
 import { Store } from "@ngrx/store";
 import * as actions from './../../state/services.actions';
 
 @Component({
   selector: 'app-status-tile',
-  template: `
-    <mat-card class="Card">
-      <mat-card-header>
-        <div mat-card-avatar class="Avatar"><img alt="icon" class="Icon" src="{{ icon? icon : service.icon }}"></div>
-        <mat-card-title>{{service.name}}
-          <app-blinker [status]="service.actuator.status"></app-blinker>
-        </mat-card-title>
-        <mat-card-subtitle class="Subtitle">
-          Service address:
-          <a mat-button href="{{ service.uri }}">{{ service.uri }}</a>
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <ng-content></ng-content>
-      </mat-card-content>
-      <mat-card-actions class="button-row" *ngIf="showActions">
-        <button mat-flat-button color="accent">Start</button>
-        <button mat-flat-button color="primary">Stop</button>
-        <button mat-flat-button color="primary">Restart</button>
-      </mat-card-actions>
-    </mat-card>
-  `,
+  templateUrl: './status-tile.component.html',
   styleUrls: [ './status-tile.component.scss' ]
 })
 export class StatusTileComponent implements OnInit {
@@ -35,11 +14,15 @@ export class StatusTileComponent implements OnInit {
   @Input() service: IService;
   @Input() icon: string;
 
-  constructor(private store: Store<ServiceStatus>) {
+  constructor(private store: Store<IServicesState>) {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new actions.GetServiceStatus(this.service));
+    // if (this.service.name === 'Raspi Backend Service') {
+      if (this.service.actuator.status === ServiceStatus.UNKNOWN) {
+        this.store.dispatch(new actions.GetServiceStatus(this.service));
+      }
+    // }
   }
 
 }

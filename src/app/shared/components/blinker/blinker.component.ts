@@ -4,19 +4,12 @@ import { ServiceStatus } from "../../../services/state/services.reducer";
 @Component({
   template: `
     <div class="Blinker"
-        [class]="getClass()">
+         [ngClass]="{'green': status.valueOf() === 0, 'red': status.valueOf()===1, 'yellow': status.valueOf()===2}"
+    >
     </div>`,
   selector: 'app-blinker',
-  styleUrls: ['./blinker.component.scss']
+  styleUrls: [ './blinker.component.scss' ],
 })
 export class BlinkerComponent {
   @Input() status: ServiceStatus;
-
-  getClass() {
-    switch (this.status) {
-      case ServiceStatus.DOWN: return 'red';
-      case ServiceStatus.UNKNOWN: return 'yellow';
-      case ServiceStatus.UP: return 'green';
-    }
-  }
 }

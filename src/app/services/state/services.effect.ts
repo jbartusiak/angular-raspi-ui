@@ -26,6 +26,11 @@ export class ServiceEffects {
   @Effect()
   getServiceStatus$ = this.$actions.pipe(
     ofType<GetServiceStatus>(servicesActions.ServiceActionTypes.GetServiceStatus),
-    mergeMap(el => this.configurationService.$getServiceStatus(el.payload))
+    mergeMap(action => this.configurationService.$getServiceStatus(action.payload).pipe(
+      map(result => new servicesActions.GetServiceStatusSuccess({
+        service: action.payload,
+        status: result,
+      }))
+    ))
   )
 }

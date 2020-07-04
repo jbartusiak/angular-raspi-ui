@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { IService } from "./services.reducer";
+import { IService, ServiceStatus } from "./services.reducer";
 
 export enum ServiceActionTypes {
   Load = '[SERVICES] Load',
@@ -36,6 +36,8 @@ export class GetServiceStatus implements Action {
 
 export class GetServiceStatusSuccess implements Action {
   readonly type = ServiceActionTypes.GetServiceStatusSuccess;
+  constructor(public payload: ({service: IService, status: ServiceStatus})) {
+  }
 }
 
 export class GetServiceStatusFail implements Action {

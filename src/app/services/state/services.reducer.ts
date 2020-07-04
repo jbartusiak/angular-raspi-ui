@@ -83,6 +83,26 @@ export const reducer = (state = initialState, action: ServicesActions): IService
         ...state,
         error: action.payload,
       }
+
+    case ServiceActionTypes.GetServiceStatusSuccess:
+      const { service, status } = action.payload;
+
+      const newService: IService = {
+        ...service,
+        actuator: {
+          ...service.actuator,
+          status,
+        }
+      }
+
+      return {
+        ...state,
+        list: {
+          ...state.list,
+          [service.name]: newService
+        },
+      };
+
     default:
       return {...state};
   }
