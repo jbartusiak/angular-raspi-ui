@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Store } from "@ngrx/store";
+
+import * as fromTorrentSearch from './state/torrent-search.reducer';
+import * as torrentSearchActions from './state/torrent-search.actions';
+
 @Component({
-  selector: 'app-torrent-search',
   template: `
     <app-layout>
       <app-providers-container column-a></app-providers-container>
@@ -12,10 +16,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TorrentSearchComponent implements OnInit {
 
-  constructor() {
+  constructor(private store: Store<fromTorrentSearch.State>) {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(new torrentSearchActions.LoadProviders);
   }
 
 }
