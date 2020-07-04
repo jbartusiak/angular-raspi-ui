@@ -1,5 +1,28 @@
 <mat-card class="Container">
+  <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="8px">
+    <mat-form-field
+      appearance="outline"
+      color="accent"
+      fxFlex="grow">
+      <mat-label>Search for...</mat-label>
+      <label>
+        <input matInput placeholder="what is it that you're looking for?">
+      </label>
+    </mat-form-field>
 
-  <p>providers works!</p>
+    <mat-form-field
+      appearance="outline"
+      color="accent"
+      fxFlex="grow"
+      fxFlex.gt-md="auto">
+      <mat-label>Favorite food</mat-label>
+      <mat-select>
+        <mat-option value="1">Option 1</mat-option>
+        <mat-option value="2">Option 2</mat-option>
+        <mat-option value="3">Option 3</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
 
 </mat-card>

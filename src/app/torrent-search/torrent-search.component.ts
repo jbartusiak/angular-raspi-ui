@@ -14,7 +14,6 @@ import { Component, OnInit } from '@angular/core';
       <div column-b>
         <div class="Heading">
           <h1>Search</h1>
-          torrent-search works!
         </div>
         <app-search></app-search>
       </div>
