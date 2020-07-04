@@ -1,6 +1,7 @@
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import * as servicesActions from './services.actions';
+import { GetServiceStatus } from './services.actions';
 import { ConfigurationService } from '../service/configuration.service';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from "rxjs";
@@ -21,4 +22,10 @@ export class ServiceEffects {
       catchError(err => of(new servicesActions.LoadFail(err))),
     ))
   );
+
+  @Effect()
+  getServiceStatus$ = this.$actions.pipe(
+    ofType<GetServiceStatus>(servicesActions.ServiceActionTypes.GetServiceStatus),
+    mergeMap(el => this.configurationService.$getServiceStatus(el.payload))
+  )
 }

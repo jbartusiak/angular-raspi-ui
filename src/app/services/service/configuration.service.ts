@@ -24,11 +24,8 @@ export class ConfigurationService {
   $getServiceStatus(service: IService) {
     const { uri, port, actuator } = service;
 
-    this.http
+    return this.http
       .get(`http://${uri}:${port}${actuator.health}`)
-      .subscribe(result => {
-        console.log(result);
-      })
   }
 
   private static handleError(err) {

@@ -8,8 +8,10 @@ import * as actions from './../../state/services.actions';
   template: `
     <mat-card class="Card">
       <mat-card-header>
-        <div mat-card-avatar class="Avatar"><img alt="icon" class="Icon" src="{{ service.icon }}"></div>
-        <mat-card-title>{{service.name}} <app-blinker [status]="service.actuator.status"></app-blinker></mat-card-title>
+        <div mat-card-avatar class="Avatar"><img alt="icon" class="Icon" src="{{ icon? icon : service.icon }}"></div>
+        <mat-card-title>{{service.name}}
+          <app-blinker [status]="service.actuator.status"></app-blinker>
+        </mat-card-title>
         <mat-card-subtitle class="Subtitle">
           Service address:
           <a mat-button href="{{ service.uri }}">{{ service.uri }}</a>
@@ -31,6 +33,7 @@ export class StatusTileComponent implements OnInit {
 
   @Input() showActions: boolean;
   @Input() service: IService;
+  @Input() icon: string;
 
   constructor(private store: Store<ServiceStatus>) {
   }

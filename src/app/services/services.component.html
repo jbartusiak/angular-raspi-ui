@@ -1,14 +1,26 @@
 <div class="Homepage">
   <div fxLayout="row wrap">
     <div fxFlex="100" fxFlex.gt-sm="30">
-      <h1 class="Heading">Server</h1>
+      <div class="Heading">
+        <h1>Server</h1>
+        <span>
+          Configuration, eureka and execution server for Raspberry PI. Verify the server status based
+        on the status indicators color.
+        </span>
+      </div>
       <app-status-tile
+        [icon]="'../../assets/raspi-icon.png'"
         [service]="server"
         [showActions]="false">
       </app-status-tile>
     </div>
     <div fxFlex="100" fxFlex.gt-sm="70">
-      <h1 class="Heading">Services</h1>
+      <div class="Heading">
+        <h1>Services</h1>
+        <span>
+          Lists services deployed on the server.
+        </span>
+      </div>
       <div>
         <app-status-tile
           *ngFor="let service of services"
