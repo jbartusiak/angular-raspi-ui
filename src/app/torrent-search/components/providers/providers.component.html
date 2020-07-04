@@ -1,14 +1,9 @@
-<mat-card class="Container">
-  <mat-card-content>
-    <ul>
-      <li *ngFor="let checkbox of checkboxes">
-        <mat-checkbox
-          [(ngModel)]="checkbox.checked"
-          color="primary"
-          class="example-margin">
-          {{checkbox.label}}
-        </mat-checkbox>
-      </li>
-    </ul>
-  </mat-card-content>
-</mat-card>
+<ul>
+  <li *ngFor="let provider of providers">
+    <mat-checkbox
+      color="primary"
+      class="example-margin">
+      {{ provider.name }}
+    </mat-checkbox>
+  </li>
+</ul>
