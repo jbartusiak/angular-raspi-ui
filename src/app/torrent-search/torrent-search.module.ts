@@ -11,6 +11,8 @@ import { StoreModule } from "@ngrx/store";
 import {reducer} from './state/torrent-search.reducer';
 import { ProvidersContainer } from "./containers/providers.container";
 import { SearchContainer } from "./containers/search.container";
+import { EffectsModule } from "@ngrx/effects";
+import { TorrentSearchEffect } from "./state/torrent-search.effect";
 
 @NgModule({
   declarations: [
@@ -21,11 +23,12 @@ import { SearchContainer } from "./containers/search.container";
     SearchComponent
   ],
   imports: [
-    SharedModule,
+    EffectsModule.forFeature([TorrentSearchEffect]),
+    FormsModule,
     MaterialModule,
     RouterModule.forChild(routes),
+    SharedModule,
     StoreModule.forFeature('torrentSearch', reducer),
-    FormsModule,
   ]
 })
 export class TorrentSearchModule { }
