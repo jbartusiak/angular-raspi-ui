@@ -1,5 +1,5 @@
 import * as fromRoot from "../../app.state";
-import { state } from "@angular/animations";
+import { TorrentSearchActions, TorrentSearchActionTypes } from "./torrent-search.actions";
 
 export interface Torrent {
   title: string;
@@ -40,6 +40,19 @@ const initialState: ITorrentSearchState = {
   results: [],
 };
 
-export const reducer = (state=initialState, action): ITorrentSearchState => {
-  return {...state};
+export const reducer = (state=initialState, action: TorrentSearchActions): ITorrentSearchState => {
+  switch (action.type) {
+    case TorrentSearchActionTypes.LoadProvidersSuccess:
+      return {
+        ...state,
+        allProviders: action.payload,
+      }
+    case TorrentSearchActionTypes.LoadProvidersFail:
+      return {
+        ...state,
+        error: action.payload
+      }
+    default:
+      return  {...state};
+  }
 }
