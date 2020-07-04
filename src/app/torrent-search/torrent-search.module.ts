@@ -6,6 +6,7 @@ import { RouterModule } from "@angular/router";
 import { routes } from "./routes";
 import { ProvidersComponent } from './components/providers/providers.component';
 import { SearchComponent } from './components/search/search.component';
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [TorrentSearchComponent, ProvidersComponent, SearchComponent],
@@ -13,6 +14,7 @@ import { SearchComponent } from './components/search/search.component';
     SharedModule,
     MaterialModule,
     RouterModule.forChild(routes),
+    FormsModule,
   ]
 })
 export class TorrentSearchModule { }

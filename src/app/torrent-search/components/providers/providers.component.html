@@ -1,5 +1,17 @@
 <mat-card class="Container">
-
-<p>providers works!</p>
-
+  <mat-card-content>
+    <ul>
+      <li *ngFor="let checkbox of checkboxes">
+        <mat-checkbox
+          [(ngModel)]="checkbox.checked"
+          color="warn"
+          class="example-margin">
+          {{checkbox.label}}
+        </mat-checkbox>
+      </li>
+    </ul>
+  </mat-card-content>
+  <mat-card-footer>
+    {{ checkboxes | json }}
+  </mat-card-footer>
 </mat-card>
