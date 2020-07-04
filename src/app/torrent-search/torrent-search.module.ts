@@ -9,9 +9,17 @@ import { SearchComponent } from './components/search/search.component';
 import { FormsModule } from "@angular/forms";
 import { StoreModule } from "@ngrx/store";
 import {reducer} from './state/torrent-search.reducer';
+import { ProvidersContainer } from "./containers/providers.container";
+import { SearchContainer } from "./containers/search.container";
 
 @NgModule({
-  declarations: [TorrentSearchComponent, ProvidersComponent, SearchComponent],
+  declarations: [
+    TorrentSearchComponent,
+    ProvidersContainer,
+    ProvidersComponent,
+    SearchContainer,
+    SearchComponent
+  ],
   imports: [
     SharedModule,
     MaterialModule,

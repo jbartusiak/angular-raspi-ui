@@ -24,7 +24,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 
 @Component({
-  selector: 'app-search',
+  selector: 'app-search-component',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
