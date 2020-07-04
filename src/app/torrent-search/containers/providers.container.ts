@@ -6,12 +6,8 @@ import { ITorrentProvider, State } from "../state/torrent-search.reducer";
 
 @Component({
   template: `
-    <h1>Providers</h1>
-    <span>Select torrent providers from the list below. Note that default, tested providers are already selected.</span>
     <app-providers-component
-        [providers]="$providers | async"
-    >
-
+        [providers]="$providers | async">
     </app-providers-component>
   `,
   selector: 'app-providers-container'
