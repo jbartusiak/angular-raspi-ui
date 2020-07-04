@@ -7,6 +7,8 @@ import { routes } from "./routes";
 import { ProvidersComponent } from './components/providers/providers.component';
 import { SearchComponent } from './components/search/search.component';
 import { FormsModule } from "@angular/forms";
+import { StoreModule } from "@ngrx/store";
+import {reducer} from './state/torrent-search.reducer';
 
 @NgModule({
   declarations: [TorrentSearchComponent, ProvidersComponent, SearchComponent],
@@ -14,6 +16,7 @@ import { FormsModule } from "@angular/forms";
     SharedModule,
     MaterialModule,
     RouterModule.forChild(routes),
+    StoreModule.forFeature('torrentSearch', reducer),
     FormsModule,
   ]
 })
