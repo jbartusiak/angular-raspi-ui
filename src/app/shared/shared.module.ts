@@ -11,16 +11,19 @@ import { BlinkerComponent } from './components/blinker/blinker.component';
 import { HttpClientModule } from "@angular/common/http";
 import { StoreModule } from "@ngrx/store";
 import * as fromServices from './../services/state/services.reducer';
+import { LayoutComponent } from "./components/layout/layout.component";
 
 @NgModule({
   declarations: [
     BackdropComponent,
     BlinkerComponent,
+    LayoutComponent,
     NavbarComponent,
   ],
   exports: [
     BackdropComponent,
     BlinkerComponent,
+    LayoutComponent,
     FlexLayoutModule,
     NavbarComponent,
     CommonModule,
