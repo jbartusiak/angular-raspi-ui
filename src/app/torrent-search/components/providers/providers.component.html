@@ -5,7 +5,8 @@
   <li *ngFor="let provider of providers">
     <mat-checkbox
       color="primary"
-      class="example-margin">
+      class="example-margin"
+      [checked]="enabledProviders.includes(provider.name)">
       {{ provider.name }}
     </mat-checkbox>
   </li>

@@ -50,7 +50,18 @@ export const reducer = (state=initialState, action: TorrentSearchActions): ITorr
     case TorrentSearchActionTypes.LoadProvidersFail:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+      }
+    case TorrentSearchActionTypes.LoadEnabledProvidersSuccess:
+      return {
+        ...state,
+        error: '',
+        enabledProviders: action.payload.map(el => el.name),
+      }
+    case TorrentSearchActionTypes.LoadEnabledProvidersFail:
+      return {
+        ...state,
+        error: action.payload,
       }
     default:
       return  {...state};

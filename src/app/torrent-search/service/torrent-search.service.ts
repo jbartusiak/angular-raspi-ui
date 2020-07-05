@@ -21,4 +21,11 @@ export class TorrentSearchService {
       map(result => result.providers)
     );
   }
+
+  $getEnabledProviders = () => {
+    const url = `http://${host}:${port}/providers/enabled`;
+    return this.http.get<{enabledProviders: ITorrentProvider[]}>(url).pipe(
+      map(result => result.enabledProviders)
+    );
+  }
 }

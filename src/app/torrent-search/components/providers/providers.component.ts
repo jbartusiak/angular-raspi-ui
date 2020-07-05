@@ -8,4 +8,5 @@ import { ITorrentProvider } from "../../state/torrent-search.reducer";
 })
 export class ProvidersComponent {
   @Input() providers: ITorrentProvider[];
+  @Input() enabledProviders: string[];
 }

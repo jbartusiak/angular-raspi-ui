@@ -7,3 +7,8 @@ export const getAllProviders = createSelector(
   getTorrentSearchFeatureState,
   state => state.allProviders,
 );
+
+export const getEnabledProviders = createSelector(
+  getTorrentSearchFeatureState,
+  state => state.enabledProviders,
+);

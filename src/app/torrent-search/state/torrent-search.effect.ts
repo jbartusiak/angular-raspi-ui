@@ -19,4 +19,12 @@ export class TorrentSearchEffect {
       map(result => new searchActions.LoadProvidersSuccess(result))
     ))
   );
+
+  @Effect()
+  $loadEnabledProviders = this.$actions.pipe(
+    ofType(searchActions.TorrentSearchActionTypes.LoadEnabledProviders),
+    mergeMap(() => this.searchService.$getEnabledProviders().pipe(
+      map(result => new searchActions.LoadEnabledProvidersSuccess(result))
+    ))
+  )
 }
