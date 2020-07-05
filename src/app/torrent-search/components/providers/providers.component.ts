@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { ITorrentProvider } from "../../state/torrent-search.reducer";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IOptions, ITorrentProvider } from "../../state";
 
 @Component({
   selector: 'app-providers-component',
@@ -9,4 +9,13 @@ import { ITorrentProvider } from "../../state/torrent-search.reducer";
 export class ProvidersComponent {
   @Input() providers: ITorrentProvider[];
   @Input() enabledProviders: string[];
+  @Output() onChecked = new EventEmitter<IOptions>();
+
+  handleChange(name: string, value: boolean) {
+    const newState: IOptions = {};
+    this.enabledProviders.forEach(el => newState[el] = true);
+    newState[name] = value;
+
+    this.onChecked.emit(newState);
+  }
 }

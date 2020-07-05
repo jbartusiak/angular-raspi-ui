@@ -10,6 +10,10 @@ export interface Torrent {
   provider: string;
 }
 
+export interface IOptions {
+  [name: string]: boolean;
+}
+
 export interface ITorrentProvider {
   name: string;
   public: string;
@@ -53,10 +57,11 @@ export const reducer = (state=initialState, action: TorrentSearchActions): ITorr
         error: action.payload,
       }
     case TorrentSearchActionTypes.LoadEnabledProvidersSuccess:
+    case TorrentSearchActionTypes.UpdateEnabledProvidersSuccess:
       return {
         ...state,
         error: '',
-        enabledProviders: action.payload.map(el => el.name),
+        enabledProviders: action.payload,
       }
     case TorrentSearchActionTypes.LoadEnabledProvidersFail:
       return {
