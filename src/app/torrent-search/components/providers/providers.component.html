@@ -6,8 +6,9 @@
     <mat-checkbox
       color="primary"
       class="example-margin"
-      [checked]="enabledProviders.indexOf(provider.name)!==-1"
-      (change)="handleChange(provider.name, $event.checked)">
+      [(ngModel)]="provider.enabled"
+      (change)="handleChange(provider.name, $event.checked)"
+      >
       {{ provider.name }}
     </mat-checkbox>
   </li>

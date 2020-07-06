@@ -8,8 +8,7 @@ import * as torrentSearchActions from "../state/torrent-search.actions";
 @Component({
   template: `
     <app-providers-component
-      [providers]="$providers | async"
-      [enabledProviders]="$enabledProviders | async"
+      [providers]="$enabledProviders | async"
 
       (onChecked)="updateEnabledProviders($event)"
     >
@@ -19,8 +18,7 @@ import * as torrentSearchActions from "../state/torrent-search.actions";
 })
 export class ProvidersContainer implements OnInit {
 
-  $providers: Observable<ITorrentProvider[]>;
-  $enabledProviders: Observable<string[]>;
+  $enabledProviders: Observable<(ITorrentProvider & { enabled: boolean })[]>;
 
   constructor(private store: Store<State>) {
   }
@@ -29,12 +27,8 @@ export class ProvidersContainer implements OnInit {
     this.store.dispatch(new torrentSearchActions.LoadProviders);
     this.store.dispatch(new torrentSearchActions.LoadEnabledProviders);
 
-    this.$providers = this.store.pipe(
-      select(torrentSearchSelectors.getAllProviders)
-    );
-
     this.$enabledProviders = this.store.pipe(
-      select(torrentSearchSelectors.getEnabledProviders)
+      select(torrentSearchSelectors.getEnabledProvidersBindable),
     );
   }
 

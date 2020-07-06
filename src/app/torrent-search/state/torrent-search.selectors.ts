@@ -12,3 +12,21 @@ export const getEnabledProviders = createSelector(
   getTorrentSearchFeatureState,
   state => state.enabledProviders,
 );
+
+export const getEnabledProvidersBindable = createSelector(
+  getTorrentSearchFeatureState,
+  state => {
+    return state.allProviders.map(el => {
+      if (state.enabledProviders.indexOf(el.name) !== -1) {
+        return {
+          ...el,
+          enabled: true,
+        }
+      }
+      else return {
+        ...el,
+        enabled: false
+      }
+    })
+  }
+)

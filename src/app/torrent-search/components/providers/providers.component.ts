@@ -7,15 +7,12 @@ import { IOptions, ITorrentProvider } from "../../state";
   styleUrls: [ './providers.component.scss' ]
 })
 export class ProvidersComponent {
-  @Input() providers: ITorrentProvider[];
-  @Input() enabledProviders: string[];
+  @Input() providers: (ITorrentProvider & {enabled: boolean})[];
   @Output() onChecked = new EventEmitter<IOptions>();
 
   handleChange(name: string, value: boolean) {
-    const newState: IOptions = {};
-    this.enabledProviders.forEach(el => newState[el] = true);
-    newState[name] = value;
-
-    this.onChecked.emit(newState);
+    this.onChecked.emit({
+      [name]: value,
+    });
   }
 }
