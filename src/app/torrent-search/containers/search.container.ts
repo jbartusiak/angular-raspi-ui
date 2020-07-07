@@ -4,6 +4,9 @@ import { Component } from "@angular/core";
   template: `
     <app-search-component>
     </app-search-component>
+    <app-results-component>
+
+    </app-results-component>
   `,
   selector: 'app-search-container'
 })

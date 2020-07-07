@@ -8,11 +8,11 @@ import { ProvidersComponent } from './components/providers/providers.component';
 import { SearchComponent } from './components/search/search.component';
 import { FormsModule } from "@angular/forms";
 import { StoreModule } from "@ngrx/store";
-import {reducer} from './state/torrent-search.reducer';
+import { reducer, TorrentSearchEffect } from './state';
 import { ProvidersContainer } from "./containers/providers.container";
 import { SearchContainer } from "./containers/search.container";
 import { EffectsModule } from "@ngrx/effects";
-import { TorrentSearchEffect } from "./state/torrent-search.effect";
+import { ResultsComponent } from "./components/results/results.component";
 
 @NgModule({
   declarations: [
@@ -20,10 +20,11 @@ import { TorrentSearchEffect } from "./state/torrent-search.effect";
     ProvidersContainer,
     ProvidersComponent,
     SearchContainer,
-    SearchComponent
+    SearchComponent,
+    ResultsComponent,
   ],
   imports: [
-    EffectsModule.forFeature([TorrentSearchEffect]),
+    EffectsModule.forFeature([ TorrentSearchEffect ]),
     FormsModule,
     MaterialModule,
     RouterModule.forChild(routes),
@@ -31,4 +32,5 @@ import { TorrentSearchEffect } from "./state/torrent-search.effect";
     StoreModule.forFeature('torrentSearch', reducer),
   ]
 })
-export class TorrentSearchModule { }
+export class TorrentSearchModule {
+}
