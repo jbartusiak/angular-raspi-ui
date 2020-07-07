@@ -44,7 +44,22 @@ const initialState: ITorrentSearchState = {
   results: [],
 };
 
-export const reducer = (state=initialState, action: TorrentSearchActions): ITorrentSearchState => {
+const composeCategories = (providers: ITorrentProvider[], enabledProviders: string[]): string[] => {
+  const categories = [];
+  providers
+    .filter(provider => enabledProviders.indexOf(provider.name) !== -1)
+    .map(el => el.categories)
+    .forEach(providerCategories =>
+      providerCategories.forEach(el => {
+        if (categories.indexOf(el) === -1) {
+          categories.push(el);
+        }
+      })
+    );
+  return categories;
+}
+
+export const reducer = (state = initialState, action: TorrentSearchActions): ITorrentSearchState => {
   switch (action.type) {
     case TorrentSearchActionTypes.LoadProvidersSuccess:
       return {
@@ -62,6 +77,7 @@ export const reducer = (state=initialState, action: TorrentSearchActions): ITorr
         ...state,
         error: '',
         enabledProviders: action.payload,
+        categories: composeCategories(state.allProviders, action.payload),
       }
     case TorrentSearchActionTypes.LoadEnabledProvidersFail:
       return {
@@ -79,6 +95,6 @@ export const reducer = (state=initialState, action: TorrentSearchActions): ITorr
         results: action.payload,
       }
     default:
-      return  {...state};
+      return {...state};
   }
 }
