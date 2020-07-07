@@ -5,3 +5,10 @@
 table {
   width: 100%;
 }
+
+.ellipsize{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 8px;
+}

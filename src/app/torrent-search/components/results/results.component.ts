@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { Torrent } from "../../state";
@@ -11,37 +11,27 @@ export interface PeriodicElement {
   provider: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {title: 1, uploaded: 'Hydrogen', size: 1.0079, condition: 'H', provider: '1337x'},
-  {title: 2, uploaded: 'Helium', size: 4.0026, condition: 'He', provider: '1337x'},
-  {title: 3, uploaded: 'Lithium', size: 6.941, condition: 'Li', provider: '1337x'},
-  {title: 4, uploaded: 'Beryllium', size: 9.0122, condition: 'Be', provider: '1337x'},
-  {title: 5, uploaded: 'Boron', size: 10.811, condition: 'B', provider: '1337x'},
-  {title: 6, uploaded: 'Carbon', size: 12.0107, condition: 'C', provider: '1337x'},
-  {title: 7, uploaded: 'Nitrogen', size: 14.0067, condition: 'N', provider: '1337x'},
-  {title: 8, uploaded: 'Oxygen', size: 15.9994, condition: 'O', provider: '1337x'},
-  {title: 9, uploaded: 'Fluorine', size: 18.9984, condition: 'F', provider: '1337x'},
-  {title: 10, uploaded: 'Neon', size: 20.1797, condition: 'Ne', provider: '1337x'},
-];
-
 @Component({
   selector: 'app-results-component',
   templateUrl: './results.component.html',
-  styleUrls: ['./results.component.scss']
+  styleUrls: [ './results.component.scss' ]
 })
-export class ResultsComponent implements OnInit {
+export class ResultsComponent implements OnChanges {
 
   @Input() results: Torrent[];
 
-  displayedColumns: string[] = ['title', 'uploaded', 'size', 'condition', 'provider'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = [ 'title', 'uploaded', 'size', 'condition', 'provider' ];
+  dataSource = new MatTableDataSource(this.results);
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor() { }
+  constructor() {
+  }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.dataSource = new MatTableDataSource<Torrent>(this.results);
     this.dataSource.sort = this.sort;
   }
+
 
 }
