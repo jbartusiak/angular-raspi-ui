@@ -40,4 +40,16 @@ export class TorrentSearchEffect {
       )
     )
   )
+
+  @Effect()
+  $performSearch = this.$actions.pipe(
+    ofType(searchActions.TorrentSearchActionTypes.PerformSearch),
+    mergeMap(({payload}) =>
+      this.searchService.$performSearch(payload).pipe(
+        map((result) =>
+          new searchActions.PerformSearchSuccess(result)
+        ),
+      )
+    )
+  )
 }

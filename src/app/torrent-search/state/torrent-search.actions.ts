@@ -16,9 +16,9 @@ export enum TorrentSearchActionTypes {
 
   UpdateQuery = '[TORRENT-SEARCH] Update Query',
 
-  ExecuteSearch = '[TORRENT-SEARCH] Execute Search',
-  ExecuteSearchSuccess = '[TORRENT-SEARCH] Execute Search Success',
-  ExecuteSearchFail = '[TORRENT-SEARCH] Execute Search Fail',
+  PerformSearch = '[TORRENT-SEARCH] Perform Search',
+  PerformSearchSuccess = '[TORRENT-SEARCH] Perform Search Success',
+  PerformSearchFail = '[TORRENT-SEARCH] Perform Search Fail',
 }
 
 export class LoadProviders implements Action {
@@ -78,20 +78,20 @@ export class UpdateQuery implements Action {
   }
 }
 
-export class ExecuteSearch implements Action {
-  readonly type = TorrentSearchActionTypes.ExecuteSearch;
+export class PerformSearch implements Action {
+  readonly type = TorrentSearchActionTypes.PerformSearch;
   constructor(public payload: string) {
   }
 }
 
-export class ExecuteSearchSuccess implements Action {
-  readonly type = TorrentSearchActionTypes.ExecuteSearchSuccess;
+export class PerformSearchSuccess implements Action {
+  readonly type = TorrentSearchActionTypes.PerformSearchSuccess;
   constructor(public payload: Torrent[]) {
   }
 }
 
-export class ExecuteSearchFail implements Action {
-  readonly type = TorrentSearchActionTypes.ExecuteSearchFail;
+export class PerformSearchFail implements Action {
+  readonly type = TorrentSearchActionTypes.PerformSearchFail;
   constructor(public payload: string) {
   }
 }
@@ -107,6 +107,6 @@ export type TorrentSearchActions =
   UpdateEnabledProvidersSuccess |
   UpdateEnabledProvidersFail |
   UpdateQuery |
-  ExecuteSearch |
-  ExecuteSearchSuccess |
-  ExecuteSearchFail;
+  PerformSearch |
+  PerformSearchSuccess |
+  PerformSearchFail;

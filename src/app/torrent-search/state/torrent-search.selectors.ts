@@ -34,4 +34,9 @@ export const getEnabledProvidersBindable = createSelector(
 export const getQuery = createSelector(
   getTorrentSearchFeatureState,
   state => state.query,
-)
+);
+
+export const getSearchResults = createSelector(
+  getTorrentSearchFeatureState,
+  state => state.results,
+);

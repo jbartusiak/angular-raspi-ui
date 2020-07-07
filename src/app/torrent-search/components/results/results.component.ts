@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
+import { Torrent } from "../../state";
 
 export interface PeriodicElement {
   uploaded: string;
@@ -29,6 +30,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./results.component.scss']
 })
 export class ResultsComponent implements OnInit {
+
+  @Input() results: Torrent[];
 
   displayedColumns: string[] = ['title', 'uploaded', 'size', 'condition', 'provider'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
