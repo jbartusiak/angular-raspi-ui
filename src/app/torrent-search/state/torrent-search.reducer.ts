@@ -37,7 +37,7 @@ export interface State extends fromRoot.State {
 const initialState: ITorrentSearchState = {
   allProviders: [],
   categories: [],
-  category: '',
+  category: 'All',
   enabledProviders: [],
   error: '',
   query: '',
@@ -73,11 +73,13 @@ export const reducer = (state = initialState, action: TorrentSearchActions): ITo
       }
     case TorrentSearchActionTypes.LoadEnabledProvidersSuccess:
     case TorrentSearchActionTypes.UpdateEnabledProvidersSuccess:
+      const categories = composeCategories(state.allProviders, action.payload);
       return {
         ...state,
         error: '',
         enabledProviders: action.payload,
-        categories: composeCategories(state.allProviders, action.payload),
+        categories,
+        category: categories[0] || '',
       }
     case TorrentSearchActionTypes.LoadEnabledProvidersFail:
       return {

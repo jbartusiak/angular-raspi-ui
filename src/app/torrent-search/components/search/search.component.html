@@ -7,7 +7,10 @@
       fxFlex="grow">
       <mat-label>Search for...</mat-label>
       <label>
-        <input (keyup)="handleChange()" [(ngModel)]="query" matInput placeholder="what is it that you're looking for?">
+        <input
+          (keyup)="handleChange()"
+          [disabled]="!categories.length"
+          [(ngModel)]="query" matInput placeholder="what is it that you're looking for?">
       </label>
     </mat-form-field>
 
@@ -16,11 +19,12 @@
       appearance="outline"
       fxFlex="grow"
       fxFlex.gt-md="auto">
-      <mat-label>Categories</mat-label>
-      <mat-select>
-        <mat-option value="1">Movies</mat-option>
-        <mat-option value="2">TV</mat-option>
-        <mat-option value="3">Games</mat-option>
+      <mat-label>Category</mat-label>
+      <mat-select [value]="selectedCategory"
+      [disabled]="!categories.length">
+        <mat-option
+          *ngFor="let category of categories"
+          value="{{category}}">{{category}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

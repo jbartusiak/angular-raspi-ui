@@ -8,6 +8,8 @@ import { Observable } from "rxjs";
 @Component({
   template: `
     <app-search-component
+      [categories]="$categories | async"
+      [selectedCategory]="$category | async"
       [query]="$query | async"
       (onQueryChanged)="handleQueryChange($event)"
     >
@@ -22,7 +24,10 @@ import { Observable } from "rxjs";
 export class SearchContainer implements OnInit {
 
   $query: Observable<string>;
-  $results: Observable<Torrent[]>
+  $categories: Observable<string[]>;
+  $category: Observable<string>;
+
+  $results: Observable<Torrent[]>;
 
   constructor(private store: Store<State>) {
   }
@@ -33,7 +38,13 @@ export class SearchContainer implements OnInit {
     );
     this.$results = this.store.pipe(
       select(selectors.getSearchResults)
+    );
+    this.$category = this.store.pipe(
+      select(selectors.getCategory)
     )
+    this.$categories = this.store.pipe(
+      select(selectors.getAllCategories)
+    );
   }
 
   handleQueryChange(query: string) {

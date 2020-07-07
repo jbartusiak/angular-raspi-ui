@@ -40,3 +40,13 @@ export const getSearchResults = createSelector(
   getTorrentSearchFeatureState,
   state => state.results,
 );
+
+export const getCategory = createSelector(
+  getTorrentSearchFeatureState,
+  state => state.category,
+)
+
+export const getAllCategories = createSelector(
+  getTorrentSearchFeatureState,
+  state => state.categories,
+)

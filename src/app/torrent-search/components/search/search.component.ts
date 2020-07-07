@@ -9,7 +9,8 @@ import { take } from "rxjs/operators";
 })
 export class SearchComponent {
   @Input() query: string;
-  @Input() categories;
+  @Input() categories: string[];
+  @Input() selectedCategory: string;
 
   @Output() onQueryChanged = new EventEmitter<string>();
 
@@ -19,10 +20,8 @@ export class SearchComponent {
     if (this.$interval) {
       this.$interval.unsubscribe();
     }
-    this.$interval = interval(1000).pipe(
-      take(1)
-    ).subscribe(
-      () => this.onQueryChanged.emit(this.query)
-    );
+    this.$interval = interval(1000)
+      .pipe(take(1))
+      .subscribe(() => this.onQueryChanged.emit(this.query));
   }
 }
