@@ -7,7 +7,7 @@
       fxFlex="grow">
       <mat-label>Search for...</mat-label>
       <label>
-        <input matInput placeholder="what is it that you're looking for?">
+        <input (keyup)="handleChange()" [(ngModel)]="query" matInput placeholder="what is it that you're looking for?">
       </label>
     </mat-form-field>
 
