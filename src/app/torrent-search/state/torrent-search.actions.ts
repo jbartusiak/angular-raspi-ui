@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { IOptions, ITorrentProvider } from "./torrent-search.reducer";
+import { IOptions, ITorrentProvider, Torrent } from "./torrent-search.reducer";
 
 export enum TorrentSearchActionTypes {
   LoadProviders = '[TORRENT-SEARCH] Load Providers',
@@ -13,6 +13,12 @@ export enum TorrentSearchActionTypes {
   UpdateEnabledProviders = '[TORRENT-SEARCH] Update Enabled Providers',
   UpdateEnabledProvidersSuccess = '[TORRENT-SEARCH] Update Enabled Providers Success',
   UpdateEnabledProvidersFail = '[TORRENT-SEARCH] Update Enabled Providers Fail',
+
+  UpdateQuery = '[TORRENT-SEARCH] Update Query',
+
+  ExecuteSearch = '[TORRENT-SEARCH] Execute Search',
+  ExecuteSearchSuccess = '[TORRENT-SEARCH] Execute Search Success',
+  ExecuteSearchFail = '[TORRENT-SEARCH] Execute Search Fail',
 }
 
 export class LoadProviders implements Action {
@@ -66,6 +72,30 @@ export class UpdateEnabledProvidersFail implements Action {
   }
 }
 
+export class UpdateQuery implements Action {
+  readonly type = TorrentSearchActionTypes.UpdateQuery;
+  constructor(public payload: string) {
+  }
+}
+
+export class ExecuteSearch implements Action {
+  readonly type = TorrentSearchActionTypes.ExecuteSearch;
+  constructor(public payload: string) {
+  }
+}
+
+export class ExecuteSearchSuccess implements Action {
+  readonly type = TorrentSearchActionTypes.ExecuteSearchSuccess;
+  constructor(public payload: Torrent[]) {
+  }
+}
+
+export class ExecuteSearchFail implements Action {
+  readonly type = TorrentSearchActionTypes.ExecuteSearchFail;
+  constructor(public payload: string) {
+  }
+}
+
 export type TorrentSearchActions =
   LoadProviders |
   LoadProvidersSuccess |
@@ -75,4 +105,8 @@ export type TorrentSearchActions =
   LoadEnabledProvidersFail |
   UpdateEnabledProviders |
   UpdateEnabledProvidersSuccess |
-  UpdateEnabledProvidersFail;
+  UpdateEnabledProvidersFail |
+  UpdateQuery |
+  ExecuteSearch |
+  ExecuteSearchSuccess |
+  ExecuteSearchFail;

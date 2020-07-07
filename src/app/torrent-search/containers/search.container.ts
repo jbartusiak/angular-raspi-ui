@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { State } from "../state";
-import * as torrentSearchSelectors from "../state/torrent-search.selectors";
+import * as selectors from "../state/torrent-search.selectors";
+import * as actions from "../state/torrent-search.actions";
 import { Observable } from "rxjs";
 
 @Component({
@@ -25,12 +26,14 @@ export class SearchContainer implements OnInit{
 
   ngOnInit(): void {
     this.$query = this.store.pipe(
-      select(torrentSearchSelectors.getQuery)
+      select(selectors.getQuery)
     );
   }
 
   handleQueryChange(query: string) {
-
+    this.store.dispatch(
+      new actions.UpdateQuery(query)
+    );
   }
 
 }

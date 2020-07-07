@@ -68,6 +68,11 @@ export const reducer = (state=initialState, action: TorrentSearchActions): ITorr
         ...state,
         error: action.payload,
       }
+    case TorrentSearchActionTypes.UpdateQuery:
+      return {
+        ...state,
+        query: action.payload,
+      }
     default:
       return  {...state};
   }
