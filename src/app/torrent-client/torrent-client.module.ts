@@ -4,9 +4,10 @@ import { SharedModule } from "../shared/shared.module";
 import { MaterialModule } from "../shared/material.module";
 import { RouterModule } from "@angular/router";
 import { routes } from "./routes";
+import { ToolsComponent } from './tools/tools.component';
 
 @NgModule({
-  declarations: [TorrentClientComponent],
+  declarations: [TorrentClientComponent, ToolsComponent],
   imports: [
     SharedModule,
     MaterialModule,

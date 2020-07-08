@@ -3,9 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-torrent-client',
   template: `
-    <p>
-      torrent-client works!
-    </p>
+    <app-tools></app-tools>
   `,
   styleUrls: ['./torrent-client.component.scss']
 })
