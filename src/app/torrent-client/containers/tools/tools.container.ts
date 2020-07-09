@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-tools',
-  templateUrl: './tools.component.html',
-  styleUrls: ['./tools.component.scss']
+  templateUrl: './tools.container.html',
+  styleUrls: ['./tools.container.scss']
 })
-export class ToolsComponent implements OnInit {
+export class ToolsContainer implements OnInit {
 
   constructor() { }
 

@@ -14,6 +14,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
+import { MatListModule } from "@angular/material/list";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 @NgModule({
   imports: [
@@ -31,6 +33,8 @@ import { MatSortModule } from "@angular/material/sort";
     MatSelectModule,
     MatTableModule,
     MatSortModule,
+    MatListModule,
+    MatProgressBarModule,
   ],
   exports: [
     MatToolbarModule,
@@ -47,6 +51,8 @@ import { MatSortModule } from "@angular/material/sort";
     MatSelectModule,
     MatTableModule,
     MatSortModule,
+    MatListModule,
+    MatProgressBarModule,
   ]
 })
 export class MaterialModule {
