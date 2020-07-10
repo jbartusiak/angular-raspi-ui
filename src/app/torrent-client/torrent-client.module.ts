@@ -7,6 +7,9 @@ import { routes } from "./routes";
 import { ToolsContainer } from './containers/tools/tools.container';
 import { TorrentListContainer } from "./containers/torrent-list/torrent-list.container";
 import { TorrentItemComponent } from "./components/torrent-item/torrent-item.component";
+import { StoreModule } from "@ngrx/store";
+
+import {reducer} from './state/torrent-client.reducer';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import { TorrentItemComponent } from "./components/torrent-item/torrent-item.com
     SharedModule,
     MaterialModule,
     RouterModule.forChild(routes),
+    StoreModule.forFeature('torrentClient', reducer)
   ]
 })
 export class TorrentClientModule { }

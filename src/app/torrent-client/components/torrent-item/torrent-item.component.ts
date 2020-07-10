@@ -7,7 +7,7 @@ import { Component, Input } from "@angular/core";
       <button mat-list-avatar mat-icon-button><mat-icon>folder</mat-icon></button>
       <h1 mat-line>Test</h1>
       <span mat-line>
-        <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+        <mat-progress-bar mode="determinate" color="primary"></mat-progress-bar>
       </span>
       <sub mat-line>
         <span>Lorem ipsum</span>
