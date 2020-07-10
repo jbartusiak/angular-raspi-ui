@@ -10,6 +10,8 @@ import { TorrentItemComponent } from "./components/torrent-item/torrent-item.com
 import { StoreModule } from "@ngrx/store";
 
 import {reducer} from './state/torrent-client.reducer';
+import { EffectsModule } from "@ngrx/effects";
+import { TorrentClientEffects } from "./state/torrent-client.effects";
 
 @NgModule({
   declarations: [
@@ -19,10 +21,11 @@ import {reducer} from './state/torrent-client.reducer';
     TorrentItemComponent,
   ],
   imports: [
-    SharedModule,
+    EffectsModule.forFeature([TorrentClientEffects]),
     MaterialModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature('torrentClient', reducer)
+    SharedModule,
+    StoreModule.forFeature('torrentClient', reducer),
   ]
 })
 export class TorrentClientModule { }
