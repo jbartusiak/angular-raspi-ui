@@ -12,12 +12,18 @@ import { StoreModule } from "@ngrx/store";
 import {reducer} from './state/torrent-client.reducer';
 import { EffectsModule } from "@ngrx/effects";
 import { TorrentClientEffects } from "./state/torrent-client.effects";
+import { AddItemContainer } from "./containers/add-item/add-item.container";
+import { AddItemComponent } from "./components/add-item/add-item.component";
+import { AddTorrentDialogComponent } from "./components/add-item/add-torrent-dialog.component";
 
 @NgModule({
   declarations: [
+    TorrentListContainer,
+    AddItemContainer,
+    AddItemComponent,
+    AddTorrentDialogComponent,
     TorrentClientComponent,
     ToolsContainer,
-    TorrentListContainer,
     TorrentItemComponent,
   ],
   imports: [
