@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-torrent-client',
   template: `
     <div class="Container">
       <app-tools></app-tools>
-      <app-torrent-list></app-torrent-list>
+      <app-torrent-list>
+      </app-torrent-list>
     </div>
   `,
   styles: [ `
@@ -15,12 +16,5 @@ import { Component, OnInit } from '@angular/core';
     }
   ` ]
 })
-export class TorrentClientComponent implements OnInit {
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
-
+export class TorrentClientComponent {
 }

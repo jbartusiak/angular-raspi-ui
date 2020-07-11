@@ -16,8 +16,7 @@ import { Subscription } from "rxjs";
     <app-add-item-component (showModal)="handleShowModal()"></app-add-item-component>`
 })
 export class AddItemContainer implements OnInit, OnDestroy {
-
-  configuration: { categories: string[], directories: string[]};
+  configuration: { categories: string[], directories: string[] };
 
   private sub: Subscription;
 
@@ -40,19 +39,19 @@ export class AddItemContainer implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.sub) this.sub.unsubscribe();
+    if (this.sub) this.sub.unsubscribe();
   }
 
   handleShowModal() {
     this.dialog
       .open<AddTorrentDialogComponent, IAddTorrentDialogData>(AddTorrentDialogComponent, {
-      width: '500px',
-      data: {
-        ...this.configuration,
-        magnet: '',
-        size: '',
-        title: '',
-      }
-    });
+        width: '500px',
+        data: {
+          ...this.configuration,
+          magnet: '',
+          size: '',
+          title: '',
+        }
+      });
   }
 }

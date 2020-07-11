@@ -10,7 +10,8 @@ import { interval, Observable, Subscription } from "rxjs";
   template: `
     <mat-list class="mat-elevation-z5 Container">
       <app-torrent-item *ngFor="let torrent of torrents$ | async" [torrent]="torrent"></app-torrent-item>
-      <app-add-item-container></app-add-item-container>
+      <app-add-item-container
+      ></app-add-item-container>
     </mat-list>
   `,
   styles: [ `

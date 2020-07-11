@@ -4,6 +4,7 @@ import { State, Torrent } from "../state";
 import * as selectors from "../state/torrent-search.selectors";
 import * as actions from "../state/torrent-search.actions";
 import { Observable } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
   template: `
@@ -15,7 +16,8 @@ import { Observable } from "rxjs";
     >
     </app-search-component>
     <app-results-component
-        [results]="$results | async"
+      [results]="$results | async"
+      (download)="handleDownload($event)"
     >
     </app-results-component>
   `,
@@ -29,7 +31,8 @@ export class SearchContainer implements OnInit {
 
   $results: Observable<Torrent[]>;
 
-  constructor(private store: Store<State>) {
+  constructor(private store: Store<State>,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -52,4 +55,8 @@ export class SearchContainer implements OnInit {
     this.store.dispatch(new actions.PerformSearch(query));
   }
 
+  handleDownload(torrent: Torrent) {
+    console.log(torrent);
+    this.router.navigate([ '/torrent-client' ]);
+  }
 }
