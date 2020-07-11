@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { magnetValidator } from "../../../shared/validators/magnet.validator";
 
@@ -27,8 +27,8 @@ export class AddTorrentDialogComponent implements OnInit {
 
   addTorrentForm: FormGroup;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IAddTorrentDialogData) {
-    console.log(data);
+  constructor(@Inject(MAT_DIALOG_DATA) public data: IAddTorrentDialogData,
+              public dialogRef: MatDialogRef<AddTorrentDialogComponent>) {
   }
 
   ngOnInit(): void {
@@ -43,7 +43,7 @@ export class AddTorrentDialogComponent implements OnInit {
           magnet: new FormControl({value: magnet, disabled: !!magnet}, Validators.required),
           size: new FormControl({value: size, disabled: !!size}, Validators.required),
           title: new FormControl({value: title, disabled: !!title}, Validators.required),
-          start: new FormControl(true, Validators.required),
+          autostart: new FormControl(true, Validators.required),
         }
       )
     }
@@ -53,10 +53,14 @@ export class AddTorrentDialogComponent implements OnInit {
           category: new FormControl('', Validators.required),
           directory: new FormControl('', Validators.required),
           magnet: new FormControl('', [Validators.required, magnetValidator]),
-          start: new FormControl(true, Validators.required),
+          autostart: new FormControl(true, Validators.required),
         }
       )
     }
   }
 
+  submitDialog() {
+    console.log('Dialog submitted!');
+    this.dialogRef.close(this.addTorrentForm.value);
+  }
 }

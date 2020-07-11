@@ -7,7 +7,7 @@ import {
 import { Store } from "@ngrx/store";
 import { State } from "../../../services/state/services.reducer";
 import * as servicesSelectors from '../../../services/state/service.selectors';
-import { map } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
 import { Subscription } from "rxjs";
 import { getTorrentToDownload } from "../../state/torrent-client.selectors";
 import { Torrent } from "../../../torrent-search/state";
@@ -55,9 +55,8 @@ export class AddItemContainer implements OnInit, OnDestroy {
     if (this.torrentSub) this.torrentSub.unsubscribe();
   }
 
-
   handleShowModal(torrent?: Torrent) {
-    this.dialog
+    const dialogRef = this.dialog
       .open<AddTorrentDialogComponent, IAddTorrentDialogData>(AddTorrentDialogComponent, {
         width: '500px',
         data: {
@@ -65,6 +64,13 @@ export class AddItemContainer implements OnInit, OnDestroy {
           magnet: torrent?.magnet || '',
           size: torrent?.size || '',
           title: torrent?.title || '',
+        }
+      });
+    dialogRef.afterClosed()
+      .pipe(take(1))
+      .subscribe(next => {
+        if (next) {
+          console.log(next);
         }
       });
   }

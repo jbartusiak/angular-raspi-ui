@@ -8,11 +8,7 @@
         <input matInput formControlName="magnet">
       </label>
       <button mat-icon-button matSuffix disabled><mat-icon>get_app</mat-icon></button>
-      <mat-error *ngIf="form.control.controls['magnet'].errors.required">this field is required</mat-error>
-      <mat-error
-        *ngIf="!form.control.controls['magnet'].errors.required && form.control.controls['magnet'].errors.magnet">
-        please provide a valid magnet
-      </mat-error>
+      <mat-error>please provide a valid magnet</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" class="full-width" *ngIf="form.control.controls['title']">
       <mat-label>item title</mat-label>
@@ -48,12 +44,18 @@
       <mat-error>please select one of available categories</mat-error>
     </mat-form-field>
     <div class="full-width" style="display: flex;">
-      <mat-slide-toggle style="margin-left: auto" color="primary" formControlName="start">
+      <mat-slide-toggle style="margin-left: auto" color="primary" formControlName="autostart">
         Start immediately
       </mat-slide-toggle>
     </div>
   </form>
 </div>
 <div mat-dialog-actions style="justify-content: center">
-  <button mat-flat-button color="primary" style="padding: 0 64px" [disabled]="form.invalid">OK</button>
+  <button
+    mat-flat-button
+    color="primary"
+    style="padding: 0 64px"
+    [disabled]="form.invalid"
+    (click)="submitDialog()"
+  >OK</button>
 </div>
