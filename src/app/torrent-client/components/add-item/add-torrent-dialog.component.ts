@@ -40,9 +40,9 @@ export class AddTorrentDialogComponent implements OnInit {
         {
           category: new FormControl('', Validators.required),
           directory: new FormControl('', Validators.required),
-          magnet: new FormControl({value: magnet, disabled: !!magnet}, Validators.required),
-          size: new FormControl({value: size, disabled: !!size}, Validators.required),
-          title: new FormControl({value: title, disabled: !!title}, Validators.required),
+          magnet: new FormControl({value: magnet, disabled: !!magnet}),
+          size: new FormControl({value: size, disabled: !!size}),
+          title: new FormControl({value: title, disabled: !!title}),
           autostart: new FormControl(true, Validators.required),
         }
       )
@@ -61,6 +61,11 @@ export class AddTorrentDialogComponent implements OnInit {
 
   submitDialog() {
     console.log('Dialog submitted!');
-    this.dialogRef.close(this.addTorrentForm.value);
+    this.dialogRef.close({
+      autostart: this.addTorrentForm.controls.autostart.value,
+      category: this.addTorrentForm.controls.category.value,
+      directory: this.addTorrentForm.controls.directory.value,
+      magnet: this.addTorrentForm.controls.magnet.value,
+    });
   }
 }
