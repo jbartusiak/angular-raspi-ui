@@ -26,16 +26,16 @@
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>directory</mat-label>
       <mat-select>
-        <mat-option>
-          hd1
+        <mat-option *ngFor="let directory of directories">
+          {{directory}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>category</mat-label>
       <mat-select>
-        <mat-option>
-          movies
+        <mat-option *ngFor="let category of categories">
+          {{category}}
         </mat-option>
       </mat-select>
     </mat-form-field>

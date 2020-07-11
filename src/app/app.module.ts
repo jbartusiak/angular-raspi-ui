@@ -11,6 +11,7 @@ import { RouterModule } from "@angular/router";
 import { routes } from "./routes";
 import { SharedModule } from "./shared/shared.module";
 import { MaterialModule } from "./shared/material.module";
+import { stateMetaReducer } from "./app.state";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { MaterialModule } from "./shared/material.module";
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({}, {
+      metaReducers: [stateMetaReducer]
+    }),
     BrowserAnimationsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
