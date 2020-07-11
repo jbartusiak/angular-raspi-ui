@@ -12,6 +12,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { StoreModule } from "@ngrx/store";
 import * as fromServices from './../services/state/services.reducer';
 import { LayoutComponent } from "./components/layout/layout.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -28,9 +29,13 @@ import { LayoutComponent } from "./components/layout/layout.component";
     NavbarComponent,
     CommonModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   imports: [
     FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
     MaterialModule,
