@@ -13,7 +13,10 @@ export class AddItemContainer {
   }
 
   handleShowModal() {
-    this.dialog.open(AddTorrentDialogComponent);
+    this.dialog.open(AddTorrentDialogComponent, {
+      width: '500px',
+      // maxWidth: 500,
+    });
     console.log('FAB clicked')
   }
 }
