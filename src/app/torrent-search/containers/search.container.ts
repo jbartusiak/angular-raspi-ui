@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { select, Store } from "@ngrx/store";
-import { State, Torrent } from "../state";
+import { GetTorrentMagnet, State, Torrent } from "../state";
 import * as selectors from "../state/torrent-search.selectors";
 import * as actions from "../state/torrent-search.actions";
 
-import {AddTorrent} from "../../torrent-client/state/torrent-client.actions";
+import { AddTorrent } from "../../torrent-client/state/torrent-client.actions";
 
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
@@ -59,7 +59,12 @@ export class SearchContainer implements OnInit {
   }
 
   handleDownload(torrent: Torrent) {
-    this.store.dispatch(new AddTorrent(torrent));
+    if (torrent.magnet) {
+      this.store.dispatch(new AddTorrent(torrent));
+    }
+    if (!torrent.magnet) {
+      this.store.dispatch(new GetTorrentMagnet(torrent));
+    }
     this.router.navigate([ '/torrent-client' ]);
   }
 }

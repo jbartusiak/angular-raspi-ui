@@ -119,9 +119,6 @@ export class GetTorrentMagnet implements Action {
 
 export class GetTorrentMagnetSuccess implements Action {
   readonly type = TorrentSearchActionTypes.GetTorrentMagnetSuccess;
-
-  constructor(public payload: string) {
-  }
 }
 
 export class GetTorrentMagnetFail implements Action {

@@ -1,9 +1,10 @@
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import * as searchActions from "./torrent-search.actions";
-import { map, mergeMap } from "rxjs/operators";
+import { map, mergeMap, switchMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { TorrentSearchService } from "../service/torrent-search.service";
-import { IOptions } from "./torrent-search.reducer";
+import { IOptions, Torrent } from "./torrent-search.reducer";
+import {AddTorrent} from "../../torrent-client/state/torrent-client.actions";
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,22 @@ export class TorrentSearchEffect {
         map((result) =>
           new searchActions.PerformSearchSuccess(result)
         ),
+      )
+    )
+  )
+
+  @Effect()
+  getTorrentMagnet$ = this.$actions.pipe(
+    ofType(searchActions.TorrentSearchActionTypes.GetTorrentMagnet),
+    mergeMap((action:{payload:Torrent}) =>
+      this.searchService.getTorrentMagnet$(action.payload).pipe(
+        switchMap(result => [
+          new searchActions.GetTorrentMagnetSuccess,
+          new AddTorrent({
+            ...action.payload,
+            magnet: result,
+          })
+        ])
       )
     )
   )
