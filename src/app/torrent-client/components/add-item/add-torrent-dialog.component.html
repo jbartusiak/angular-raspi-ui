@@ -7,17 +7,21 @@
       <label>
         <input matInput formControlName="magnet">
       </label>
-      <mat-icon matSuffix>get_app</mat-icon>
-      <mat-error>please provide a valid magnet</mat-error>
+      <button mat-icon-button matSuffix disabled><mat-icon>get_app</mat-icon></button>
+      <mat-error *ngIf="form.control.controls['magnet'].errors.required">this field is required</mat-error>
+      <mat-error
+        *ngIf="!form.control.controls['magnet'].errors.required && form.control.controls['magnet'].errors.magnet">
+        please provide a valid magnet
+      </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field appearance="outline" class="full-width" *ngIf="form.control.controls['title']">
       <mat-label>item title</mat-label>
       <label>
         <input matInput formControlName="title">
       </label>
       <mat-error>please provide a valid title</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline" class="full-width">
+    <mat-form-field appearance="outline" class="full-width" *ngIf="form.control.controls['size']">
       <mat-label>approximate size</mat-label>
       <label>
         <input matInput formControlName="size">
@@ -51,5 +55,5 @@
   </form>
 </div>
 <div mat-dialog-actions style="justify-content: center">
-  <button mat-flat-button color="primary" style="padding: 0 64px">OK</button>
+  <button mat-flat-button color="primary" style="padding: 0 64px" [disabled]="form.invalid">OK</button>
 </div>
