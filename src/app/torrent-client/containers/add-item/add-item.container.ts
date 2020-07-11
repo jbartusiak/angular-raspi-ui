@@ -11,7 +11,7 @@ import { map, take } from "rxjs/operators";
 import { Subscription } from "rxjs";
 import { getTorrentToDownload } from "../../state/torrent-client.selectors";
 import { Torrent } from "../../../torrent-search/state";
-import { ClearTorrent } from "../../state/torrent-client.actions";
+import { ClearTorrent, DownloadTorrent } from "../../state/torrent-client.actions";
 
 @Component({
   selector: 'app-add-item-container',
@@ -70,7 +70,7 @@ export class AddItemContainer implements OnInit, OnDestroy {
       .pipe(take(1))
       .subscribe(next => {
         if (next) {
-          console.log(next);
+          this.store.dispatch(new DownloadTorrent(next));
         }
       });
   }
