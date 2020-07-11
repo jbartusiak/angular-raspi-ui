@@ -1,8 +1,48 @@
-<h1 mat-dialog-title>Title</h1>
+<h1 mat-dialog-title>Add a new torrent</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+  <form style="overflow: hidden">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>magnet</mat-label>
+      <label>
+        <input matInput placeholder="Ex. Pizza">
+      </label>
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" disabled>
+        <mat-icon>get_app</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>item title</mat-label>
+      <label>
+        <input matInput placeholder="Ex. Pizza">
+      </label>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>approximate size</mat-label>
+      <label>
+        <input matInput placeholder="Ex. Pizza">
+      </label>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>directory</mat-label>
+      <mat-select>
+        <mat-option>
+          hd1
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>category</mat-label>
+      <mat-select>
+        <mat-option>
+          movies
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="full-width" style="display: flex;">
+      <mat-slide-toggle style="margin-left: auto" color="primary">Start immediately</mat-slide-toggle>
+    </div>
+  </form>
 </div>
-<div mat-dialog-actions>
-  <button mat-button>No Thanks</button>
-  <button mat-button>Ok</button>
+<div mat-dialog-actions style="justify-content: center">
+  <button mat-flat-button color="primary" style="padding: 0 64px">OK</button>
 </div>

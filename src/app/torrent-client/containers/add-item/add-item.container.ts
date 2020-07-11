@@ -4,7 +4,8 @@ import { AddTorrentDialogComponent } from "../../components/add-item/add-torrent
 
 @Component({
   selector: 'app-add-item-container',
-  template: `<app-add-item-component (showModal)="handleShowModal()"></app-add-item-component>`
+  template: `
+    <app-add-item-component (showModal)="handleShowModal()"></app-add-item-component>`
 })
 export class AddItemContainer {
 
@@ -12,7 +13,7 @@ export class AddItemContainer {
   }
 
   handleShowModal() {
-    console.log('FAB clicked')
     this.dialog.open(AddTorrentDialogComponent);
+    console.log('FAB clicked')
   }
 }
