@@ -9,6 +9,9 @@ import { State } from "../../../services/state/services.reducer";
 import * as servicesSelectors from '../../../services/state/service.selectors';
 import { map } from "rxjs/operators";
 import { Subscription } from "rxjs";
+import { getTorrentToDownload } from "../../state/torrent-client.selectors";
+import { Torrent } from "../../../torrent-search/state";
+import { ClearTorrent } from "../../state/torrent-client.actions";
 
 @Component({
   selector: 'app-add-item-container',
@@ -18,13 +21,14 @@ import { Subscription } from "rxjs";
 export class AddItemContainer implements OnInit, OnDestroy {
   configuration: { categories: string[], directories: string[] };
 
-  private sub: Subscription;
+  private serviceSub: Subscription;
+  private torrentSub: Subscription;
 
   constructor(private dialog: MatDialog, private store: Store<State>) {
   }
 
   ngOnInit(): void {
-    this.sub = this.store
+    this.serviceSub = this.store
       .select(servicesSelectors.getServices)
       .pipe(map(result => Object.values(result)))
       .subscribe(
@@ -36,21 +40,31 @@ export class AddItemContainer implements OnInit, OnDestroy {
           }
         }
       )
+    this.torrentSub = this.store.select(getTorrentToDownload).subscribe(
+      next => {
+        if (next) {
+          this.store.dispatch(new ClearTorrent());
+          this.handleShowModal(next)
+        }
+      }
+    )
   }
 
   ngOnDestroy(): void {
-    if (this.sub) this.sub.unsubscribe();
+    if (this.serviceSub) this.serviceSub.unsubscribe();
+    if (this.torrentSub) this.torrentSub.unsubscribe();
   }
 
-  handleShowModal() {
+
+  handleShowModal(torrent?: Torrent) {
     this.dialog
       .open<AddTorrentDialogComponent, IAddTorrentDialogData>(AddTorrentDialogComponent, {
         width: '500px',
         data: {
           ...this.configuration,
-          magnet: '',
-          size: '',
-          title: '',
+          magnet: torrent?.magnet || '',
+          size: torrent?.size || '',
+          title: torrent?.title || '',
         }
       });
   }

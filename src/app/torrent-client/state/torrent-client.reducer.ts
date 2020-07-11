@@ -1,5 +1,6 @@
 import * as fromRoot from './../../app.state';
 import { TorrentClientActions, TorrentClientActionTypes} from "./torrent-client.actions";
+import { Torrent } from "../../torrent-search/state";
 
 export interface ITorrentItem {
   downloadDir: string;
@@ -17,6 +18,7 @@ export interface ITorrentItem {
 }
 
 export interface ITorrentClientState {
+  torrentToDownload: Torrent;
   torrents: ITorrentItem[];
   error: string;
 }
@@ -26,6 +28,7 @@ export interface State extends fromRoot.State {
 }
 
 const initialState: ITorrentClientState = {
+  torrentToDownload: null,
   torrents: [],
   error: null,
 }
@@ -34,13 +37,23 @@ export const reducer = (state=initialState, action: TorrentClientActions): ITorr
   switch (action.type) {
     case TorrentClientActionTypes.LoadTorrentsSuccess:
       return {
-        error: null,
+        ...state,
         torrents: action.payload,
       }
     case TorrentClientActionTypes.LoadTorrentsFail:
       return {
         ...state,
         error: action.payload,
+      }
+    case TorrentClientActionTypes.AddTorrent:
+      return {
+        ...state,
+        torrentToDownload: action.payload,
+      }
+    case TorrentClientActionTypes.ClearTorrent:
+      return {
+        ...state,
+        torrentToDownload: null,
       }
     default:
       return state;

@@ -12,3 +12,8 @@ export const getTorrents = createSelector(
   getTorrentClientFeatureState,
   state => state.torrents,
 );
+
+export const getTorrentToDownload = createSelector(
+  getTorrentClientFeatureState,
+  state => state.torrentToDownload,
+);

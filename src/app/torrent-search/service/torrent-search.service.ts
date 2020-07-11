@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { map, tap } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { IOptions, ITorrentProvider, Torrent } from "../state";
+import { Observable, of } from "rxjs";
 
 const host = '192.168.0.254';
 const port = '3001';
@@ -45,10 +46,14 @@ export class TorrentSearchService {
         query,
       })
       .pipe(
-        tap(next => console.log(next)),
-        map<{results: Torrent[]}, Torrent[]>(
+        map<{ results: Torrent[] }, Torrent[]>(
           next => next.results
         )
       );
+  }
+
+  getTorrentMagnet$ = (torrent: Torrent): Observable<string> => {
+    const url = `http://192.168.0.254:3001/torrent/magnet`;
+    return of('');
   }
 }
