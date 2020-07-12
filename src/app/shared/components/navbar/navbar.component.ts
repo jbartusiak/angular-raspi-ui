@@ -14,6 +14,7 @@ export class NavbarComponent implements AfterContentInit, OnDestroy {
   items: IFeatureRoute[];
   name = 'Raspberry PI';
   panelOpened = false;
+  theme = (window.localStorage.getItem('__raspi-theme__') || 'light') === 'light';
 
   subscription$: Subscription;
 
@@ -25,6 +26,8 @@ export class NavbarComponent implements AfterContentInit, OnDestroy {
       select(servicesSelectors.getServices),
       flatMap(res => Object.values(res).map(el=>el.featureRoutes)),
     ).subscribe(res => this.items = res);
+    if (!this.theme)
+      window.document.body.classList.add('theme-dark');
   }
 
   ngOnDestroy(): void {
@@ -32,6 +35,13 @@ export class NavbarComponent implements AfterContentInit, OnDestroy {
   }
 
   swapTheme(): void {
+    if (this.theme) {
+      window.localStorage.setItem('__raspi-theme__', 'dark');
+    }
+    else {
+      window.localStorage.setItem('__raspi-theme__', 'light');
+    }
+    this.theme = !this.theme;
     window.document.body.classList.toggle('theme-dark');
   }
 }

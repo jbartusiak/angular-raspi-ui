@@ -8,7 +8,6 @@ import { Subscription } from "rxjs";
 import { take } from "rxjs/operators";
 
 @Component({
-  selector: 'app-homepage',
   templateUrl: './services.component.html',
   styleUrls: [ './services.component.scss' ]
 })
