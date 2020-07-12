@@ -1,5 +1,10 @@
 .Fab {
   position: fixed;
-  bottom: 32px;
-  right: 32px;
+  bottom: 64px;
+  right: 64px;
+  transition: all 250ms linear;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
