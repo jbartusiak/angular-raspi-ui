@@ -1,29 +1,19 @@
 <mat-card>
-    <mat-card-content>
-      <button mat-icon-button>
-        <mat-icon>check_circle</mat-icon>
-      </button>
-      <span class="divider"> </span>
-      <button mat-icon-button>
-        <mat-icon>play_arrow</mat-icon>
-      </button>
-      <button mat-icon-button>
-        <mat-icon>stop</mat-icon>
-      </button>
-      <span class="divider"> </span>
-      <button mat-icon-button>
-        <mat-icon>arrow_upward</mat-icon>
-      </button>
-      <button mat-icon-button>
-        <mat-icon>arrow_downward</mat-icon>
-      </button>
-      <span class="divider"> </span>
-      <button mat-icon-button>
-        <mat-icon>info</mat-icon>
-      </button>
-      <span class="divider"> </span>
-      <button mat-icon-button>
-        <mat-icon>delete</mat-icon>
-      </button>
-    </mat-card-content>
-  </mat-card>
+  <mat-card-content>
+<!--    <button mat-icon-button>-->
+<!--      <mat-icon>check_circle</mat-icon>-->
+<!--    </button>-->
+<!--    <span class="divider"> </span>-->
+    <app-function-button (clicked)="handleStart()" iconName="play_arrow"></app-function-button>
+    <app-function-button (clicked)="handleStop()" iconName="stop"></app-function-button>
+    <app-function-button (clicked)="handleDelete()" iconName="delete"></app-function-button>
+
+<!--    <span class="divider"> </span>-->
+<!--    <app-function-button iconName="arrow_upward"></app-function-button>-->
+<!--    <app-function-button iconName="arrow_downward"></app-function-button>-->
+
+<!--    <span class="divider"> </span>-->
+
+<!--    <app-function-button iconName="info"></app-function-button>-->
+  </mat-card-content>
+</mat-card>
