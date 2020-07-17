@@ -42,4 +42,12 @@ export class TorrentClientEffects {
       map(() => new actions.StartTorrentSuccess()),
     ))
   );
+
+  @Effect()
+  stopTorrents$ = this.actions$.pipe(
+    ofType(actions.TorrentClientActionTypes.StopTorrents),
+    mergeMap(({payload}) => this.client.stopTorrents$(payload).pipe(
+      map(() => new actions.StopTorrentsSuccess()),
+    ))
+  );
 }

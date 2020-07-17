@@ -41,4 +41,13 @@ export class TorrentClientService {
     }
     return this.http.post(url, requestBody);
   }
+
+  stopTorrents$ = (ids: number[]) => {
+    const url = `http://192.168.0.254:3001/transmission/stop`;
+    const requestBody = {
+      ids,
+    }
+    return this.http.post(url, requestBody);
+  }
+
 }

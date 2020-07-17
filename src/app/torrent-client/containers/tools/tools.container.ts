@@ -27,7 +27,8 @@ export class ToolsContainer {
   }
 
   handleStop() {
-    console.log('stop');
+    this.store.dispatch(new actions.StopTorrents(this.selectionService.snapshot));
+    this.selectionService.clear();
   }
 
   handleDelete() {
