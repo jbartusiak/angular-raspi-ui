@@ -10,7 +10,7 @@ import { SelectionControllerService } from "../../services/selection-controller.
 @Component({
   selector: 'app-torrent-list',
   template: `
-    <mat-list class="mat-elevation-z5 Container">
+    <mat-list class="Container">
 
       <app-torrent-item
         *ngFor="let torrent of torrents$ | async"
