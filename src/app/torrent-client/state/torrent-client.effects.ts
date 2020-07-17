@@ -55,7 +55,10 @@ export class TorrentClientEffects {
   deleteTorrents$ = this.actions$.pipe(
     ofType(actions.TorrentClientActionTypes.DeleteTorrents),
     mergeMap(({payload}) => this.client.deleteTorrents$(payload).pipe(
-      map(() => new actions.DeleteTorrentsSuccess())
+      switchMap(() => [
+        new actions.DeleteTorrentsSuccess(),
+        new actions.LoadTorrents()
+      ])
     ))
   )
 }
