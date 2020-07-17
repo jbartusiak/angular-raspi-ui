@@ -5,6 +5,7 @@ import { ITorrentItem } from "../state/torrent-client.reducer";
 import { LoadTorrentResponse } from "../models/LoadTorrentResponse";
 import { map } from "rxjs/operators";
 import { NewTorrentForm } from "../models/NewTorrentForm";
+import { DeleteTorrentsForm } from "../models/DeleteTorrentsForm";
 
 @Injectable({
   providedIn: 'root',
@@ -50,4 +51,12 @@ export class TorrentClientService {
     return this.http.post(url, requestBody);
   }
 
+  deleteTorrents$ = ({ids, deleteLocalData}: DeleteTorrentsForm) => {
+    const url = `http://192.168.0.254:3001/transmission/remove`;
+    const requestBody = {
+      ids,
+      deleteLocalData,
+    }
+    return this.http.post(url, requestBody);
+  }
 }

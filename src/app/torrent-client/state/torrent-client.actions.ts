@@ -2,6 +2,7 @@ import { Action } from "@ngrx/store";
 import { ITorrentItem } from "./torrent-client.reducer";
 import { Torrent } from "../../torrent-search/state";
 import { NewTorrentForm } from "../models/NewTorrentForm";
+import { DeleteTorrentsForm } from "../models/DeleteTorrentsForm";
 
 
 export enum TorrentClientActionTypes {
@@ -23,6 +24,10 @@ export enum TorrentClientActionTypes {
   StopTorrents = '[TORRENT CLIENT] Stop Torrents',
   StopTorrentsSuccess = '[TORRENT CLIENT] Stop Torrents Success',
   StopTorrentsFail = '[TORRENT CLIENT] Stop Torrents Fail',
+
+  DeleteTorrents = '[TORRENT CLIENT] Delete Torrents',
+  DeleteTorrentsSuccess = '[TORRENT CLIENT] Delete Torrents Success',
+  DeleteTorrentsFail = '[TORRENT CLIENT] Delete Torrents Fail',
 }
 
 export class LoadTorrents implements Action {
@@ -108,6 +113,22 @@ export class StopTorrentsFail implements Action {
   }
 }
 
+export class DeleteTorrents implements Action {
+  readonly type = TorrentClientActionTypes.DeleteTorrents;
+  constructor(public payload: DeleteTorrentsForm) {
+  }
+}
+
+export class DeleteTorrentsSuccess implements Action {
+  readonly type = TorrentClientActionTypes.DeleteTorrentsSuccess;
+}
+
+export class DeleteTorrentsFail implements Action {
+  readonly type = TorrentClientActionTypes.DeleteTorrentsFail;
+  constructor(public payload: string) {
+  }
+}
+
 export type TorrentClientActions =
   LoadTorrents |
   LoadTorrentsSuccess |
@@ -122,5 +143,7 @@ export type TorrentClientActions =
   StartTorrentFail |
   StopTorrents |
   StopTorrentsSuccess |
-  StopTorrentsFail
-;
+  StopTorrentsFail |
+  DeleteTorrents |
+  DeleteTorrentsSuccess |
+  DeleteTorrentsFail;

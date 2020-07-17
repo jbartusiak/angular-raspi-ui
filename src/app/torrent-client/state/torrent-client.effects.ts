@@ -50,4 +50,12 @@ export class TorrentClientEffects {
       map(() => new actions.StopTorrentsSuccess()),
     ))
   );
+
+  @Effect()
+  deleteTorrents$ = this.actions$.pipe(
+    ofType(actions.TorrentClientActionTypes.DeleteTorrents),
+    mergeMap(({payload}) => this.client.deleteTorrents$(payload).pipe(
+      map(() => new actions.DeleteTorrentsSuccess())
+    ))
+  )
 }

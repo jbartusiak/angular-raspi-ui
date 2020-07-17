@@ -14,7 +14,7 @@ export class ToolsContainer {
 
   selections$: Subscription;
 
-  constructor(private selectionService: SelectionControllerService,
+  constructor(public selectionService: SelectionControllerService,
               private store: Store<State>) {
     this.selections$ = this.selectionService.selections$.subscribe(
       next => console.log('new selection', next)
@@ -22,16 +22,19 @@ export class ToolsContainer {
   }
 
   handleStart() {
+    if (!this.selectionService.snapshot.length) return;
     this.store.dispatch(new actions.StartTorrent(this.selectionService.snapshot));
     this.selectionService.clear();
   }
 
   handleStop() {
+    if (!this.selectionService.snapshot.length) return;
     this.store.dispatch(new actions.StopTorrents(this.selectionService.snapshot));
     this.selectionService.clear();
   }
 
   handleDelete() {
+    if (!this.selectionService.snapshot.length) return;
     console.log('delete');
   }
 
