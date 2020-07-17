@@ -15,6 +15,10 @@ export enum TorrentClientActionTypes {
   DownloadTorrent = '[TORRENT CLIENT] Download Torrent',
   DownloadTorrentSuccess = '[TORRENT CLIENT] Download Torrent Success',
   DownloadTorrentFail = '[TORRENT CLIENT] Download Torrent Fail',
+
+  StartTorrents = '[TORRENT CLIENT] Start Torrents',
+  StartTorrentsSuccess = '[TORRENT CLIENT] Start Torrents Success',
+  StartTorrentsFail = '[TORRENT CLIENT] Start Torrents Fail',
 }
 
 export class LoadTorrents implements Action {
@@ -64,6 +68,24 @@ export class DownloadTorrentFail implements Action {
   }
 }
 
+export class StartTorrent implements Action {
+  readonly type = TorrentClientActionTypes.StartTorrents;
+
+  constructor(public payload: number[]) {
+  }
+}
+
+export class StartTorrentSuccess implements Action {
+  readonly type = TorrentClientActionTypes.StartTorrentsSuccess;
+}
+
+export class StartTorrentFail implements Action {
+  readonly type = TorrentClientActionTypes.StartTorrentsFail;
+
+  constructor(public payload: string) {
+  }
+}
+
 export type TorrentClientActions =
   LoadTorrents |
   LoadTorrentsSuccess |
@@ -72,4 +94,7 @@ export type TorrentClientActions =
   ClearTorrent |
   DownloadTorrent |
   DownloadTorrentSuccess |
-  DownloadTorrentFail;
+  DownloadTorrentFail |
+  StartTorrent |
+  StartTorrentSuccess |
+  StartTorrentFail;

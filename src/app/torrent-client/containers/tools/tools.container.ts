@@ -3,6 +3,7 @@ import { SelectionControllerService } from "../../services/selection-controller.
 import { State } from "../../state/torrent-client.reducer";
 import { Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
+import * as actions from '../../state/torrent-client.actions';
 
 @Component({
   selector: 'app-tools',
@@ -21,7 +22,8 @@ export class ToolsContainer {
   }
 
   handleStart() {
-    console.log('start');
+    this.store.dispatch(new actions.StartTorrent(this.selectionService.snapshot));
+    this.selectionService.clear();
   }
 
   handleStop() {

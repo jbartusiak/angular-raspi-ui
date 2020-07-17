@@ -18,6 +18,15 @@ export class SelectionControllerService {
     return this._selections$;
   }
 
+  get snapshot(): number[] {
+    return [...this.selections];
+  }
+
+  clear() {
+    this.selections.clear();
+    this.publish();
+  }
+
   select(id: number) {
     this.selections.add(id);
     this.publish();

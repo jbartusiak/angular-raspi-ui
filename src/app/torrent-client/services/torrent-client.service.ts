@@ -33,4 +33,12 @@ export class TorrentClientService {
 
     return this.http.post(url, requestBody);
   }
+
+  startTorrents$ = (ids: number[]) => {
+    const url = `http://192.168.0.254:3001/transmission/start`;
+    const requestBody = {
+      ids,
+    }
+    return this.http.post(url, requestBody);
+  }
 }
