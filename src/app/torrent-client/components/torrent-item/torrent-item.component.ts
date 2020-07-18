@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ITorrentItem } from "../../state/torrent-client.reducer";
 import { SelectionEvent } from "../../events/SelectionEvent";
 
@@ -12,11 +12,36 @@ const getTorrentIcon = (input: string) => {
   else return 'folder';
 }
 
+const megabyte = 1048576;
+const gigabyte = 1073741824;
+
+const sizeConverter = (bytes: number) => {
+  if (bytes > gigabyte) {
+    return `${(bytes / gigabyte).toFixed(2)} GB`;
+  } else {
+    return `${(bytes / megabyte).toFixed(2)} MB`;
+  }
+}
+
+enum ETransmissionTorrentStatus {
+  Stopped, // Torrent is stopped
+  'Pending filecheck', // Queued to check files
+  'Checking files', // Checking files
+  'Pending download', // Queued for download
+  Downloading, // Downloading
+  'Pending seed', // Queued to seed
+  Seeding, // Seeding
+  'No peers found' // No peers found
+}
+
 @Component({
   selector: 'app-torrent-item',
   template: `
-    <mat-list-item>
+    <mat-list-item class="mat-elevation-z3">
       <button mat-list-avatar mat-icon-button
+              class="ToggleButton"
+              [class.Downloading]="[1,2,3,4].indexOf(torrent.status)!==-1"
+              [class.Seeding]="[5,6].indexOf(torrent.status)!==-1"
               [color]="isSelected ? 'primary' : null"
               (click)="handleSelected()">
         <mat-icon>{{ getIcon() }}</mat-icon>
@@ -26,20 +51,50 @@ const getTorrentIcon = (input: string) => {
         <mat-progress-bar mode="determinate" color="primary" [value]="torrent.percentDone * 100"></mat-progress-bar>
       </span>
       <sub mat-line>
-        <span>{{torrent.percentDone*100}}</span>
+        <span>{{percentDone}} ({{ size }}) </span>
+        <span>{{status}} </span>
+        <span>Seeds: {{torrent.peersSendingToUs}} </span>
+        <span>Seeds available: {{torrent.peersConnected}} </span>
       </sub>
       <div style="margin-left: 16px">
-        <button mat-icon-button><mat-icon>folder</mat-icon></button>
+        <button mat-icon-button>
+          <mat-icon>folder</mat-icon>
+        </button>
       </div>
     </mat-list-item>
-  `
+  `,
+  styleUrls: ['./torrent-item.component.scss']
 })
-export class TorrentItemComponent {
+export class TorrentItemComponent implements OnInit {
   @Input() torrent: ITorrentItem;
   @Input() isSelected: boolean;
   @Output() onSelection = new EventEmitter<SelectionEvent>();
 
+  percentDone: string;
+  size: string;
+  status: string;
+
+  ngOnInit(): void {
+    this.percentDone = `${Math.floor(this.torrent.percentDone * 100)}%`;
+    this.size = this.getSize();
+    this.status = ETransmissionTorrentStatus[this.torrent.status];
+  }
+
+  getSize() {
+    if (this.torrent.percentDone===1) {
+      return `${sizeConverter(this.torrent.totalSize)}`;
+    }
+    else {
+      return `${sizeConverter(this.torrent.downloadedEver)} of ${sizeConverter(this.torrent.totalSize)}`;
+    }
+  }
+
   getIcon() {
+    if([1,2,3,4].indexOf(this.torrent.status) !== -1) {
+      return 'get_app';
+    } else if ([5,6].indexOf(this.torrent.status) !== -1) {
+      return 'publish';
+    }
     return getTorrentIcon(this.torrent.downloadDir);
   }
 
