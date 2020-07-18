@@ -10,23 +10,23 @@ import { of } from "rxjs";
   providedIn: 'root'
 })
 export class ServiceEffects {
-  constructor(private $actions: Actions,
+  constructor(private actions$: Actions,
               private configurationService: ConfigurationService) {
   }
 
   @Effect()
-  loadServices$ = this.$actions.pipe(
+  loadServices$ = this.actions$.pipe(
     ofType(servicesActions.ServiceActionTypes.Load),
-    mergeMap(() => this.configurationService.$fetchConfiguration().pipe(
+    mergeMap(() => this.configurationService.fetchConfiguration$().pipe(
       map(result => new servicesActions.LoadSuccess(result)),
       catchError(err => of(new servicesActions.LoadFail(err))),
     ))
   );
 
   @Effect()
-  getServiceStatus$ = this.$actions.pipe(
+  getServiceStatus$ = this.actions$.pipe(
     ofType<GetServiceStatus>(servicesActions.ServiceActionTypes.GetServiceStatus),
-    mergeMap(action => this.configurationService.$getServiceStatus(action.payload).pipe(
+    mergeMap(action => this.configurationService.getServiceStatus$(action.payload).pipe(
       map(result => new servicesActions.GetServiceStatusSuccess({
         service: action.payload,
         status: result,
