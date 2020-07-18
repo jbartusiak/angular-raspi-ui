@@ -18,3 +18,12 @@
   max-height: 110px;
   margin-bottom: 16px;
 }
+
+.ProgressBar {
+  transition: all 1s ease-in-out;
+  opacity: 0;
+}
+
+.Active {
+  opacity: 1;
+}

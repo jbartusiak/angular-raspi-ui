@@ -4,6 +4,7 @@ import { IFeatureRoute, IServicesState } from "../../../services/state/services.
 import { Subscription } from "rxjs";
 import * as servicesSelectors from './../../../services/state/service.selectors';
 import { flatMap } from "rxjs/operators";
+import { LoadingService } from "../../services/loading.service";
 
 @Component({
   selector: 'navbar-component',
@@ -15,23 +16,34 @@ export class NavbarComponent implements AfterContentInit, OnDestroy {
   name = 'Raspberry PI';
   panelOpened = false;
   theme = (window.localStorage.getItem('__raspi-theme__') || 'light') === 'light';
+  isLoading: boolean;
 
-  subscription$: Subscription;
+  servicesSub$: Subscription;
+  loadingSub$: Subscription;
 
-  constructor(private store: Store<IServicesState>) {
+  constructor(private store: Store<IServicesState>, private loading: LoadingService) {
   }
 
   ngAfterContentInit(): void {
-    this.subscription$ = this.store.pipe(
+    this.servicesSub$ = this.store.pipe(
       select(servicesSelectors.getServices),
       flatMap(res => Object.values(res).map(el=>el.featureRoutes)),
     ).subscribe(res => this.items = res);
+
+    this.loadingSub$ = this.loading.queriesInProgress$.subscribe(
+      value => {
+        console.log(value);
+        this.isLoading = !!value;
+      }
+    );
+
     if (!this.theme)
       window.document.body.classList.add('theme-dark');
   }
 
   ngOnDestroy(): void {
-    this.subscription$.unsubscribe();
+    this.servicesSub$.unsubscribe();
+    this.loadingSub$.unsubscribe();
   }
 
   swapTheme(): void {
