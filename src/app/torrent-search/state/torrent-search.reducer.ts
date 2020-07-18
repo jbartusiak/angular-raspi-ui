@@ -94,7 +94,13 @@ export const reducer = (state = initialState, action: TorrentSearchActions): ITo
     case TorrentSearchActionTypes.PerformSearchSuccess:
       return {
         ...state,
+        error: '',
         results: action.payload,
+      }
+    case TorrentSearchActionTypes.PerformSearchFail:
+      return {
+        ...state,
+        error: action.payload,
       }
     default:
       return {...state};

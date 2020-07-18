@@ -1,10 +1,11 @@
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import * as searchActions from "./torrent-search.actions";
-import { map, mergeMap, switchMap } from "rxjs/operators";
+import { catchError, map, mergeMap, switchMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { TorrentSearchService } from "../service/torrent-search.service";
 import { IOptions, Torrent } from "./torrent-search.reducer";
 import {AddTorrent} from "../../torrent-client/state/torrent-client.actions";
+import { of } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +51,9 @@ export class TorrentSearchEffect {
         map((result) =>
           new searchActions.PerformSearchSuccess(result)
         ),
+        catchError(err =>
+          of(new searchActions.PerformSearchFail(err.statusText))
+        )
       )
     )
   )

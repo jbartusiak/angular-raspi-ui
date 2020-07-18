@@ -38,7 +38,10 @@ export class LoadingService {
 
   private initializeActionObserver() {
     this.actionsSubscription = this.actions$.subscribe(action => {
-      if (action.type.toLocaleLowerCase().includes('success')) {
+      if (
+        action.type.toLocaleLowerCase().includes('success') ||
+        action.type.toLocaleLowerCase().includes('fail')
+      ) {
         this.endApiCall();
       } else if (action.type !== TorrentSearchActionTypes.UpdateQuery){
         this.beginCall();
