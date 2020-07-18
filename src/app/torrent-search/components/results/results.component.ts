@@ -4,6 +4,10 @@ import { MatTableDataSource } from "@angular/material/table";
 import { Torrent } from "../../state";
 import { resultsFadeInAnimation } from "../../animations/torrent-search.animations";
 
+/*
+* TODO Fix table sorting
+*  */
+
 @Component({
   selector: 'app-results-component',
   templateUrl: './results.component.html',

@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+/*
+* TODO add snackbars to indicate state changes
+* */
+
 @Component({
   selector: 'app-torrent-client',
   template: `

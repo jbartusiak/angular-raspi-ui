@@ -2,6 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { interval, Subscription } from "rxjs";
 import { take } from "rxjs/operators";
 
+/*
+* TODO fix categories selection
+* */
+
 @Component({
   selector: 'app-search-component',
   templateUrl: './search.component.html',
