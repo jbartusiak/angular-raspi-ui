@@ -30,6 +30,7 @@ export class TorrentClientEffects {
     mergeMap((action: { payload: NewTorrentForm }) => this.client.addNewTorrent$(action.payload).pipe(
       switchMap(() => [
         new actions.DownloadTorrentSuccess(),
+        new actions.LoadTorrents(),
       ])
       )
     )
@@ -39,7 +40,10 @@ export class TorrentClientEffects {
   startTorrents$ = this.actions$.pipe(
     ofType(actions.TorrentClientActionTypes.StartTorrents),
     mergeMap(({payload}) => this.client.startTorrents$(payload).pipe(
-      map(() => new actions.StartTorrentSuccess()),
+      switchMap(() => [
+        new actions.StartTorrentSuccess(),
+        new actions.LoadTorrents(),
+      ]),
     ))
   );
 
@@ -47,7 +51,10 @@ export class TorrentClientEffects {
   stopTorrents$ = this.actions$.pipe(
     ofType(actions.TorrentClientActionTypes.StopTorrents),
     mergeMap(({payload}) => this.client.stopTorrents$(payload).pipe(
-      map(() => new actions.StopTorrentsSuccess()),
+      switchMap(() => [
+        new actions.StopTorrentsSuccess(),
+        new actions.LoadTorrents(),
+      ]),
     ))
   );
 
@@ -57,7 +64,7 @@ export class TorrentClientEffects {
     mergeMap(({payload}) => this.client.deleteTorrents$(payload).pipe(
       switchMap(() => [
         new actions.DeleteTorrentsSuccess(),
-        new actions.LoadTorrents()
+        new actions.LoadTorrents(),
       ])
     ))
   )
