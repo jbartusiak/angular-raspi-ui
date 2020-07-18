@@ -2,11 +2,13 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewC
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { Torrent } from "../../state";
+import { resultsFadeInAnimation } from "../../animations/torrent-search.animations";
 
 @Component({
   selector: 'app-results-component',
   templateUrl: './results.component.html',
-  styleUrls: [ './results.component.scss' ]
+  styleUrls: [ './results.component.scss' ],
+  animations: [resultsFadeInAnimation],
 })
 export class ResultsComponent implements OnChanges {
 

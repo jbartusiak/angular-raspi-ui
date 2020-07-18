@@ -1,4 +1,4 @@
-<div class="Container" *ngIf="results.length">
+<div class="Container" *ngIf="results.length" [@resultsFadeIn]="results.length>0">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" matSort>
 
     <ng-container matColumnDef="title" sticky>
