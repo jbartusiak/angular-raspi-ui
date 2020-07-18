@@ -39,3 +39,12 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
+<div class="Container" *ngIf="error" [@resultsFadeIn]="error.length>0">
+  <mat-card>
+    <mat-card-title>I encountered a problem while processing your request</mat-card-title>
+    <mat-card-content>
+      Server provided the following explanation:
+      <p>{{ error }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -20,6 +20,7 @@ import { Router } from "@angular/router";
     </app-search-component>
     <app-results-component
       [results]="$results | async"
+      [error]="error$ | async"
       (download)="handleDownload($event)"
     >
     </app-results-component>
@@ -31,6 +32,7 @@ export class SearchContainer implements OnInit {
   $query: Observable<string>;
   $categories: Observable<string[]>;
   $category: Observable<string>;
+  error$: Observable<string>;
 
   $results: Observable<Torrent[]>;
 
@@ -50,6 +52,9 @@ export class SearchContainer implements OnInit {
     )
     this.$categories = this.store.pipe(
       select(selectors.getAllCategories)
+    );
+    this.error$ = this.store.pipe(
+      select(selectors.getError)
     );
   }
 

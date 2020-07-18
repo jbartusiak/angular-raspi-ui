@@ -13,6 +13,11 @@ export const getEnabledProviders = createSelector(
   state => state.enabledProviders,
 );
 
+export const getError = createSelector(
+  getTorrentSearchFeatureState,
+  state => state.error,
+)
+
 export const getEnabledProvidersBindable = createSelector(
   getTorrentSearchFeatureState,
   state => {

@@ -4,7 +4,7 @@ import { catchError, map, mergeMap, switchMap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { TorrentSearchService } from "../service/torrent-search.service";
 import { IOptions, Torrent } from "./torrent-search.reducer";
-import {AddTorrent} from "../../torrent-client/state/torrent-client.actions";
+import { AddTorrent } from "../../torrent-client/state/torrent-client.actions";
 import { of } from "rxjs";
 
 @Injectable({
@@ -51,8 +51,10 @@ export class TorrentSearchEffect {
         map((result) =>
           new searchActions.PerformSearchSuccess(result)
         ),
-        catchError(err =>
-          of(new searchActions.PerformSearchFail(err.statusText))
+        catchError(err => {
+            console.error(err);
+            return of(new searchActions.PerformSearchFail(`${ err.error.message } (status code: ${ err.status })`))
+          }
         )
       )
     )
@@ -61,7 +63,7 @@ export class TorrentSearchEffect {
   @Effect()
   getTorrentMagnet$ = this.$actions.pipe(
     ofType(searchActions.TorrentSearchActionTypes.GetTorrentMagnet),
-    mergeMap((action:{payload:Torrent}) =>
+    mergeMap((action: { payload: Torrent }) =>
       this.searchService.getTorrentMagnet$(action.payload).pipe(
         switchMap(result => [
           new searchActions.GetTorrentMagnetSuccess,

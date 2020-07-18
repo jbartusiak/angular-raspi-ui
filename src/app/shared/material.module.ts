@@ -17,6 +17,7 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatListModule } from "@angular/material/list";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatListModule,
     MatProgressBarModule,
     MatDialogModule,
+    MatSnackBarModule,
   ],
   exports: [
     MatToolbarModule,
@@ -56,6 +58,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatListModule,
     MatProgressBarModule,
     MatDialogModule,
+    MatSnackBarModule,
   ]
 })
 export class MaterialModule {

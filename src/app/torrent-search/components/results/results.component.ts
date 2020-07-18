@@ -13,15 +13,13 @@ import { resultsFadeInAnimation } from "../../animations/torrent-search.animatio
 export class ResultsComponent implements OnChanges {
 
   @Input() results: Torrent[];
+  @Input() error: string;
   @Output() download = new EventEmitter<Torrent>();
 
   displayedColumns: string[] = [ 'title', 'magnet', 'uploaded', 'size', 'condition', 'provider' ];
   dataSource = new MatTableDataSource(this.results);
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-
-  constructor() {
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.dataSource = new MatTableDataSource<Torrent>(this.results);

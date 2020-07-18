@@ -101,6 +101,7 @@ export const reducer = (state = initialState, action: TorrentSearchActions): ITo
       return {
         ...state,
         error: action.payload,
+        results: [],
       }
     default:
       return {...state};
