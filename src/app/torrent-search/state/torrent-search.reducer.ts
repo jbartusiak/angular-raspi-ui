@@ -1,4 +1,4 @@
-import * as fromRoot from "../../app.state";
+import * as fromRoot from "../../state/app.state";
 import { TorrentSearchActions, TorrentSearchActionTypes } from "./torrent-search.actions";
 
 export interface Torrent {

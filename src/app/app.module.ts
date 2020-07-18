@@ -11,7 +11,7 @@ import { RouterModule } from "@angular/router";
 import { routes } from "./routes";
 import { SharedModule } from "./shared/shared.module";
 import { MaterialModule } from "./shared/material.module";
-import { stateMetaReducer } from "./app.state";
+import { stateMetaReducer } from "./state/app.state";
 
 @NgModule({
   declarations: [
