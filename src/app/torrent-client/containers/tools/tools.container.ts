@@ -12,6 +12,7 @@ import {
 } from "../../components/delete-torrent-dialog/delete-torrent-dialog.component";
 import { take } from "rxjs/operators";
 import { DeleteTorrentsForm } from "../../models/DeleteTorrentsForm";
+import { SnackbarService } from "../../services/snackbar.service";
 
 @Component({
   selector: 'app-tools',
@@ -26,7 +27,8 @@ export class ToolsContainer implements OnInit, OnDestroy {
 
   constructor(public selectionService: SelectionControllerService,
               private store: Store<State>,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private snackbar: SnackbarService) {
   }
 
   ngOnInit(): void {
@@ -46,12 +48,14 @@ export class ToolsContainer implements OnInit, OnDestroy {
     if (!this.selectionService.snapshot.length) return;
     this.store.dispatch(new actions.StartTorrent(this.selectionService.snapshot));
     this.selectionService.clear();
+    this.snackbar.show('Torrents are being started...');
   }
 
   handleStop() {
     if (!this.selectionService.snapshot.length) return;
     this.store.dispatch(new actions.StopTorrents(this.selectionService.snapshot));
     this.selectionService.clear();
+    this.snackbar.show('Torrents are being stopped...');
   }
 
   handleDelete() {
@@ -79,6 +83,7 @@ export class ToolsContainer implements OnInit, OnDestroy {
               ...result,
               ids: selectedIds,
             }))
+            this.snackbar.show('Torrents are being deleted...');
           }
         }
       )
