@@ -91,6 +91,11 @@ export const reducer = (state = initialState, action: TorrentSearchActions): ITo
         ...state,
         query: action.payload,
       }
+    case TorrentSearchActionTypes.UpdateCategory:
+      return {
+        ...state,
+        category: action.payload,
+      }
     case TorrentSearchActionTypes.PerformSearchSuccess:
       return {
         ...state,

@@ -43,7 +43,7 @@ export class LoadingService {
         action.type.toLocaleLowerCase().includes('fail')
       ) {
         this.endApiCall();
-      } else if (action.type !== TorrentSearchActionTypes.UpdateQuery){
+      } else if (action.type !== TorrentSearchActionTypes.UpdateQuery && action.type !== TorrentSearchActionTypes.UpdateCategory){
         this.beginCall();
       }
     })

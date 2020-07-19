@@ -65,7 +65,7 @@ export class SearchContainer implements OnInit {
   }
 
   handleCategoryChange(category: string) {
-
+    this.store.dispatch(new actions.UpdateCategory(category));
   }
 
   handleDownload(torrent: Torrent) {
