@@ -1,5 +1,6 @@
 import { Action } from "@ngrx/store";
 import { IOptions, ITorrentProvider, Torrent } from "./torrent-search.reducer";
+import { TorrentSearchQuery } from "../models/TorrentSearchQuery";
 
 export enum TorrentSearchActionTypes {
   LoadProviders = '[TORRENT-SEARCH] Load Providers',
@@ -101,7 +102,7 @@ export class UpdateCategory implements Action {
 export class PerformSearch implements Action {
   readonly type = TorrentSearchActionTypes.PerformSearch;
 
-  constructor(public payload: string) {
+  constructor(public payload: TorrentSearchQuery) {
   }
 }
 

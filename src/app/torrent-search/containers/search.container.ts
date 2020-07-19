@@ -65,18 +65,18 @@ export class SearchContainer implements OnInit {
       select(selectors.getEnabledProviders)
     );
     this.subscription =
-      combineLatest([this.category$, this.query$, this.enabledProviders$])
+      combineLatest([ this.category$, this.query$, this.enabledProviders$ ])
         .pipe(
-          map(([category$, query$, enabledProviders$]) => ({
+          map(([ category$, query$, enabledProviders$ ]) => ({
             category: category$,
             query: query$,
             enabledProviders: enabledProviders$,
           }))
         )
         .subscribe(
-          ({category, query, enabledProviders}) => {
-            if (category && query && enabledProviders) {
-              console.log(category, query, enabledProviders)
+          (queryParams) => {
+            if (queryParams.category && queryParams.query && queryParams.enabledProviders) {
+              this.store.dispatch(new actions.PerformSearch(queryParams));
             }
           }
         );

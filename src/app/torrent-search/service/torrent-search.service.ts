@@ -38,11 +38,11 @@ export class TorrentSearchService {
     )
   }
 
-  performSearch$ = (query: string, categories?: string | string[], limit = 40) => {
+  performSearch$ = (query: string, category: string, limit = 40) => {
     const url = `http://${ host }:${ port }/torrent/search`;
     return this.http
       .post(url, {
-        categories: Array.isArray(categories) ? categories : [ categories ],
+        categories: [category],
         limit,
         query,
       })

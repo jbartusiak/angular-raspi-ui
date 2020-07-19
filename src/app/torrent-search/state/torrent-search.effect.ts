@@ -6,6 +6,7 @@ import { TorrentSearchService } from "../service/torrent-search.service";
 import { IOptions, Torrent } from "./torrent-search.reducer";
 import { AddTorrent } from "../../torrent-client/state/torrent-client.actions";
 import { of } from "rxjs";
+import { TorrentSearchQuery } from "../models/TorrentSearchQuery";
 
 @Injectable({
   providedIn: 'root'
@@ -46,8 +47,8 @@ export class TorrentSearchEffect {
   @Effect()
   performSearch$ = this.actions$.pipe(
     ofType(searchActions.TorrentSearchActionTypes.PerformSearch),
-    mergeMap(({payload}) =>
-      this.searchService.performSearch$(payload).pipe(
+    mergeMap(({payload}: { payload: TorrentSearchQuery }) =>
+      this.searchService.performSearch$(payload.query, payload.category, payload.resultsLimit).pipe(
         map((result) =>
           new searchActions.PerformSearchSuccess(result)
         ),
