@@ -16,6 +16,7 @@ import { Router } from "@angular/router";
       [selectedCategory]="$category | async"
       [query]="$query | async"
       (onQueryChanged)="handleQueryChange($event)"
+      (onCategoryChanged)="handleCategoryChange($event)"
     >
     </app-search-component>
     <app-results-component
@@ -61,6 +62,10 @@ export class SearchContainer implements OnInit {
   handleQueryChange(query: string) {
     this.store.dispatch(new actions.UpdateQuery(query));
     this.store.dispatch(new actions.PerformSearch(query));
+  }
+
+  handleCategoryChange(category: string) {
+
   }
 
   handleDownload(torrent: Torrent) {

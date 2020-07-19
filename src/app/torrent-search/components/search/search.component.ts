@@ -17,6 +17,7 @@ export class SearchComponent {
   @Input() selectedCategory: string;
 
   @Output() onQueryChanged = new EventEmitter<string>();
+  @Output() onCategoryChanged = new EventEmitter<string>();
 
   private $interval: Subscription;
 

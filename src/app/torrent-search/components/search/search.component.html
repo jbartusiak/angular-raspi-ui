@@ -20,8 +20,11 @@
       fxFlex="grow"
       fxFlex.gt-md="auto">
       <mat-label>Category</mat-label>
-      <mat-select [value]="selectedCategory"
-      [disabled]="!categories.length">
+      <mat-select
+        [value]="selectedCategory"
+        [disabled]="!categories.length"
+        (selectionChange)="onCategoryChanged.emit($event.value)"
+      >
         <mat-option
           *ngFor="let category of categories"
           value="{{category}}">{{category}}</mat-option>
