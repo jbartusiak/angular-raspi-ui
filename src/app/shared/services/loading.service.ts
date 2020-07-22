@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, Subscription } from "rxjs";
 import { Actions } from "@ngrx/effects";
 import { TorrentSearchActionTypes } from "../../torrent-search/state";
+import { TorrentClientActionTypes } from "../../torrent-client/state/torrent-client.actions";
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,12 @@ export class LoadingService {
         action.type.toLocaleLowerCase().includes('fail')
       ) {
         this.endApiCall();
-      } else if (action.type !== TorrentSearchActionTypes.UpdateQuery && action.type !== TorrentSearchActionTypes.UpdateCategory){
+      } else if (
+        action.type !== TorrentSearchActionTypes.UpdateQuery &&
+        action.type !== TorrentSearchActionTypes.UpdateCategory &&
+        action.type !== TorrentClientActionTypes.AddTorrent &&
+        action.type !== TorrentClientActionTypes.ClearTorrent
+      ){
         this.beginCall();
       }
     })
