@@ -82,6 +82,9 @@ export class TorrentItemComponent implements OnInit {
   }
 
   getSize() {
+    if (this.torrent.totalSize === 0) {
+      return 'Size in unknown'
+    }
     if (this.torrent.percentDone === 1) {
       return `${ sizeConverter(this.torrent.totalSize) }`;
     } else {

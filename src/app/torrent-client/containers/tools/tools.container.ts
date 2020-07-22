@@ -84,6 +84,7 @@ export class ToolsContainer implements OnInit, OnDestroy {
               ids: selectedIds,
             }))
             this.snackbar.show('Torrents are being deleted...');
+            this.selectionService.clear();
           }
         }
       )
