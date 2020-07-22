@@ -1,5 +1,5 @@
 <div class="Container" *ngIf="results.length" [@resultsFadeIn]="results.length>0">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" matSort>
+  <table mat-table [dataSource]="sortedResults" class="mat-elevation-z2" matSort (matSortChange)="sortChange($event)">
 
     <ng-container matColumnDef="title" sticky>
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>

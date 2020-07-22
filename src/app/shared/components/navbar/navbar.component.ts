@@ -31,10 +31,7 @@ export class NavbarComponent implements AfterContentInit, OnDestroy {
     ).subscribe(res => this.items = res);
 
     this.loadingSub$ = this.loading.queriesInProgress$.subscribe(
-      value => {
-        console.log(value);
-        this.isLoading = !!value;
-      }
+      value => this.isLoading = !!value
     );
 
     if (!this.theme)
