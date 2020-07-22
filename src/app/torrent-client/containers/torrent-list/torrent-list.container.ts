@@ -46,7 +46,7 @@ export class TorrentListContainer implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch(new actions.LoadTorrents());
-    this.intervalSub = interval(10000).subscribe(
+    this.intervalSub = interval(12000).subscribe(
       () => this.store.dispatch(new actions.LoadTorrents())
     );
     this.displayStatusSub =

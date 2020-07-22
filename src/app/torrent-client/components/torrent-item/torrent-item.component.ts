@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ITorrentItem } from "../../state/torrent-client.reducer";
 import { SelectionEvent } from "../../events/SelectionEvent";
-import {ETorrentItemStatusDisplay} from '../../models/TorrentItemStatusDisplay';
+import { ETorrentItemStatusDisplay } from '../../models/TorrentItemStatusDisplay';
 import { statusSwitchAnimation } from "../../animations/torrent-client.animations";
 
 const getTorrentIcon = (input: string) => {
@@ -60,15 +60,10 @@ enum ETransmissionTorrentStatus {
         <div *ngIf="displayStatus===1" @statusSwitch>{{percentDone}} ({{ size }})</div>
         <div *ngIf="displayStatus===0" @statusSwitch>{{status}} </div>
       </div>
-      <div style="margin-left: 16px">
-        <button mat-icon-button>
-          <mat-icon>folder</mat-icon>
-        </button>
-      </div>
     </mat-list-item>
   `,
   styleUrls: [ './torrent-item.component.scss' ],
-  animations: [statusSwitchAnimation]
+  animations: [ statusSwitchAnimation ]
 })
 export class TorrentItemComponent implements OnInit {
   @Input() torrent: ITorrentItem;
