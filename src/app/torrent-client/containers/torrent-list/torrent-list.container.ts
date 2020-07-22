@@ -50,10 +50,10 @@ export class TorrentListContainer implements OnInit, OnDestroy {
       () => this.store.dispatch(new actions.LoadTorrents())
     );
     this.displayStatusSub =
-      interval(2000)
+      interval(4000)
         .pipe(
           tap(next => console.log(next)),
-          map(next => next % 3))
+          map(next => (next+1) % 3))
         .subscribe(
           next => this.displayStatus = next);
     this.torrents$ = this.store.pipe(

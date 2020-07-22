@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ITorrentItem } from "../../state/torrent-client.reducer";
 import { SelectionEvent } from "../../events/SelectionEvent";
 import {ETorrentItemStatusDisplay} from '../../models/TorrentItemStatusDisplay';
+import { statusSwitchAnimation } from "../../animations/torrent-client.animations";
 
 const getTorrentIcon = (input: string) => {
   const name = input.toLocaleLowerCase();
@@ -53,11 +54,11 @@ enum ETransmissionTorrentStatus {
         <mat-progress-bar mode="determinate" color="primary" [value]="torrent.percentDone * 100"></mat-progress-bar>
       </span>
       <div mat-line>
-        <div *ngIf="displayStatus===0">{{status}} </div>
-        <div *ngIf="displayStatus===1">{{percentDone}} ({{ size }})</div>
-        <div *ngIf="displayStatus===2">
+        <div *ngIf="displayStatus===2" @statusSwitch>
           Seeds: {{torrent.peersSendingToUs}} Seeds available: {{torrent.peersConnected}}
         </div>
+        <div *ngIf="displayStatus===1" @statusSwitch>{{percentDone}} ({{ size }})</div>
+        <div *ngIf="displayStatus===0" @statusSwitch>{{status}} </div>
       </div>
       <div style="margin-left: 16px">
         <button mat-icon-button>
@@ -66,7 +67,8 @@ enum ETransmissionTorrentStatus {
       </div>
     </mat-list-item>
   `,
-  styleUrls: [ './torrent-item.component.scss' ]
+  styleUrls: [ './torrent-item.component.scss' ],
+  animations: [statusSwitchAnimation]
 })
 export class TorrentItemComponent implements OnInit {
   @Input() torrent: ITorrentItem;
