@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ITorrentItem } from "../../state/torrent-client.reducer";
 import { SelectionEvent } from "../../events/SelectionEvent";
+import {ETorrentItemStatusDisplay} from '../../models/TorrentItemStatusDisplay';
 
 const getTorrentIcon = (input: string) => {
   const name = input.toLocaleLowerCase();
 
-  if (name.indexOf('games')>=0) return 'games';
+  if (name.indexOf('games') >= 0) return 'games';
   else if (name.indexOf('movies') >= 0) return 'movie';
   else if (name.indexOf('series') >= 0) return 'tv';
   else if (name.indexOf('others') >= 0) return 'description';
@@ -17,9 +18,9 @@ const gigabyte = 1073741824;
 
 const sizeConverter = (bytes: number) => {
   if (bytes > gigabyte) {
-    return `${(bytes / gigabyte).toFixed(2)} GB`;
+    return `${ (bytes / gigabyte).toFixed(2) } GB`;
   } else {
-    return `${(bytes / megabyte).toFixed(2)} MB`;
+    return `${ (bytes / megabyte).toFixed(2) } MB`;
   }
 }
 
@@ -33,6 +34,7 @@ enum ETransmissionTorrentStatus {
   Seeding, // Seeding
   'No peers found' // No peers found
 }
+
 
 @Component({
   selector: 'app-torrent-item',
@@ -50,12 +52,13 @@ enum ETransmissionTorrentStatus {
       <span mat-line>
         <mat-progress-bar mode="determinate" color="primary" [value]="torrent.percentDone * 100"></mat-progress-bar>
       </span>
-      <sub mat-line>
-        <span>{{percentDone}} ({{ size }}) </span>
-        <span>{{status}} </span>
-        <span>Seeds: {{torrent.peersSendingToUs}} </span>
-        <span>Seeds available: {{torrent.peersConnected}} </span>
-      </sub>
+      <div mat-line>
+        <div *ngIf="displayStatus===0">{{status}} </div>
+        <div *ngIf="displayStatus===1">{{percentDone}} ({{ size }})</div>
+        <div *ngIf="displayStatus===2">
+          Seeds: {{torrent.peersSendingToUs}} Seeds available: {{torrent.peersConnected}}
+        </div>
+      </div>
       <div style="margin-left: 16px">
         <button mat-icon-button>
           <mat-icon>folder</mat-icon>
@@ -63,11 +66,12 @@ enum ETransmissionTorrentStatus {
       </div>
     </mat-list-item>
   `,
-  styleUrls: ['./torrent-item.component.scss']
+  styleUrls: [ './torrent-item.component.scss' ]
 })
 export class TorrentItemComponent implements OnInit {
   @Input() torrent: ITorrentItem;
   @Input() isSelected: boolean;
+  @Input() displayStatus: ETorrentItemStatusDisplay;
   @Output() onSelection = new EventEmitter<SelectionEvent>();
 
   percentDone: string;
@@ -75,24 +79,23 @@ export class TorrentItemComponent implements OnInit {
   status: string;
 
   ngOnInit(): void {
-    this.percentDone = `${Math.floor(this.torrent.percentDone * 100)}%`;
+    this.percentDone = `${ (this.torrent.percentDone * 100).toFixed(2) }%`;
     this.size = this.getSize();
     this.status = ETransmissionTorrentStatus[this.torrent.status];
   }
 
   getSize() {
-    if (this.torrent.percentDone===1) {
-      return `${sizeConverter(this.torrent.totalSize)}`;
-    }
-    else {
-      return `${sizeConverter(this.torrent.downloadedEver)} of ${sizeConverter(this.torrent.totalSize)}`;
+    if (this.torrent.percentDone === 1) {
+      return `${ sizeConverter(this.torrent.totalSize) }`;
+    } else {
+      return `${ sizeConverter(this.torrent.downloadedEver) } of ${ sizeConverter(this.torrent.totalSize) }`;
     }
   }
 
   getIcon() {
-    if([1,2,3,4].indexOf(this.torrent.status) !== -1) {
+    if ([ 1, 2, 3, 4 ].indexOf(this.torrent.status) !== -1) {
       return 'get_app';
-    } else if ([5,6].indexOf(this.torrent.status) !== -1) {
+    } else if ([ 5, 6 ].indexOf(this.torrent.status) !== -1) {
       return 'publish';
     }
     return getTorrentIcon(this.torrent.downloadDir);
