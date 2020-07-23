@@ -8,6 +8,7 @@ import { SelectionEvent } from "../../events/SelectionEvent";
 import { SelectionControllerService } from "../../services/selection-controller.service";
 import { map } from "rxjs/operators";
 import { ETorrentItemStatusDisplay } from "../../models/TorrentItemStatusDisplay";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-torrent-list',
@@ -40,6 +41,7 @@ export class TorrentListContainer implements OnInit, OnDestroy {
   private displayStatusSub: Subscription;
 
   constructor(private store: Store<State>,
+              private router: Router,
               public selectionService: SelectionControllerService) {
   }
 
@@ -71,6 +73,6 @@ export class TorrentListContainer implements OnInit, OnDestroy {
 
   handleDetails(torrentId: number) {
     console.log(torrentId);
-    //TODO router navigate to
+    this.router.navigate(['/torrent-client', torrentId]);
   }
 }
