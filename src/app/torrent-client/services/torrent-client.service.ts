@@ -6,6 +6,7 @@ import { LoadTorrentResponse } from "../models/LoadTorrentResponse";
 import { map } from "rxjs/operators";
 import { NewTorrentForm } from "../models/NewTorrentForm";
 import { DeleteTorrentsForm } from "../models/DeleteTorrentsForm";
+import { TorrentItemDetailsResponse } from "../models/TorrentItemDetailsResponse";
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,11 @@ export class TorrentClientService {
     console.log('adding new torrent');
 
     return this.http.post(url, requestBody);
+  }
+
+  getTorrentDetails$ = (torrentId: number):Observable<TorrentItemDetailsResponse> => {
+    const url = `http://192.168.0.254:3001/transmission/all?id=${torrentId}`;
+    return this.http.get<TorrentItemDetailsResponse>(url);
   }
 
   startTorrents$ = (ids: number[]) => {
