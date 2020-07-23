@@ -39,29 +39,7 @@ enum ETransmissionTorrentStatus {
 
 @Component({
   selector: 'app-torrent-item',
-  template: `
-    <mat-list-item class="mat-elevation-z3">
-      <button mat-list-avatar mat-icon-button
-              class="ToggleButton"
-              [class.Downloading]="[1,2,3,4].indexOf(torrent.status)!==-1"
-              [class.Seeding]="[5,6].indexOf(torrent.status)!==-1"
-              [color]="isSelected ? 'primary' : null"
-              (click)="handleSelected()">
-        <mat-icon>{{ getIcon() }}</mat-icon>
-      </button>
-      <h1 mat-line>{{ torrent.name }}</h1>
-      <span mat-line>
-        <mat-progress-bar mode="determinate" color="primary" [value]="torrent.percentDone * 100"></mat-progress-bar>
-      </span>
-      <div mat-line>
-        <div *ngIf="displayStatus===2" @statusSwitch>
-          Seeds: {{torrent.peersSendingToUs}} Seeds available: {{torrent.peersConnected}}
-        </div>
-        <div *ngIf="displayStatus===1" @statusSwitch>{{percentDone}} ({{ size }})</div>
-        <div *ngIf="displayStatus===0" @statusSwitch>{{status}} </div>
-      </div>
-    </mat-list-item>
-  `,
+  templateUrl: './torrent-item.component.html',
   styleUrls: [ './torrent-item.component.scss' ],
   animations: [ statusSwitchAnimation ]
 })
@@ -70,6 +48,7 @@ export class TorrentItemComponent implements OnInit {
   @Input() isSelected: boolean;
   @Input() displayStatus: ETorrentItemStatusDisplay;
   @Output() onSelection = new EventEmitter<SelectionEvent>();
+  @Output() onDetails = new EventEmitter();
 
   percentDone: string;
   size: string;
@@ -101,10 +80,15 @@ export class TorrentItemComponent implements OnInit {
     return getTorrentIcon(this.torrent.downloadDir);
   }
 
-  handleSelected() {
+  handleSelected(event: MouseEvent) {
+    event.stopPropagation();
     this.onSelection.emit({
       torrentId: this.torrent.id,
       selected: !this.isSelected,
     });
+  }
+
+  handleDetails() {
+    this.onDetails.emit(this.torrent.id);
   }
 }

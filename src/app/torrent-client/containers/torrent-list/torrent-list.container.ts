@@ -6,30 +6,29 @@ import * as selectors from '../../state/torrent-client.selectors';
 import { interval, Observable, Subscription } from "rxjs";
 import { SelectionEvent } from "../../events/SelectionEvent";
 import { SelectionControllerService } from "../../services/selection-controller.service";
-import { map, tap } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { ETorrentItemStatusDisplay } from "../../models/TorrentItemStatusDisplay";
 
 @Component({
   selector: 'app-torrent-list',
   template: `
-    <mat-list class="Container">
-
+    <mat-list class="Container mat-elevation-z5">
       <app-torrent-item
         *ngFor="let torrent of torrents$ | async"
         [displayStatus]="displayStatus"
         [torrent]="torrent"
         [isSelected]="this.selectionService.isSelected(torrent.id)"
-        (onSelection)="handleSelection($event)">
+        (onSelection)="handleSelection($event)"
+        (onDetails)="handleDetails($event)">
       </app-torrent-item>
-
-      <app-add-item-container>
-      </app-add-item-container>
-
     </mat-list>
+    <app-add-item-container>
+    </app-add-item-container>
   `,
   styles: [ `
     .Container {
-      margin: 16px auto;
+      margin: 8px 0;
+      padding: 8px 0;
     }
   ` ]
 })
@@ -52,8 +51,7 @@ export class TorrentListContainer implements OnInit, OnDestroy {
     this.displayStatusSub =
       interval(4000)
         .pipe(
-          tap(next => console.log(next)),
-          map(next => (next+1) % 3))
+          map(next => (next + 1) % 3))
         .subscribe(
           next => this.displayStatus = next);
     this.torrents$ = this.store.pipe(
@@ -69,5 +67,10 @@ export class TorrentListContainer implements OnInit, OnDestroy {
     if (selected) {
       this.selectionService.select(torrentId);
     } else this.selectionService.deselect(torrentId);
+  }
+
+  handleDetails(torrentId: number) {
+    console.log(torrentId);
+    //TODO router navigate to
   }
 }

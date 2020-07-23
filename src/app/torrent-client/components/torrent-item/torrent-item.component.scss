@@ -4,14 +4,18 @@
   transition: all 0.5s ease-in-out;
 }
 
-.Downloading{
+.Downloading {
   background-color: mat-color($raspi-app-palette-primary, A400);
   animation: Breathe alternate infinite 1s;
 }
 
-.Seeding{
+.Seeding {
   background-color: mat-color($raspi-app-palette-accent, 700);
   animation: Breathe alternate infinite 1s;
+}
+
+.ClickItem {
+  cursor: pointer;
 }
 
 @keyframes Breathe {

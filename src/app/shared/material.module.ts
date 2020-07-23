@@ -18,6 +18,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatRippleModule } from "@angular/material/core";
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     MatProgressBarModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatRippleModule,
   ],
   exports: [
     MatToolbarModule,
@@ -59,6 +61,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     MatProgressBarModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatRippleModule,
   ]
 })
 export class MaterialModule {
