@@ -63,6 +63,7 @@ export class TorrentListContainer implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.intervalSub.unsubscribe();
+    this.displayStatusSub.unsubscribe();
   }
 
   handleSelection({torrentId, selected}: SelectionEvent) {
