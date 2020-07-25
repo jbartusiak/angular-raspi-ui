@@ -13,6 +13,7 @@ import { StoreModule } from "@ngrx/store";
 import * as fromServices from './../services/state/services.reducer';
 import { LayoutComponent } from "./components/layout/layout.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { DataVolumePipe } from './pipes/data-volume.pipe';
 
 @NgModule({
   declarations: [
@@ -20,18 +21,20 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     BlinkerComponent,
     LayoutComponent,
     NavbarComponent,
+    DataVolumePipe,
   ],
-  exports: [
-    BackdropComponent,
-    BlinkerComponent,
-    LayoutComponent,
-    FlexLayoutModule,
-    NavbarComponent,
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+    exports: [
+        BackdropComponent,
+        BlinkerComponent,
+        LayoutComponent,
+        FlexLayoutModule,
+        NavbarComponent,
+        CommonModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        DataVolumePipe,
+    ],
   imports: [
     FlexLayoutModule,
     FormsModule,

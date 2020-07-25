@@ -10,6 +10,35 @@ export interface TorrentItemFileStats {
   wanted: boolean,
 }
 
+export interface PeerDetails {
+  address: string,
+  clientIsChoked: boolean,
+  clientIsInterested: boolean,
+  clientName: string,
+  flagStr: string,
+  isDownloadingFrom: boolean,
+  isEncrypted: boolean,
+  isIncoming: boolean,
+  isUTP: boolean,
+  isUploadingTo: boolean,
+  peerIsChoked: boolean,
+  peerIsInterested: boolean,
+  port: number,
+  progress: number,
+  rateToClient: number,
+  rateToPeer: number,
+}
+
+export interface PeerSource {
+  fromCache: number,
+  fromDht: number,
+  fromIncoming: number,
+  fromLpd: number,
+  fromLtep: number,
+  fromPex: number,
+  fromTracker: number,
+}
+
 export interface TorrentItemDetails {
   activityDate: number,
   addedDate: number,
@@ -45,9 +74,9 @@ export interface TorrentItemDetails {
   metadataPercentComplete: number,
   name: string,
   'peer-limit': number,
-  peers: [],
+  peers: PeerDetails[],
   peersConnected: number,
-  peersFrom: [],
+  peersFrom: PeerSource,
   peersGettingFromUs: number,
   peersSendingToUs: number,
   percentDone: number,
