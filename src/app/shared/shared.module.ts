@@ -14,6 +14,7 @@ import * as fromServices from './../services/state/services.reducer';
 import { LayoutComponent } from "./components/layout/layout.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DataVolumePipe } from './pipes/data-volume.pipe';
+import { EstimatedTtaPipe } from './pipes/estimated-tta.pipe';
 
 @NgModule({
   declarations: [
@@ -22,19 +23,21 @@ import { DataVolumePipe } from './pipes/data-volume.pipe';
     LayoutComponent,
     NavbarComponent,
     DataVolumePipe,
+    EstimatedTtaPipe,
   ],
-    exports: [
-        BackdropComponent,
-        BlinkerComponent,
-        LayoutComponent,
-        FlexLayoutModule,
-        NavbarComponent,
-        CommonModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        DataVolumePipe,
-    ],
+  exports: [
+    BackdropComponent,
+    BlinkerComponent,
+    LayoutComponent,
+    FlexLayoutModule,
+    NavbarComponent,
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DataVolumePipe,
+    EstimatedTtaPipe,
+  ],
   imports: [
     FlexLayoutModule,
     FormsModule,

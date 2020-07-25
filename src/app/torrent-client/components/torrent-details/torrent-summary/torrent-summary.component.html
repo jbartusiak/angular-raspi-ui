@@ -10,7 +10,7 @@
       <p>Downloaded: {{ downloaded | dataVolume }}</p>
       <p>Percent done: {{ percentDone | percent }}</p>
       <p>Added date: {{ addedDate *1000| date }}</p>
-      <p>ETA: {{ eta }}</p>
+      <p>ETA: {{ eta | estimatedTta}}</p>
       <p>D/L rate: {{ rateDownload | dataVolume}}/s</p>
       <p>U/L rate: {{ rateUpload | dataVolume}}/s</p>
       <p>Queue position: {{ queuePosition }}</p>

@@ -19,6 +19,7 @@ import { FunctionButtonComponent } from "./components/function-button/function-b
 import { DeleteTorrentDialogComponent } from './components/delete-torrent-dialog/delete-torrent-dialog.component';
 import { TorrentDetailContainer } from './containers/torrent-detail/torrent-detail.container';
 import { TorrentSummaryComponent } from './components/torrent-details/torrent-summary/torrent-summary.component';
+import { FileSummaryComponent } from './components/torrent-details/file-summary/file-summary.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { TorrentSummaryComponent } from './components/torrent-details/torrent-su
     DeleteTorrentDialogComponent,
     TorrentDetailContainer,
     TorrentSummaryComponent,
+    FileSummaryComponent,
   ],
   imports: [
     EffectsModule.forFeature([TorrentClientEffects]),

@@ -4,6 +4,7 @@ import { Subscription } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { map } from "rxjs/operators";
 import { TorrentItemDetails } from "../../models/TorrentDetails";
+import { TorrentFile } from "../../models/TorrentFile";
 
 @Component({
   template: `
@@ -41,25 +42,10 @@ import { TorrentItemDetails } from "../../models/TorrentDetails";
           </mat-card-content>
         </mat-card>
       </div>
-      <div column-b>
-        <mat-card class="Item">
-          <mat-card-title>Files</mat-card-title>
-          <mat-card-content class="FileListing">
-            <p *ngFor="let file of torrentItem?.files">{{ file | json }}</p>
-          </mat-card-content>
-        </mat-card>
-        <mat-card class="Item">
-          <mat-card-title>File stats</mat-card-title>
-          <mat-card-content class="FileListing">
-            <p *ngFor="let file of torrentItem?.fileStats">{{ file | json }}</p>
-          </mat-card-content>
-        </mat-card>
-        <mat-card class="Item">
-          <mat-card-title>File priorities</mat-card-title>
-          <mat-card-content class="FileListing">
-            <p *ngFor="let file of torrentItem?.priorities">{{ file | json }}</p>
-          </mat-card-content>
-        </mat-card>
+      <div column-b class="Item">
+        <app-file-summary
+          [torrentFiles]="generateFileSummary(this.torrentItem)"
+          ></app-file-summary>
         <div>{{ torrentItem?.webseeds| json }}</div>
       </div>
     </app-layout>
@@ -94,6 +80,16 @@ export class TorrentDetailContainer implements OnInit {
     this.torrentSub = this.service.getTorrentDetails$(Number.parseInt(torrentId)).pipe(
       map(next => next.torrents[0])
     ).subscribe(next => this.torrentItem = next);
+  }
+
+  generateFileSummary(torrent: TorrentItemDetails): TorrentFile[] {
+    const {
+      files, fileStats
+    } = torrent;
+    return files.map((item, index) => ({
+      ...item,
+      ...fileStats[index],
+    }));
   }
 
 }
