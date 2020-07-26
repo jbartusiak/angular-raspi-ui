@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TorrentFile } from "../../../models/TorrentFile";
+import { TorrentFolder } from "../../../models/TorrentFile";
 
 @Component({
   selector: 'app-file-summary',
@@ -8,11 +8,12 @@ import { TorrentFile } from "../../../models/TorrentFile";
 })
 export class FileSummaryComponent implements OnInit {
 
-  @Input() torrentFiles: TorrentFile[];
+  @Input() fileListing: TorrentFolder;
 
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -1,7 +1,9 @@
 <mat-card>
-  <mat-card-title>File details</mat-card-title>
+  <mat-card-title>Files</mat-card-title>
   <mat-card-content>
-    <p>{{ this.torrentFiles | json }}</p>
+    <app-file-listing
+      [isExpanded]="false"
+      [fileListing]="fileListing"></app-file-listing>
   </mat-card-content>
 </mat-card>
 
