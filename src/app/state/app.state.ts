@@ -1,7 +1,6 @@
 import { Action, ActionReducer } from "@ngrx/store";
 
 export interface State {
-
 }
 
 const LOCAL_STORAGE_KEY = '__angular-raspi-ui__';

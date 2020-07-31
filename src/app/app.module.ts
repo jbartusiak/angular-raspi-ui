@@ -12,6 +12,7 @@ import { routes } from "./routes";
 import { SharedModule } from "./shared/shared.module";
 import { MaterialModule } from "./shared/material.module";
 import { stateMetaReducer } from "./state/app.state";
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -20,16 +21,20 @@ import { stateMetaReducer } from "./state/app.state";
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    StoreModule.forRoot({}, {
-      metaReducers: [stateMetaReducer]
+    StoreModule.forRoot({
+      router: routerReducer,
+    }, {
+      metaReducers: [ stateMetaReducer ]
     }),
     BrowserAnimationsModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     EffectsModule.forRoot([]),
     SharedModule,
     MaterialModule,
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+}

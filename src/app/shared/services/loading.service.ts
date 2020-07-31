@@ -48,7 +48,8 @@ export class LoadingService {
         action.type !== TorrentSearchActionTypes.UpdateQuery &&
         action.type !== TorrentSearchActionTypes.UpdateCategory &&
         action.type !== TorrentClientActionTypes.AddTorrent &&
-        action.type !== TorrentClientActionTypes.ClearTorrent
+        action.type !== TorrentClientActionTypes.ClearTorrent &&
+        !action.type.toString().includes('router-store')
       ){
         this.beginCall();
       }
