@@ -6,6 +6,7 @@ import * as servicesSelectors from './state/service.selectors';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from "rxjs";
 import { take } from "rxjs/operators";
+import { SubSink } from "subsink";
 
 @Component({
   templateUrl: './services.component.html',
@@ -13,11 +14,20 @@ import { take } from "rxjs/operators";
 })
 export class ServicesComponent implements OnDestroy, AfterContentInit {
 
+  private subs: SubSink;
   services$: Subscription;
   services: IService[] = [];
   server: IService;
 
   constructor(private store: Store<fromService.State>) {
+    this.subs = new SubSink();
+    this.subs.sink = this.store
+      .pipe(
+        select(servicesSelectors.getServices),
+      )
+      .subscribe(
+        next => {this.services = Object.values(next).filter(s => s.name !== 'Raspi Backend Service');}
+    );
   }
 
   ngOnDestroy(): void {
@@ -25,7 +35,7 @@ export class ServicesComponent implements OnDestroy, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    this.store.dispatch(new servicesActions.Load());
+    this.store.dispatch(servicesActions.loadServices());
     this.services$ = this.store.pipe(
       select(servicesSelectors.getServices)
     ).subscribe(next => {
@@ -38,7 +48,7 @@ export class ServicesComponent implements OnDestroy, AfterContentInit {
   }
 
   createURL(service: IService) {
-    return `http://${service?.uri}:${service?.port}`;
+    return `http://${ service?.uri }:${ service?.port }`;
   }
 
 }

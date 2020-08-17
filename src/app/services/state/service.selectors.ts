@@ -14,6 +14,6 @@ export const getServices = createSelector(
 );
 
 export const getServerService = createSelector(
-  getServices,
-  res => Object.values(res).find(el => el.name === 'Raspi Backend Service')
+  getServiceFeatureState,
+  state => state.server,
 );

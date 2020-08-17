@@ -1,5 +1,6 @@
 import * as fromRoot from '../../state/app.state';
-import { ServiceActionTypes, ServicesActions } from "./services.actions";
+import * as Actions from "./services.actions";
+import { createReducer, on } from "@ngrx/store";
 
 export enum ServiceStatus {
   UP,
@@ -44,6 +45,7 @@ export interface State extends fromRoot.State {
 
 export interface IServicesState {
   error: string | null;
+  server: IService;
   list: {
     [name: string]: IService;
   }
@@ -51,59 +53,50 @@ export interface IServicesState {
 
 const initialState: IServicesState = {
   error: null,
-  list: {
-    'Raspi Backend Service': {
-      name: 'Raspi Backend Service',
-      uri: '192.168.0.254',
-      port: '8888',
-      actuator: {
-        status: ServiceStatus.UNKNOWN,
-        health: '/actuator/health',
-        parseStatus: /(status).*(UP)/,
-      },
-      start: '',
-      stop: '',
-      restart: '',
+  server: {
+    name: 'Raspi Backend Service',
+    uri: '192.168.0.254',
+    port: '8888',
+    actuator: {
+      status: ServiceStatus.UNKNOWN,
+      health: '/actuator/health',
+      parseStatus: /(status).*(UP)/,
     },
-  }
+    start: '',
+    stop: '',
+    restart: '',
+  },
+  list: {}
 };
 
-export const reducer = (state = initialState, action: ServicesActions): IServicesState => {
-  switch (action.type) {
-    case ServiceActionTypes.LoadSuccess:
-      return {
-        ...state,
-        list: {
-          ...state.list,
-          ...action.payload
-        }
+export const reducer = createReducer(
+  initialState,
+  on(Actions.loadServicesSuccess, (state, {type, ...rest}) =>({
+    ...state,
+    list: {
+      ...state.list,
+      ...rest,
+    }
+  })),
+  on(Actions.loadServicesFailed, (state, {error}) => ({
+    ...state,
+    error,
+  })),
+  on(Actions.getServiceStatusSuccess, (state, {service, status}) => {
+    const newService: IService = {
+      ...service,
+      actuator: {
+        ...service.actuator,
+        status,
       }
-    case ServiceActionTypes.LoadFail:
-      return {
-        ...state,
-        error: action.payload,
-      }
+    }
 
-    case ServiceActionTypes.GetServiceStatusSuccess:
-      const { service, status } = action.payload;
-
-      const newService: IService = {
-        ...service,
-        actuator: {
-          ...service.actuator,
-          status,
-        }
-      }
-
-      return {
-        ...state,
-        list: {
-          ...state.list,
-          [service.name]: newService
-        },
-      };
-
-    default:
-      return {...state};
-  }
-}
+    return {
+      ...state,
+      list: {
+        ...state.list,
+        [service.name]: newService
+      },
+    };
+  })
+);

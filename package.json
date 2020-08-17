@@ -28,6 +28,7 @@
     "@ngrx/store-devtools": "^9.2.0",
     "lodash": "^4.17.19",
     "rxjs": "~6.5.4",
+    "subsink": "^1.0.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

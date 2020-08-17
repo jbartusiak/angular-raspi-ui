@@ -1,51 +1,35 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { IService, ServiceStatus } from "./services.reducer";
 
 export enum ServiceActionTypes {
-  Load = '[SERVICES] Load',
-  LoadSuccess = '[SERVICES] Load Success',
-  LoadFail = '[SERVICES] Load Fail',
+  GetServices = '[SERVICES] Load',
+  GetServicesSuccess = '[SERVICES] Load Success',
+  GetServicesFailed = '[SERVICES] Load Fail',
+  GetServerStatus = '[SERVICES] Get Server Status',
+  GetServerStatusSuccess = '[SERVICES] Get Server Status Success',
+  GetServerStatusFailed = '[SERVICES] Get Server Status Failed',
   GetServiceStatus = '[SERVICES] Get Status',
   GetServiceStatusSuccess = '[SERVICES] Get Status Success',
   GetServiceStatusFail = '[SERVICES] Get Status Fail',
 }
 
-export class Load implements Action {
-  readonly type = ServiceActionTypes.Load;
-}
+export const loadServices =
+  createAction(ServiceActionTypes.GetServices);
+export const loadServicesSuccess =
+  createAction(ServiceActionTypes.GetServicesSuccess, props<{ [name: string]: IService }>());
+export const loadServicesFailed =
+  createAction(ServiceActionTypes.GetServicesFailed, props<{ error: string }>());
 
-export class LoadSuccess implements Action {
-  readonly type = ServiceActionTypes.LoadSuccess;
+export const getServerStatus =
+  createAction(ServiceActionTypes.GetServerStatus);
+export const getServerStatusSuccess =
+  createAction(ServiceActionTypes.GetServerStatusSuccess, props<{ server: IService }>());
+export const getServerStatusFailed =
+  createAction(ServiceActionTypes.GetServerStatusFailed, props<{ error: string }>());
 
-  constructor(public payload: { [name: string]: IService }) {
-  }
-}
-
-export class LoadFail implements Action {
-  readonly type = ServiceActionTypes.LoadFail;
-
-  constructor(public payload: string) {
-  }
-}
-
-export class GetServiceStatus implements Action {
-  readonly type = ServiceActionTypes.GetServiceStatus;
-  constructor(public payload: IService) {
-  }
-}
-
-export class GetServiceStatusSuccess implements Action {
-  readonly type = ServiceActionTypes.GetServiceStatusSuccess;
-  constructor(public payload: ({service: IService, status: ServiceStatus})) {
-  }
-}
-
-export class GetServiceStatusFail implements Action {
-  readonly type = ServiceActionTypes.GetServiceStatusFail;
-
-  constructor(public payload: string) {
-  }
-}
-
-export type ServicesActions =
-  Load | LoadSuccess | LoadFail | GetServiceStatus | GetServiceStatusSuccess | GetServiceStatusFail;
+export const getServiceStatus =
+  createAction(ServiceActionTypes.GetServiceStatus, props<{service: IService}>());
+export const getServiceStatusSuccess =
+  createAction(ServiceActionTypes.GetServiceStatusSuccess, props<{ service: IService, status: ServiceStatus }>())
+export const getServiceStatusFailed =
+  createAction(ServiceActionTypes.GetServiceStatusFail, props<{ error: string }>())
