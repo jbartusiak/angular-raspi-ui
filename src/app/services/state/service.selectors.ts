@@ -5,12 +5,12 @@ const getServiceFeatureState= createFeatureSelector<IServicesState>('services');
 
 export const getError = createSelector(
   getServiceFeatureState,
-  res => res.error,
+  state => state.error,
 );
 
 export const getServices = createSelector(
   getServiceFeatureState,
-  res => res.list,
+  state => Object.values(state.list),
 );
 
 export const getServerService = createSelector(

@@ -1,54 +1,25 @@
-import { AfterContentInit, Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
+import { Observable } from "rxjs";
+import { Store } from '@ngrx/store';
+
 import * as fromService from './state/services.reducer';
 import { IService } from './state/services.reducer';
 import * as servicesActions from './state/services.actions';
-import * as servicesSelectors from './state/service.selectors';
-import { select, Store } from '@ngrx/store';
-import { Subscription } from "rxjs";
-import { take } from "rxjs/operators";
-import { SubSink } from "subsink";
+import { ServicesFacade } from "./service/services.facade";
 
 @Component({
   templateUrl: './services.component.html',
   styleUrls: [ './services.component.scss' ]
 })
-export class ServicesComponent implements OnDestroy, AfterContentInit {
+export class ServicesComponent {
+  server$: Observable<IService>;
+  services$: Observable<IService[]>;
 
-  private subs: SubSink;
-  services$: Subscription;
-  services: IService[] = [];
-  server: IService;
+  constructor(private store: Store<fromService.State>,
+              private facade: ServicesFacade) {
+    this.server$ = facade.server$;
+    this.services$ = facade.services$;
 
-  constructor(private store: Store<fromService.State>) {
-    this.subs = new SubSink();
-    this.subs.sink = this.store
-      .pipe(
-        select(servicesSelectors.getServices),
-      )
-      .subscribe(
-        next => {this.services = Object.values(next).filter(s => s.name !== 'Raspi Backend Service');}
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.services$.unsubscribe();
-  }
-
-  ngAfterContentInit(): void {
     this.store.dispatch(servicesActions.loadServices());
-    this.services$ = this.store.pipe(
-      select(servicesSelectors.getServices)
-    ).subscribe(next => {
-      this.services = Object.values(next).filter(s => s.name !== 'Raspi Backend Service');
-    });
-    this.store.pipe(
-      select(servicesSelectors.getServerService),
-      take(1)
-    ).subscribe(next => this.server = next);
   }
-
-  createURL(service: IService) {
-    return `http://${ service?.uri }:${ service?.port }`;
-  }
-
 }

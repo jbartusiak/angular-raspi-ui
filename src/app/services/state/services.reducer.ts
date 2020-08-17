@@ -46,9 +46,7 @@ export interface State extends fromRoot.State {
 export interface IServicesState {
   error: string | null;
   server: IService;
-  list: {
-    [name: string]: IService;
-  }
+  list: IService[];
 }
 
 const initialState: IServicesState = {
@@ -66,17 +64,16 @@ const initialState: IServicesState = {
     stop: '',
     restart: '',
   },
-  list: {}
+  list: [],
 };
 
 export const reducer = createReducer(
   initialState,
-  on(Actions.loadServicesSuccess, (state, {type, ...rest}) =>({
+  on(Actions.loadServicesSuccess, (state, {services}) => ({
     ...state,
-    list: {
-      ...state.list,
-      ...rest,
-    }
+    list: [
+      ...services,
+    ]
   })),
   on(Actions.loadServicesFailed, (state, {error}) => ({
     ...state,
@@ -91,12 +88,14 @@ export const reducer = createReducer(
       }
     }
 
+    const newList = state.list.filter(item => item.name !== service.name);
+
     return {
       ...state,
-      list: {
-        ...state.list,
-        [service.name]: newService
-      },
+      list: [
+        ...newList,
+        newService
+      ],
     };
   })
 );

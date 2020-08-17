@@ -17,7 +17,7 @@ export class ServiceEffects {
   loadServices$ = this.actions$.pipe(
     ofType(servicesActions.loadServices),
     mergeMap(() => this.configurationService.fetchConfiguration$().pipe(
-      map(result => servicesActions.loadServicesSuccess(result)),
+      map(services => servicesActions.loadServicesSuccess({services})),
       catchError(err => of(servicesActions.loadServicesFailed({error: err}))),
     ))
   );

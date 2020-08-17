@@ -9,7 +9,7 @@
     </div>
     <app-status-tile
       icon="assets/img/raspiIcon.png"
-      [service]="server"
+      [service]="server$ | async"
       [showActions]="false">
     </app-status-tile>
   </div>
@@ -20,7 +20,7 @@
     </div>
     <div>
       <app-status-tile
-        *ngFor="let service of services"
+        *ngFor="let service of services$ | async"
         [service]="service"
       ></app-status-tile>
     </div>

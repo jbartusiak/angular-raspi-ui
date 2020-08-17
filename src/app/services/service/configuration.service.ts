@@ -16,7 +16,7 @@ export class ConfigurationService {
     return this.http
       .get<{ services: { [name: string]: IService } }>('http://192.168.0.254:8888/configuration/raspi-ui-dev.json')
       .pipe(
-        map(result => result.services),
+        map(result => Object.values(result.services)),
         catchError(ConfigurationService.handleError),
       );
   }
@@ -50,7 +50,7 @@ export class ConfigurationService {
     );
   }
 
-  private handleCommandHealthCheck$ = (service: IService)=> {
+  private handleCommandHealthCheck$ = (service: IService) => {
     const {actuator} = service;
     const requestBody = {
       ...actuator.health as any,

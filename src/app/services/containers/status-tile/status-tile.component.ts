@@ -18,9 +18,9 @@ export class StatusTileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      if (this.service.actuator.status === ServiceStatus.UNKNOWN) {
-        this.store.dispatch(getServiceStatus({service: this.service}));
-      }
+    if (this.service.actuator.status === ServiceStatus.UNKNOWN) {
+      this.store.dispatch(getServiceStatus({service: this.service}));
+    }
   }
 
 }
