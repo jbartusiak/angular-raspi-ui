@@ -15,6 +15,7 @@ import { LayoutComponent } from "./components/layout/layout.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DataVolumePipe } from './pipes/data-volume.pipe';
 import { EstimatedTtaPipe } from './pipes/estimated-tta.pipe';
+import { NavbarFacade } from "./services/navbar.facade";
 
 @NgModule({
   declarations: [
@@ -47,6 +48,9 @@ import { EstimatedTtaPipe } from './pipes/estimated-tta.pipe';
     MaterialModule,
     RouterModule,
     StoreModule.forFeature('services', fromServices.reducer)
+  ],
+  providers: [
+    {provide: NavbarFacade, useClass: NavbarFacade}
   ]
 })
 export class SharedModule {

@@ -1,53 +1,35 @@
-import { AfterContentInit, Component, OnDestroy } from '@angular/core';
-import { select, Store } from "@ngrx/store";
-import { IFeatureRoute, IServicesState } from "../../../services/state/services.reducer";
-import { Subscription } from "rxjs";
-import * as servicesSelectors from './../../../services/state/service.selectors';
-import { flatMap } from "rxjs/operators";
-import { LoadingService } from "../../services/loading.service";
+import { AfterContentInit, Component } from '@angular/core';
+import { IFeatureRoute } from "../../../services/state/services.reducer";
+import { Observable } from "rxjs";
+import { NavbarFacade } from "../../services/navbar.facade";
 
 @Component({
   selector: 'navbar-component',
   templateUrl: './navbar.component.html',
   styleUrls: [ './navbar.component.scss' ],
 })
-export class NavbarComponent implements AfterContentInit, OnDestroy {
-  items: IFeatureRoute[];
+export class NavbarComponent implements AfterContentInit {
   name = 'Raspberry PI';
   panelOpened = false;
   theme = (window.localStorage.getItem('__raspi-theme__') || 'light') === 'light';
-  isLoading: boolean;
 
-  servicesSub$: Subscription;
-  loadingSub$: Subscription;
+  featureRoutes$: Observable<IFeatureRoute[]>;
+  loading$: Observable<boolean>;
 
-  constructor(private store: Store<IServicesState>, private loading: LoadingService) {
+  constructor(private facade: NavbarFacade) {
+    this.featureRoutes$ = facade.featureRoutes$;
+    this.loading$ = facade.loading$;
   }
 
   ngAfterContentInit(): void {
-    this.servicesSub$ = this.store.pipe(
-      select(servicesSelectors.getServices),
-      flatMap(res => Object.values(res).map(el=>el.featureRoutes)),
-    ).subscribe(res => this.items = res);
-
-    this.loadingSub$ = this.loading.queriesInProgress$.subscribe(
-      value => this.isLoading = !!value
-    );
-
     if (!this.theme)
       window.document.body.classList.add('theme-dark');
-  }
-
-  ngOnDestroy(): void {
-    this.servicesSub$.unsubscribe();
-    this.loadingSub$.unsubscribe();
   }
 
   swapTheme(): void {
     if (this.theme) {
       window.localStorage.setItem('__raspi-theme__', 'dark');
-    }
-    else {
+    } else {
       window.localStorage.setItem('__raspi-theme__', 'light');
     }
     this.theme = !this.theme;

@@ -19,17 +19,17 @@
     [class.Hidden]="!panelOpened"
     [class.Show]="panelOpened"
   >
-    <div *ngFor="let item of items">
+    <div *ngFor="let route of featureRoutes$ | async">
       <button
         mat-button
-        [routerLink]="item.route"
+        [routerLink]="route.route"
         [disabled]="false"
       >
-        {{ item.name }}</button>
+        {{ route.name }}</button>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-progress-bar
   class="ProgressBar"
-  [class.Active]="isLoading"
+  [class.Active]="loading$ | async"
   mode="query" color="accent"></mat-progress-bar>
