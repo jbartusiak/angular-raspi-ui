@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { forkJoin, Observable, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { IService, ServiceStatus } from '../state/services.reducer';
 import { catchError, map } from 'rxjs/operators';
 import { CommandResponse } from "../models/CommandResponse";
@@ -20,12 +20,6 @@ export class ConfigurationService {
         map(result => Object.values(result.services)),
         catchError(ConfigurationService.handleError),
       );
-  }
-
-  getAllServicesStatus$ = (services: IService[]) => {
-    forkJoin(
-      services.map(service => this.getServiceStatus$(service))
-    )
   }
 
   getServiceStatus$ = (service: IService): Observable<IService> => {
