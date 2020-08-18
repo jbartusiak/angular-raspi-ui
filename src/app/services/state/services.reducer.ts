@@ -79,22 +79,18 @@ export const reducer = createReducer(
     ...state,
     error,
   })),
-  on(Actions.getServiceStatusSuccess, (state, {service, status}) => {
-    const newService: IService = {
-      ...service,
-      actuator: {
-        ...service.actuator,
-        status,
-      }
-    }
-
+  on(Actions.getServerStatusSuccess, (state, {server}) => ({
+    ...state,
+    server: {...server},
+  })),
+  on(Actions.getServiceStatusSuccess, (state, {service}) => {
     const newList = state.list.filter(item => item.name !== service.name);
 
     return {
       ...state,
       list: [
         ...newList,
-        newService
+        service
       ],
     };
   })
