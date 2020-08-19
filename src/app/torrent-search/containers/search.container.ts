@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { select, Store } from "@ngrx/store";
+import { Component, OnDestroy } from "@angular/core";
+import { Store } from "@ngrx/store";
 import { GetTorrentMagnet, State, Torrent } from "../state";
-import * as selectors from "../state/torrent-search.selectors";
 import * as actions from "../state/torrent-search.actions";
 
 import { AddTorrent } from "../../torrent-client/state/torrent-client.actions";
 
-import { combineLatest, Observable, Subscription } from "rxjs";
+import { Observable } from "rxjs";
 import { Router } from "@angular/router";
-import { map } from "rxjs/operators";
+import { TorrentSearchFacade } from "../service/torrent-search.facade";
+import { SubSink } from "subsink";
 
 @Component({
   template: `
@@ -29,7 +29,7 @@ import { map } from "rxjs/operators";
   `,
   selector: 'app-search-container'
 })
-export class SearchContainer implements OnInit {
+export class SearchContainer implements OnDestroy {
 
   query$: Observable<string>;
   categories$: Observable<string[]>;
@@ -39,40 +39,22 @@ export class SearchContainer implements OnInit {
 
   results$: Observable<Torrent[]>;
 
-  private subscription: Subscription;
+  private sub: SubSink;
 
   constructor(private store: Store<State>,
-              private router: Router) {
-  }
+              private router: Router,
+              private facade: TorrentSearchFacade) {
+    this.sub = new SubSink();
 
-  ngOnInit(): void {
-    this.query$ = this.store.pipe(
-      select(selectors.getQuery)
-    );
-    this.results$ = this.store.pipe(
-      select(selectors.getSearchResults)
-    );
-    this.category$ = this.store.pipe(
-      select(selectors.getCategory)
-    )
-    this.categories$ = this.store.pipe(
-      select(selectors.getAllCategories)
-    );
-    this.error$ = this.store.pipe(
-      select(selectors.getError)
-    );
-    this.enabledProviders$ = this.store.pipe(
-      select(selectors.getEnabledProviders)
-    );
-    this.subscription =
-      combineLatest([ this.category$, this.query$, this.enabledProviders$ ])
-        .pipe(
-          map(([ category$, query$, enabledProviders$ ]) => ({
-            category: category$,
-            query: query$,
-            enabledProviders: enabledProviders$,
-          }))
-        )
+    this.query$ = this.facade.query$;
+    this.results$ = this.facade.results$;
+    this.category$ = this.facade.category$
+    this.categories$ = this.facade.categories$;
+    this.error$ = this.facade.error$;
+    this.enabledProviders$ = this.facade.enabledProviders$;
+
+    this.sub.sink =
+      this.facade.queryParams$
         .subscribe(
           (queryParams) => {
             if (queryParams.category && queryParams.query && queryParams.enabledProviders) {
@@ -80,6 +62,10 @@ export class SearchContainer implements OnInit {
             }
           }
         );
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   handleQueryChange(query: string) {

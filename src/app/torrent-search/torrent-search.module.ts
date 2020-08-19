@@ -13,6 +13,7 @@ import { ProvidersContainer } from "./containers/providers.container";
 import { SearchContainer } from "./containers/search.container";
 import { EffectsModule } from "@ngrx/effects";
 import { ResultsComponent } from "./components/results/results.component";
+import { TorrentSearchFacade } from "./service/torrent-search.facade";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,9 @@ import { ResultsComponent } from "./components/results/results.component";
     RouterModule.forChild(routes),
     SharedModule,
     StoreModule.forFeature('torrentSearch', reducer),
+  ],
+  providers: [
+    TorrentSearchFacade,
   ]
 })
 export class TorrentSearchModule {
