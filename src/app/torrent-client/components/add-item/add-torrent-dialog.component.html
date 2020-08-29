@@ -10,7 +10,10 @@
       <button mat-icon-button matSuffix disabled><mat-icon>get_app</mat-icon></button>
       <mat-error>please provide a valid magnet</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline" class="full-width" *ngIf="form.control.controls['title']">
+    <mat-form-field
+      [@nameEnter]
+      appearance="outline" class="full-width"
+      *ngIf="form.control.controls['magnet'].value && form.control.controls.magnet.valid || form.control.controls.magnet.disabled">
       <mat-label>item title</mat-label>
       <label>
         <input matInput formControlName="title">

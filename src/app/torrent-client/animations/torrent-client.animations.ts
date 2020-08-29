@@ -12,3 +12,11 @@ export const statusSwitchAnimation =
       animate('150ms linear', style({position: 'absolute', transform: 'translateY(-25px)', opacity: 0, maxHeight: 0}))
     ])
   ]);
+
+export const nameEnterAnimation =
+  trigger('nameEnter', [
+    transition('void=>*', [
+      style({maxHeight: 0, opacity: 0, overflow: 'hidden'}),
+      animate('500ms ease-out', style({maxHeight: '72px', opacity: 1}))
+    ])
+  ])

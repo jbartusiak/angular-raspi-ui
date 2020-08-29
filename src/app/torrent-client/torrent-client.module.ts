@@ -9,7 +9,7 @@ import { TorrentListContainer } from "./containers/torrent-list/torrent-list.con
 import { TorrentItemComponent } from "./components/torrent-item/torrent-item.component";
 import { StoreModule } from "@ngrx/store";
 
-import {reducer} from './state/torrent-client.reducer';
+import { reducer } from './state/torrent-client.reducer';
 import { EffectsModule } from "@ngrx/effects";
 import { TorrentClientEffects } from "./state/torrent-client.effects";
 import { AddItemContainer } from "./containers/add-item/add-item.container";
@@ -21,6 +21,8 @@ import { TorrentDetailContainer } from './containers/torrent-detail/torrent-deta
 import { TorrentSummaryComponent } from './components/torrent-details/torrent-summary/torrent-summary.component';
 import { FileSummaryComponent } from './components/torrent-details/file-summary/file-summary.component';
 import { FileListingComponent } from "./components/torrent-details/file-listing/file-listing.component";
+import { HttpUrlEncodingCodec } from "@angular/common/http";
+import { MagnetParserService } from "./services/magnet-parser.service";
 
 @NgModule({
   declarations: [
@@ -39,11 +41,16 @@ import { FileListingComponent } from "./components/torrent-details/file-listing/
     FileListingComponent,
   ],
   imports: [
-    EffectsModule.forFeature([TorrentClientEffects]),
+    EffectsModule.forFeature([ TorrentClientEffects ]),
     MaterialModule,
     RouterModule.forChild(routes),
     SharedModule,
     StoreModule.forFeature('torrentClient', reducer),
+  ],
+  providers: [
+    HttpUrlEncodingCodec,
+    MagnetParserService,
   ]
 })
-export class TorrentClientModule { }
+export class TorrentClientModule {
+}
