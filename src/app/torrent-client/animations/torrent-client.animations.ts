@@ -1,4 +1,4 @@
-import { animate, style, transition, trigger } from "@angular/animations";
+import { animate, style, transition, trigger } from '@angular/animations';
 
 export const statusSwitchAnimation =
   trigger('statusSwitch', [
@@ -19,4 +19,4 @@ export const nameEnterAnimation =
       style({maxHeight: 0, opacity: 0, overflow: 'hidden'}),
       animate('500ms ease-out', style({maxHeight: '72px', opacity: 1}))
     ])
-  ])
+  ]);

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TorrentFolder } from "../../../models/TorrentFile";
+import { TorrentFolder } from '../../../models/TorrentFile';
 
 @Component({
   selector: 'app-file-summary',

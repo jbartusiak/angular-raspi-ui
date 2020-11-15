@@ -7,11 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { RouterModule } from "@angular/router";
-import { routes } from "./routes";
-import { SharedModule } from "./shared/shared.module";
-import { MaterialModule } from "./shared/material.module";
-import { stateMetaReducer } from "./state/app.state";
+import { RouterModule } from '@angular/router';
+import { routes } from './routes';
+import { SharedModule } from './shared/shared.module';
+import { MaterialModule } from './shared/material.module';
+import { stateMetaReducer } from './state/app.state';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({

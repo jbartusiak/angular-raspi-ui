@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, Subscription } from "rxjs";
-import { Actions } from "@ngrx/effects";
-import { TorrentSearchActionTypes } from "../../torrent-search/state";
-import { TorrentClientActionTypes } from "../../torrent-client/state/torrent-client.actions";
+import { Observable, Subject, Subscription } from 'rxjs';
+import { Actions } from '@ngrx/effects';
+import { TorrentSearchActionTypes } from '../../torrent-search/state';
+import { TorrentClientActionTypes } from '../../torrent-client/state/torrent-client.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoadingService {
-  private _queriesInProgress: number = 0;
+  private _queriesInProgress = 0;
   private _queriesInProgress$: Subject<number>;
 
   private actionsSubscription: Subscription;
@@ -53,6 +53,6 @@ export class LoadingService {
       ){
         this.beginCall();
       }
-    })
+    });
   }
 }

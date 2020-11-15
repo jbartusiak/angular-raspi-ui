@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IService } from "../../state/services.reducer";
+import { IService } from '../../state/services.reducer';
 
 @Component({
   selector: 'app-status-tile',

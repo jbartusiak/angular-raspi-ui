@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { IService, ServiceStatus } from '../state/services.reducer';
 import { catchError, map } from 'rxjs/operators';
-import { CommandResponse } from "../models/CommandResponse";
+import { CommandResponse } from '../models/CommandResponse';
+import {environment as env} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +14,13 @@ export class ConfigurationService {
   constructor(private http: HttpClient) {
   }
 
+  private static handleError(err) {
+    return throwError(err.message);
+  }
+
   fetchConfiguration$ = (): Observable<IService[]> => {
     return this.http
-      .get<{ services: { [name: string]: IService } }>('http://192.168.0.254:8888/configuration/raspi-ui-dev.json')
+      .get<{ services: { [name: string]: IService } }>(`http://${env.serverIp}:8888/configuration/raspi-ui-dev.json`)
       .pipe(
         map(result => Object.values(result.services)),
         catchError(ConfigurationService.handleError),
@@ -31,7 +36,8 @@ export class ConfigurationService {
   }
 
   private handleHttpHealthCheck$ = (service: IService): Observable<IService> => {
-    const {uri, port, actuator} = service;
+    const { port, actuator} = service;
+    const uri = env.serverIp;
 
     console.log(`Starting health check for ${ service.name }`);
     const url = `http://${ uri }:${ port }${ actuator.health }`;
@@ -48,7 +54,7 @@ export class ConfigurationService {
               ...service.actuator,
               status: ServiceStatus.UP,
             }
-          }
+          };
         } else {
           return {
             ...service,
@@ -56,7 +62,7 @@ export class ConfigurationService {
               ...service.actuator,
               status: ServiceStatus.DOWN,
             }
-          }
+          };
         }
       })
     );
@@ -69,7 +75,7 @@ export class ConfigurationService {
       elevate: true,
     };
 
-    return this.http.post<CommandResponse>('http://192.168.0.254:8888/execute', requestBody)
+    return this.http.post<CommandResponse>(`http://${env.serverIp}:8888/execute`, requestBody)
       .pipe(
         map(item => {
           const regex = new RegExp(actuator.parseStatus);
@@ -80,19 +86,16 @@ export class ConfigurationService {
                 ...service.actuator,
                 status: ServiceStatus.UP,
               }
-            }
-          } else return {
+            };
+          } else { return {
             ...service,
             actuator: {
               ...service.actuator,
               status: ServiceStatus.DOWN,
             }
+          };
           }
         })
       );
-  }
-
-  private static handleError(err) {
-    return throwError(err.message)
   }
 }

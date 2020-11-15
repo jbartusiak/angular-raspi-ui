@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import * as fromService from './state/services.reducer';
 import { IService } from './state/services.reducer';
 import * as servicesActions from './state/services.actions';
-import { ServicesFacade } from "./service/services.facade";
+import { ServicesFacade } from './service/services.facade';
 
 @Component({
   templateUrl: './services.component.html',

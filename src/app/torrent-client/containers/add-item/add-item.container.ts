@@ -1,17 +1,17 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {
   AddTorrentDialogComponent,
   IAddTorrentDialogData
-} from "../../components/add-item/add-torrent-dialog.component";
-import { Store } from "@ngrx/store";
-import { State } from "../../../services/state/services.reducer";
+} from '../../components/add-item/add-torrent-dialog.component';
+import { Store } from '@ngrx/store';
+import { State } from '../../../services/state/services.reducer';
 import * as servicesSelectors from '../../../services/state/service.selectors';
-import { map, take } from "rxjs/operators";
-import { Subscription } from "rxjs";
-import { getTorrentToDownload } from "../../state/torrent-client.selectors";
-import { Torrent } from "../../../torrent-search/state";
-import { ClearTorrent, DownloadTorrent } from "../../state/torrent-client.actions";
+import { map, take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { getTorrentToDownload } from '../../state/torrent-client.selectors';
+import { Torrent } from '../../../torrent-search/state';
+import { ClearTorrent, DownloadTorrent } from '../../state/torrent-client.actions';
 
 @Component({
   selector: 'app-add-item-container',
@@ -35,24 +35,24 @@ export class AddItemContainer implements OnInit, OnDestroy {
         (services) => {
           const fromState = services.filter(el => el.name === 'Torrent Backend Service').map(el => el.configuration)[0];
           this.configuration = {
-            categories: fromState['categories'],
-            directories: fromState['directories']
-          }
+            categories: fromState.categories,
+            directories: fromState.directories
+          };
         }
-      )
+      );
     this.torrentSub = this.store.select(getTorrentToDownload).subscribe(
       next => {
         if (next) {
           this.store.dispatch(new ClearTorrent());
-          this.handleShowModal(next)
+          this.handleShowModal(next);
         }
       }
-    )
+    );
   }
 
   ngOnDestroy(): void {
-    if (this.serviceSub) this.serviceSub.unsubscribe();
-    if (this.torrentSub) this.torrentSub.unsubscribe();
+    if (this.serviceSub) { this.serviceSub.unsubscribe(); }
+    if (this.torrentSub) { this.torrentSub.unsubscribe(); }
   }
 
   handleShowModal(torrent?: Torrent) {

@@ -1,14 +1,14 @@
-import { Component, OnDestroy } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { GetTorrentMagnet, State, Torrent } from "../state";
-import * as actions from "../state/torrent-search.actions";
+import { Component, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { GetTorrentMagnet, State, Torrent } from '../state';
+import * as actions from '../state/torrent-search.actions';
 
-import { AddTorrent } from "../../torrent-client/state/torrent-client.actions";
+import { AddTorrent } from '../../torrent-client/state/torrent-client.actions';
 
-import { Observable } from "rxjs";
-import { Router } from "@angular/router";
-import { TorrentSearchFacade } from "../service/torrent-search.facade";
-import { SubSink } from "subsink";
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { TorrentSearchFacade } from '../service/torrent-search.facade';
+import { SubSink } from 'subsink';
 
 @Component({
   template: `
@@ -48,7 +48,7 @@ export class SearchContainer implements OnDestroy {
 
     this.query$ = this.facade.query$;
     this.results$ = this.facade.results$;
-    this.category$ = this.facade.category$
+    this.category$ = this.facade.category$;
     this.categories$ = this.facade.categories$;
     this.error$ = this.facade.error$;
     this.enabledProviders$ = this.facade.enabledProviders$;

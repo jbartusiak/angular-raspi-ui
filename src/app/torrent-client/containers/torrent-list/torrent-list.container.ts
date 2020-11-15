@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { select, Store } from "@ngrx/store";
-import { ITorrentItem, State } from "../../state/torrent-client.reducer";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { ITorrentItem, State } from '../../state/torrent-client.reducer';
 import * as actions from '../../state/torrent-client.actions';
 import * as selectors from '../../state/torrent-client.selectors';
-import { interval, Observable, Subscription } from "rxjs";
-import { SelectionEvent } from "../../events/SelectionEvent";
-import { SelectionControllerService } from "../../services/selection-controller.service";
-import { map } from "rxjs/operators";
-import { ETorrentItemStatusDisplay } from "../../models/TorrentItemStatusDisplay";
-import { Router } from "@angular/router";
+import { interval, Observable, Subscription } from 'rxjs';
+import { SelectionEvent } from '../../events/SelectionEvent';
+import { SelectionControllerService } from '../../services/selection-controller.service';
+import { map } from 'rxjs/operators';
+import { ETorrentItemStatusDisplay } from '../../models/TorrentItemStatusDisplay';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-torrent-list',
@@ -69,7 +69,7 @@ export class TorrentListContainer implements OnInit, OnDestroy {
   handleSelection({torrentId, selected}: SelectionEvent) {
     if (selected) {
       this.selectionService.select(torrentId);
-    } else this.selectionService.deselect(torrentId);
+    } else { this.selectionService.deselect(torrentId); }
   }
 
   handleDetails(torrentId: number) {

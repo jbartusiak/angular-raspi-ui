@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { TorrentItemDetails } from "../models/TorrentDetails";
-import { TorrentFile, TorrentFolder } from "../models/TorrentFile";
+import { Injectable } from '@angular/core';
+import { TorrentItemDetails } from '../models/TorrentDetails';
+import { TorrentFile, TorrentFolder } from '../models/TorrentFile';
 import { partition } from 'lodash';
-import { Observable, of } from "rxjs";
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +42,7 @@ export class FileTreeService {
 
     inSubdirectory.forEach(file => {
       const [ folderName, ...fileName ] = file.name.split('/');
-      const existingFolder = folders.find(folder => folder.name === folderName);
+      const existingFolder = folders.find(f => f.name === folderName);
       if (existingFolder) {
         existingFolder.parent = folder;
         existingFolder.files.push({
@@ -51,7 +51,7 @@ export class FileTreeService {
           priority: file.priority,
           length: file.length,
           bytesCompleted: file.bytesCompleted,
-        })
+        });
       } else {
         folders.push({
           name: folderName,
@@ -64,11 +64,11 @@ export class FileTreeService {
             length: file.length,
             bytesCompleted: file.bytesCompleted,
           } ],
-        })
+        });
       }
     });
 
-    folders.forEach(folder => this.mapToFileListing(folder));
+    folders.forEach(f => this.mapToFileListing(f));
 
     return folder;
   }

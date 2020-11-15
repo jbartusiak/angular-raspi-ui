@@ -26,32 +26,32 @@ export class DataVolumePipe implements PipeTransform {
     const inputInBytes = this.normalize(input, inputUnit);
 
     switch (outputUnit) {
-      case "bits":
+      case 'bits':
         return this.toBit(inputInBytes);
-      case "bytes":
+      case 'bytes':
         return this.toByte(inputInBytes);
-      case "kbit":
+      case 'kbit':
         return this.toKbit(inputInBytes);
-      case "kb":
+      case 'kb':
         return this.toKB(inputInBytes);
-      case "mbit":
+      case 'mbit':
         return this.toMbit(inputInBytes);
-      case "mb":
+      case 'mb':
         return this.toMB(inputInBytes);
-      case "gbit":
+      case 'gbit':
         return this.toGbit(inputInBytes);
-      case "gb":
+      case 'gb':
         return this.toGB(inputInBytes);
-      case "tbit":
+      case 'tbit':
         return this.toTbit(inputInBytes);
-      case "tb":
+      case 'tb':
         return this.toTB(inputInBytes);
       default: {
-        if (input > terabyte) return this.toTB(inputInBytes);
-        if (input > gigabyte) return this.toGB(inputInBytes);
-        if (input > megabyte) return this.toMB(inputInBytes);
-        if (input > kilobyte) return this.toKB(inputInBytes);
-        if (input > byte) return this.toByte(inputInBytes);
+        if (input > terabyte) { return this.toTB(inputInBytes); }
+        if (input > gigabyte) { return this.toGB(inputInBytes); }
+        if (input > megabyte) { return this.toMB(inputInBytes); }
+        if (input > kilobyte) { return this.toKB(inputInBytes); }
+        if (input > byte) { return this.toByte(inputInBytes); }
       }
     }
     return '0';
@@ -74,25 +74,25 @@ export class DataVolumePipe implements PipeTransform {
 
   normalize = (input: number, inputUnit: DataVolumeUnit): number => {
     switch (inputUnit) {
-      case "bits":
+      case 'bits':
         return input * bit;
-      case "bytes":
+      case 'bytes':
         return input;
-      case "kbit":
+      case 'kbit':
         return input * kilobit;
-      case "kb":
+      case 'kb':
         return input * kilobyte;
-      case "mbit":
+      case 'mbit':
         return input * megabit;
-      case "mb":
+      case 'mb':
         return input * megabyte;
-      case "gbit":
+      case 'gbit':
         return input * gigabit;
-      case "gb":
+      case 'gb':
         return input * gigabyte;
-      case "tbit":
+      case 'tbit':
         return input * terabit;
-      case "tb":
+      case 'tb':
         return input * terabyte;
     }
   }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IOptions, ITorrentProvider } from "../../state";
+import { IOptions, ITorrentProvider } from '../../state';
 
 @Component({
   selector: 'app-providers-component',

@@ -1,18 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { ITorrentItem } from "../../state/torrent-client.reducer";
-import { SelectionEvent } from "../../events/SelectionEvent";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ITorrentItem } from '../../state/torrent-client.reducer';
+import { SelectionEvent } from '../../events/SelectionEvent';
 import { ETorrentItemStatusDisplay } from '../../models/TorrentItemStatusDisplay';
-import { statusSwitchAnimation } from "../../animations/torrent-client.animations";
+import { statusSwitchAnimation } from '../../animations/torrent-client.animations';
 
 const getTorrentIcon = (input: string) => {
   const name = input.toLocaleLowerCase();
 
-  if (name.indexOf('games') >= 0) return 'games';
-  else if (name.indexOf('movies') >= 0) return 'movie';
-  else if (name.indexOf('series') >= 0) return 'tv';
-  else if (name.indexOf('others') >= 0) return 'description';
-  else return 'folder';
-}
+  if (name.indexOf('games') >= 0) { return 'games'; }
+  else if (name.indexOf('movies') >= 0) { return 'movie'; }
+  else if (name.indexOf('series') >= 0) { return 'tv'; }
+  else if (name.indexOf('others') >= 0) { return 'description'; }
+  else { return 'folder'; }
+};
 
 const megabyte = 1048576;
 const gigabyte = 1073741824;
@@ -23,7 +23,7 @@ const sizeConverter = (bytes: number) => {
   } else {
     return `${ (bytes / megabyte).toFixed(2) } MB`;
   }
-}
+};
 
 enum ETransmissionTorrentStatus {
   Stopped, // Torrent is stopped
@@ -62,7 +62,7 @@ export class TorrentItemComponent implements OnInit {
 
   getSize() {
     if (this.torrent.totalSize === 0) {
-      return 'Size in unknown'
+      return 'Size in unknown';
     }
     if (this.torrent.percentDone === 1) {
       return `${ sizeConverter(this.torrent.totalSize) }`;

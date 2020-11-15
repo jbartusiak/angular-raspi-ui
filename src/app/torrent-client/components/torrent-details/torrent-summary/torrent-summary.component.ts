@@ -23,7 +23,7 @@ export class TorrentSummaryComponent {
 
   dateFromNumber(input: number) {
     console.log(input);
-    return new Date(input*1000);
+    return new Date(input * 1000);
   }
 
 }

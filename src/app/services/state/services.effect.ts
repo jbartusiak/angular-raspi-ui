@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import * as servicesActions from './services.actions';
 import { ConfigurationService } from '../service/configuration.service';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { of } from "rxjs";
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class ServiceEffects {
     mergeMap(({server}) => this.configurationService.getServiceStatus$(server).pipe(
       map((result) => servicesActions.getServerStatusSuccess({server: result}))
     ))
-  )
+  );
 
   @Effect()
   getServiceStatus$ = this.actions$.pipe(
@@ -36,5 +36,5 @@ export class ServiceEffects {
     mergeMap(({service}) => this.configurationService.getServiceStatus$(service).pipe(
       map(result => servicesActions.getServiceStatusSuccess({service: result}))
     ))
-  )
+  );
 }

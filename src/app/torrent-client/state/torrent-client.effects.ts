@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { Actions, Effect, ofType } from "@ngrx/effects";
+import { Injectable } from '@angular/core';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as actions from './torrent-client.actions';
-import { map, mergeMap, switchMap } from "rxjs/operators";
-import { TorrentClientService } from "../services/torrent-client.service";
-import { NewTorrentForm } from "../models/NewTorrentForm";
+import { map, mergeMap, switchMap } from 'rxjs/operators';
+import { TorrentClientService } from '../services/torrent-client.service';
+import { NewTorrentForm } from '../models/NewTorrentForm';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ export class TorrentClientEffects {
         result => new actions.LoadTorrentsSuccess(result))
       )
     )
-  )
+  );
 
   @Effect()
   downloadTorrent$ = this.actions$.pipe(
@@ -67,5 +67,5 @@ export class TorrentClientEffects {
         new actions.LoadTorrents(),
       ])
     ))
-  )
+  );
 }

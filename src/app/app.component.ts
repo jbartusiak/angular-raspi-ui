@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { routerNavigationAnimation } from "./app.animations";
+import { routerNavigationAnimation } from './app.animations';
 
 @Component({
   selector: 'app-root',

@@ -1,7 +1,7 @@
 import { AfterContentInit, Component } from '@angular/core';
-import { IFeatureRoute } from "../../../services/state/services.reducer";
-import { Observable } from "rxjs";
-import { NavbarFacade } from "../../services/navbar.facade";
+import { IFeatureRoute } from '../../../services/state/services.reducer';
+import { Observable } from 'rxjs';
+import { NavbarFacade } from '../../services/navbar.facade';
 
 @Component({
   selector: 'navbar-component',
@@ -22,8 +22,9 @@ export class NavbarComponent implements AfterContentInit {
   }
 
   ngAfterContentInit(): void {
-    if (!this.theme)
+    if (!this.theme) {
       window.document.body.classList.add('theme-dark');
+    }
   }
 
   swapTheme(): void {

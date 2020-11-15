@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import * as fromService from "../state/services.reducer";
-import { IService } from "../state/services.reducer";
-import { select, Store } from "@ngrx/store";
-import * as servicesSelectors from "../state/service.selectors";
-import { take } from "rxjs/operators";
-import * as servicesActions from "../state/services.actions";
-import { Actions, ofType } from "@ngrx/effects";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import * as fromService from '../state/services.reducer';
+import { IService } from '../state/services.reducer';
+import { select, Store } from '@ngrx/store';
+import * as servicesSelectors from '../state/service.selectors';
+import { take } from 'rxjs/operators';
+import * as servicesActions from '../state/services.actions';
+import { Actions, ofType } from '@ngrx/effects';
 
 @Injectable({
   providedIn: 'root',
@@ -38,8 +38,8 @@ export class ServicesFacade {
       take(1)
     ).subscribe(
       ({services}) => {
-        services.forEach(service => this.store.dispatch(servicesActions.getServiceStatus({service})))
+        services.forEach(service => this.store.dispatch(servicesActions.getServiceStatus({service})));
       }
-    )
+    );
   }
 }

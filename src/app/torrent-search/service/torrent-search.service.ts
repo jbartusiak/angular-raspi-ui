@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { map } from "rxjs/operators";
-import { IOptions, ITorrentProvider, Torrent } from "../state";
-import { Observable } from "rxjs";
-import { GetTorrentMagnetResponse } from "../models";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { IOptions, ITorrentProvider, Torrent } from '../state';
+import { Observable } from 'rxjs';
+import { GetTorrentMagnetResponse } from '../models';
 
 const host = '192.168.0.254';
 const port = '3001';
@@ -35,7 +35,7 @@ export class TorrentSearchService {
     const url = `http://${ host }:${ port }/providers`;
     return this.http.post(url, options).pipe(
       map<{ enabledProviders: string[] }, string[]>(result => result.enabledProviders)
-    )
+    );
   }
 
   performSearch$ = (query: string, category: string, limit = 40) => {

@@ -1,8 +1,8 @@
-import { Action } from "@ngrx/store";
-import { ITorrentItem } from "./torrent-client.reducer";
-import { Torrent } from "../../torrent-search/state";
-import { NewTorrentForm } from "../models/NewTorrentForm";
-import { DeleteTorrentsForm } from "../models/DeleteTorrentsForm";
+import { Action } from '@ngrx/store';
+import { ITorrentItem } from './torrent-client.reducer';
+import { Torrent } from '../../torrent-search/state';
+import { NewTorrentForm } from '../models/NewTorrentForm';
+import { DeleteTorrentsForm } from '../models/DeleteTorrentsForm';
 
 
 export enum TorrentClientActionTypes {

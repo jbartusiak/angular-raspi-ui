@@ -1,6 +1,6 @@
-import { Action } from "@ngrx/store";
-import { IOptions, ITorrentProvider, Torrent } from "./torrent-search.reducer";
-import { TorrentSearchQuery } from "../models/TorrentSearchQuery";
+import { Action } from '@ngrx/store';
+import { IOptions, ITorrentProvider, Torrent } from './torrent-search.reducer';
+import { TorrentSearchQuery } from '../models/TorrentSearchQuery';
 
 export enum TorrentSearchActionTypes {
   LoadProviders = '[TORRENT-SEARCH] Load Providers',

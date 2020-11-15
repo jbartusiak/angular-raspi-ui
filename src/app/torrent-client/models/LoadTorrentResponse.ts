@@ -1,4 +1,4 @@
-import { ITorrentItem } from "../state/torrent-client.reducer";
+import { ITorrentItem } from '../state/torrent-client.reducer';
 
 export interface LoadTorrentResponse {
   code: number;

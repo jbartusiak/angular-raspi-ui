@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { FormControl } from "@angular/forms";
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormControl } from '@angular/forms';
 
 export interface IDeleteTorrentDialogData {
   names: string[];
@@ -21,7 +21,7 @@ export class DeleteTorrentDialogComponent {
   submitDialog() {
     this.dialogRef.close({
       deleteLocalData: this.deleteData.value,
-    })
+    });
   }
 
   closeDialog() {

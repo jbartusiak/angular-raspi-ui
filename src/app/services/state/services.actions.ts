@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IService } from "./services.reducer";
+import { IService } from './services.reducer';
 
 export enum ServiceActionTypes {
   GetServices = '[SERVICES] Load',
@@ -30,6 +30,6 @@ export const getServerStatusFailed =
 export const getServiceStatus =
   createAction(ServiceActionTypes.GetServiceStatus, props<{ service: IService }>());
 export const getServiceStatusSuccess =
-  createAction(ServiceActionTypes.GetServiceStatusSuccess, props<{ service: IService }>())
+  createAction(ServiceActionTypes.GetServiceStatusSuccess, props<{ service: IService }>());
 export const getServiceStatusFailed =
-  createAction(ServiceActionTypes.GetServiceStatusFail, props<{ error: string }>())
+  createAction(ServiceActionTypes.GetServiceStatusFail, props<{ error: string }>());

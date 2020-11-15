@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { interval, Subscription } from "rxjs";
-import { take } from "rxjs/operators";
+import { interval, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-component',

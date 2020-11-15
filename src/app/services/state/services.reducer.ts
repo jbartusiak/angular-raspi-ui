@@ -1,6 +1,7 @@
 import * as fromRoot from '../../state/app.state';
-import * as Actions from "./services.actions";
-import { createReducer, on } from "@ngrx/store";
+import * as Actions from './services.actions';
+import { createReducer, on } from '@ngrx/store';
+import {environment} from '../../../environments/environment';
 
 export enum ServiceStatus {
   UP,
@@ -53,7 +54,7 @@ const initialState: IServicesState = {
   error: null,
   server: {
     name: 'Raspi Backend Service',
-    uri: '192.168.0.254',
+    uri: environment.serverIp,
     port: '8888',
     actuator: {
       status: ServiceStatus.UNKNOWN,

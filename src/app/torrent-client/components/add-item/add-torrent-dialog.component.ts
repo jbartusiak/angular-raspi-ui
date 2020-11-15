@@ -1,10 +1,10 @@
-import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { magnetValidator } from "../../../shared/validators/magnet.validator";
-import { nameEnterAnimation } from "../../animations/torrent-client.animations";
-import { MagnetParserService } from "../../services/magnet-parser.service";
-import { SubSink } from "subsink";
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { magnetValidator } from '../../../shared/validators/magnet.validator';
+import { nameEnterAnimation } from '../../animations/torrent-client.animations';
+import { MagnetParserService } from '../../services/magnet-parser.service';
+import { SubSink } from 'subsink';
 
 export interface IAddTorrentDialogData {
   categories: string[];
@@ -57,7 +57,7 @@ export class AddTorrentDialogComponent implements OnInit, OnDestroy {
           title: this.title,
           autostart: new FormControl(true, Validators.required),
         }
-      )
+      );
     } else {
       this.title = new FormControl({value: '', disabled: true});
       this.addTorrentForm = new FormGroup(
@@ -68,12 +68,12 @@ export class AddTorrentDialogComponent implements OnInit, OnDestroy {
           title: this.title,
           autostart: new FormControl(true, Validators.required),
         }
-      )
+      );
     }
 
     this.sub.sink = this.addTorrentForm.controls.magnet.valueChanges.subscribe(
       next => this.parseMagnet(next)
-    )
+    );
   }
 
   ngOnDestroy(): void {

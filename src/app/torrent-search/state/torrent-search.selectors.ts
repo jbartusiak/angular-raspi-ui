@@ -1,5 +1,5 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { ITorrentSearchState } from "./torrent-search.reducer";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { ITorrentSearchState } from './torrent-search.reducer';
 
 const getTorrentSearchFeatureState = createFeatureSelector<ITorrentSearchState>('torrentSearch');
 
@@ -16,7 +16,7 @@ export const getEnabledProviders = createSelector(
 export const getError = createSelector(
   getTorrentSearchFeatureState,
   state => state.error,
-)
+);
 
 export const getEnabledProvidersBindable = createSelector(
   getTorrentSearchFeatureState,
@@ -26,15 +26,16 @@ export const getEnabledProvidersBindable = createSelector(
         return {
           ...el,
           enabled: true,
-        }
+        };
       }
-      else return {
+      else { return {
         ...el,
         enabled: false
+      };
       }
-    })
+    });
   }
-)
+);
 
 export const getQuery = createSelector(
   getTorrentSearchFeatureState,
@@ -49,9 +50,9 @@ export const getSearchResults = createSelector(
 export const getCategory = createSelector(
   getTorrentSearchFeatureState,
   state => state.category,
-)
+);
 
 export const getAllCategories = createSelector(
   getTorrentSearchFeatureState,
   state => state.categories,
-)
+);

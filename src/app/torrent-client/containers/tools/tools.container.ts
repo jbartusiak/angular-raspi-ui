@@ -1,18 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SelectionControllerService } from "../../services/selection-controller.service";
-import { ITorrentItem, State } from "../../state/torrent-client.reducer";
-import { select, Store } from "@ngrx/store";
-import { Subscription } from "rxjs";
+import { SelectionControllerService } from '../../services/selection-controller.service';
+import { ITorrentItem, State } from '../../state/torrent-client.reducer';
+import { select, Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import * as actions from '../../state/torrent-client.actions';
 import * as selectors from '../../state/torrent-client.selectors';
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog } from '@angular/material/dialog';
 import {
   DeleteTorrentDialogComponent,
   IDeleteTorrentDialogData
-} from "../../components/delete-torrent-dialog/delete-torrent-dialog.component";
-import { take } from "rxjs/operators";
-import { DeleteTorrentsForm } from "../../models/DeleteTorrentsForm";
-import { SnackbarService } from "../../services/snackbar.service";
+} from '../../components/delete-torrent-dialog/delete-torrent-dialog.component';
+import { take } from 'rxjs/operators';
+import { DeleteTorrentsForm } from '../../models/DeleteTorrentsForm';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-tools',
@@ -45,14 +45,14 @@ export class ToolsContainer implements OnInit, OnDestroy {
   }
 
   handleStart() {
-    if (!this.selectionService.snapshot.length) return;
+    if (!this.selectionService.snapshot.length) { return; }
     this.store.dispatch(new actions.StartTorrent(this.selectionService.snapshot));
     this.selectionService.clear();
     this.snackbar.show('Torrents are being started...');
   }
 
   handleStop() {
-    if (!this.selectionService.snapshot.length) return;
+    if (!this.selectionService.snapshot.length) { return; }
     this.store.dispatch(new actions.StopTorrents(this.selectionService.snapshot));
     this.selectionService.clear();
     this.snackbar.show('Torrents are being stopped...');
@@ -60,13 +60,13 @@ export class ToolsContainer implements OnInit, OnDestroy {
 
   handleDelete() {
     const selectedIds = this.selectionService.snapshot;
-    if (!selectedIds.length) return;
+    if (!selectedIds.length) { return; }
     this.dialog
       .open<DeleteTorrentDialogComponent, IDeleteTorrentDialogData, DeleteTorrentsForm>(
         DeleteTorrentDialogComponent, {
           width: '400px',
           data: {
-            names: this.torrents.filter(el => selectedIds.indexOf(el.id)!==-1).map(el => el.name)
+            names: this.torrents.filter(el => selectedIds.indexOf(el.id) !== -1).map(el => el.name)
           }
         }
       )
@@ -82,12 +82,12 @@ export class ToolsContainer implements OnInit, OnDestroy {
             this.store.dispatch(new actions.DeleteTorrents({
               ...result,
               ids: selectedIds,
-            }))
+            }));
             this.snackbar.show('Torrents are being deleted...');
             this.selectionService.clear();
           }
         }
-      )
+      );
   }
 
 }

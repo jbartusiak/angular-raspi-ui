@@ -1,5 +1,5 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { IServicesState } from "./services.reducer";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { IServicesState } from './services.reducer';
 import { flatten } from 'lodash';
 
 const getServiceFeatureState = createFeatureSelector<IServicesState>('services');
@@ -23,4 +23,4 @@ export const getServerService = createSelector(
 export const getFeatureRoutes = createSelector(
   getServices,
   state => flatten(state.filter(element => element.featureRoutes?.length > 0).map(el => el.featureRoutes))
-)
+);

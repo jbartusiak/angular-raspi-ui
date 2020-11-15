@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { select, Store } from "@ngrx/store";
+import { Injectable } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { ITorrentProvider, State, Torrent } from '../state';
-import { combineLatest, Observable } from "rxjs";
-import * as selectors from "../state/torrent-search.selectors";
-import * as actions from "../state/torrent-search.actions";
-import { map } from "rxjs/operators";
-import { TorrentSearchQuery } from "../models/TorrentSearchQuery";
+import { combineLatest, Observable } from 'rxjs';
+import * as selectors from '../state/torrent-search.selectors';
+import * as actions from '../state/torrent-search.actions';
+import { map } from 'rxjs/operators';
+import { TorrentSearchQuery } from '../models/TorrentSearchQuery';
 
 @Injectable()
 export class TorrentSearchFacade {
@@ -20,8 +20,8 @@ export class TorrentSearchFacade {
   queryParams$: Observable<TorrentSearchQuery>;
 
   constructor(private store: Store<State>) {
-    this.store.dispatch(new actions.LoadProviders);
-    this.store.dispatch(new actions.LoadEnabledProviders);
+    this.store.dispatch(new actions.LoadProviders());
+    this.store.dispatch(new actions.LoadEnabledProviders());
 
     this.enabledProvidersBindable$ = this.store.pipe(
       select(selectors.getEnabledProvidersBindable),
@@ -34,7 +34,7 @@ export class TorrentSearchFacade {
     );
     this.category$ = this.store.pipe(
       select(selectors.getCategory)
-    )
+    );
     this.categories$ = this.store.pipe(
       select(selectors.getAllCategories)
     );
@@ -52,6 +52,6 @@ export class TorrentSearchFacade {
           query: query$,
           enabledProviders: enabledProviders$,
         }))
-      )
+      );
   }
 }

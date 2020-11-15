@@ -1,9 +1,9 @@
-import { Component } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { IOptions, ITorrentProvider, State } from "../state";
-import * as actions from "../state/torrent-search.actions";
-import { TorrentSearchFacade } from "../service/torrent-search.facade";
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { IOptions, ITorrentProvider, State } from '../state';
+import * as actions from '../state/torrent-search.actions';
+import { TorrentSearchFacade } from '../service/torrent-search.facade';
 
 @Component({
   template: `

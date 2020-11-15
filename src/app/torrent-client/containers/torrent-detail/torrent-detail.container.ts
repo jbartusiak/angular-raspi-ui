@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { TorrentClientService } from "../../services/torrent-client.service";
-import { Observable, Subscription } from "rxjs";
-import { ActivatedRoute } from "@angular/router";
-import { map } from "rxjs/operators";
-import { TorrentItemDetails } from "../../models/TorrentDetails";
-import { FileTreeService } from "../../services/file-tree.service";
-import { TorrentFolder } from "../../models/TorrentFile";
+import { TorrentClientService } from '../../services/torrent-client.service';
+import { Observable, Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { TorrentItemDetails } from '../../models/TorrentDetails';
+import { FileTreeService } from '../../services/file-tree.service';
+import { TorrentFolder } from '../../models/TorrentFile';
 
 @Component({
   template: `
@@ -61,7 +61,7 @@ export class TorrentDetailContainer implements OnInit {
 
   ngOnInit(): void {
     const torrentId = this.route.snapshot.paramMap.get('id');
-    this.torrentSub = this.service.getTorrentDetails$(Number.parseInt(torrentId))
+    this.torrentSub = this.service.getTorrentDetails$(Number.parseInt(torrentId, 10))
       .pipe(
         map(next => next.torrents[0])
       )

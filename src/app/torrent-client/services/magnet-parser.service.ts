@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { HttpUrlEncodingCodec } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpUrlEncodingCodec } from '@angular/common/http';
 
 @Injectable()
 export class MagnetParserService {
@@ -16,7 +16,7 @@ export class MagnetParserService {
       return {
         key,
         value
-      }
+      };
     });
 
     const torrentMeta: { [key: string]: string | string[] } = {};

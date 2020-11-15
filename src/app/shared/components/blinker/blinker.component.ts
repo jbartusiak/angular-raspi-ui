@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ServiceStatus } from "../../../services/state/services.reducer";
+import { ServiceStatus } from '../../../services/state/services.reducer';
 
 @Component({
   template: `

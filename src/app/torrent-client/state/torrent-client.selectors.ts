@@ -1,5 +1,5 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { ITorrentClientState } from "./torrent-client.reducer";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { ITorrentClientState } from './torrent-client.reducer';
 
 const getTorrentClientFeatureState = createFeatureSelector<ITorrentClientState>('torrentClient');
 

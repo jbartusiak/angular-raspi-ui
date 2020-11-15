@@ -1,5 +1,5 @@
-import * as fromRoot from "../../state/app.state";
-import { TorrentSearchActions, TorrentSearchActionTypes } from "./torrent-search.actions";
+import * as fromRoot from '../../state/app.state';
+import { TorrentSearchActions, TorrentSearchActionTypes } from './torrent-search.actions';
 
 export interface Torrent {
   title: string;
@@ -57,7 +57,7 @@ const composeCategories = (providers: ITorrentProvider[], enabledProviders: stri
       })
     );
   return categories;
-}
+};
 
 export const reducer = (state = initialState, action: TorrentSearchActions): ITorrentSearchState => {
   switch (action.type) {
@@ -65,12 +65,12 @@ export const reducer = (state = initialState, action: TorrentSearchActions): ITo
       return {
         ...state,
         allProviders: action.payload,
-      }
+      };
     case TorrentSearchActionTypes.LoadProvidersFail:
       return {
         ...state,
         error: action.payload,
-      }
+      };
     case TorrentSearchActionTypes.LoadEnabledProvidersSuccess:
     case TorrentSearchActionTypes.UpdateEnabledProvidersSuccess:
       const categories = composeCategories(state.allProviders, action.payload);
@@ -80,35 +80,35 @@ export const reducer = (state = initialState, action: TorrentSearchActions): ITo
         enabledProviders: action.payload,
         categories,
         category: categories[0] || '',
-      }
+      };
     case TorrentSearchActionTypes.LoadEnabledProvidersFail:
       return {
         ...state,
         error: action.payload,
-      }
+      };
     case TorrentSearchActionTypes.UpdateQuery:
       return {
         ...state,
         query: action.payload,
-      }
+      };
     case TorrentSearchActionTypes.UpdateCategory:
       return {
         ...state,
         category: action.payload,
-      }
+      };
     case TorrentSearchActionTypes.PerformSearchSuccess:
       return {
         ...state,
         error: '',
         results: action.payload,
-      }
+      };
     case TorrentSearchActionTypes.PerformSearchFail:
       return {
         ...state,
         error: action.payload,
         results: [],
-      }
+      };
     default:
       return {...state};
   }
-}
+};

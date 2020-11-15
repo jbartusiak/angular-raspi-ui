@@ -1,5 +1,5 @@
-import { Component, Input } from "@angular/core";
-import { TorrentFolder } from "../../../models/TorrentFile";
+import { Component, Input } from '@angular/core';
+import { TorrentFolder } from '../../../models/TorrentFile';
 
 @Component({
   selector: 'app-file-listing',
@@ -12,16 +12,16 @@ export class FileListingComponent {
   @Input() isExpanded: boolean;
 
   folderWanted(folder: TorrentFolder): boolean {
-    return folder.files.every(file => file.wanted) && folder.folders.every(folder => this.folderWanted(folder));
+    return folder.files.every(file => file.wanted) && folder.folders.every(f => this.folderWanted(f));
   }
 
   folderContentsSize(folder: TorrentFolder): number {
-    return folder.files.reduce((prev, current) => prev+=current.length, 0) +
-      folder.folders.map(folder => this.folderContentsSize(folder)).reduce((prev, curr) => prev +=curr, 0);
+    return folder.files.reduce((prev, current) => prev += current.length, 0) +
+      folder.folders.map(f => this.folderContentsSize(f)).reduce((prev, curr) => prev += curr, 0);
   }
 
   folderCompleted(folder: TorrentFolder): number {
-    return folder.files.reduce((prev, current) => prev+=current.bytesCompleted, 0) +
-      folder.folders.map(folder => this.folderContentsSize(folder)).reduce((prev, curr) => prev +=curr, 0);
+    return folder.files.reduce((prev, current) => prev += current.bytesCompleted, 0) +
+      folder.folders.map(f => this.folderContentsSize(f)).reduce((prev, curr) => prev += curr, 0);
   }
 }
