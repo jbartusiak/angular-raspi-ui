@@ -4,8 +4,9 @@ import { map } from 'rxjs/operators';
 import { IOptions, ITorrentProvider, Torrent } from '../state';
 import { Observable } from 'rxjs';
 import { GetTorrentMagnetResponse } from '../models';
+import {environment} from '../../../environments/environment';
 
-const host = '192.168.0.254';
+const host = environment.serverIp;
 const port = '3001';
 const uri = 'providers';
 
