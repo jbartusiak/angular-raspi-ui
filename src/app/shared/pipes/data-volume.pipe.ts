@@ -57,21 +57,6 @@ export class DataVolumePipe implements PipeTransform {
     return '0';
   }
 
-  private toBit = (bytes: number) => `${ Math.ceil(bytes * bit) } bits`;
-  private toByte = (bytes: number) => `${ (bytes)} bytes`;
-
-  private toKbit = (bytes: number) => `${ (bytes / kilobit).toFixed(2) } Kbit`;
-  private toKB = (bytes: number) => `${ (bytes / kilobyte).toFixed(2) } KB`;
-
-  private toMbit = (bytes: number) => `${ (bytes / megabit).toFixed(2) } Mbit`;
-  private toMB = (bytes: number) => `${ (bytes / megabyte).toFixed(2) } MB`;
-
-  private toGbit = (bytes: number) => `${ (bytes / gigabit).toFixed(2) } Gbit`;
-  private toGB = (bytes: number) => `${ (bytes / gigabyte).toFixed(2) } GB`;
-
-  private toTbit = (bytes: number) => `${ (bytes / terabit).toFixed(2) } Tbit`;
-  private toTB = (bytes: number) => `${ (bytes / terabyte).toFixed(2) } TB`;
-
   normalize = (input: number, inputUnit: DataVolumeUnit): number => {
     switch (inputUnit) {
       case 'bits':
@@ -95,6 +80,20 @@ export class DataVolumePipe implements PipeTransform {
       case 'tb':
         return input * terabyte;
     }
-  }
+  };
 
+  private toBit = (bytes: number) => `${ Math.ceil(bytes * bit) } bits`;
+  private toByte = (bytes: number) => `${ (bytes)} bytes`;
+
+  private toKbit = (bytes: number) => `${ (bytes / kilobit).toFixed(2) } Kbit`;
+  private toKB = (bytes: number) => `${ (bytes / kilobyte).toFixed(2) } KB`;
+
+  private toMbit = (bytes: number) => `${ (bytes / megabit).toFixed(2) } Mbit`;
+  private toMB = (bytes: number) => `${ (bytes / megabyte).toFixed(2) } MB`;
+
+  private toGbit = (bytes: number) => `${ (bytes / gigabit).toFixed(2) } Gbit`;
+  private toGB = (bytes: number) => `${ (bytes / gigabyte).toFixed(2) } GB`;
+
+  private toTbit = (bytes: number) => `${ (bytes / terabit).toFixed(2) } Tbit`;
+  private toTB = (bytes: number) => `${ (bytes / terabyte).toFixed(2) } TB`;
 }

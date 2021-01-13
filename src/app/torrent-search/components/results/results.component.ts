@@ -20,12 +20,12 @@ export class ResultsComponent implements OnChanges, OnInit {
   @Input() error: string;
   @Output() download = new EventEmitter<Torrent>();
 
+  @ViewChild(MatSort) sort: MatSort;
+
   sortedResults: Torrent[];
   dataSource: MatTableDataSource<Torrent>;
 
   displayedColumns: string[] = [ 'title', 'magnet', 'uploaded', 'size', 'condition', 'provider' ];
-
-  @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.results);

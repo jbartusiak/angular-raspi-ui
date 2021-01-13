@@ -9,10 +9,6 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class ServiceEffects {
-  constructor(private actions$: Actions,
-              private configurationService: ConfigurationService) {
-  }
-
   @Effect()
   loadServices$ = this.actions$.pipe(
     ofType(servicesActions.loadServices),
@@ -37,4 +33,8 @@ export class ServiceEffects {
       map(result => servicesActions.getServiceStatusSuccess({service: result}))
     ))
   );
+
+  constructor(private actions$: Actions,
+              private configurationService: ConfigurationService) {
+  }
 }

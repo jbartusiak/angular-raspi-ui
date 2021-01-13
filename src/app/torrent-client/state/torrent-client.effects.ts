@@ -9,11 +9,6 @@ import { NewTorrentForm } from '../models/NewTorrentForm';
   providedIn: 'root',
 })
 export class TorrentClientEffects {
-
-  constructor(private actions$: Actions,
-              private client: TorrentClientService) {
-  }
-
   @Effect()
   loadTorrents$ = this.actions$.pipe(
     ofType(actions.TorrentClientActionTypes.LoadTorrents),
@@ -68,4 +63,8 @@ export class TorrentClientEffects {
       ])
     ))
   );
+
+  constructor(private actions$: Actions,
+              private client: TorrentClientService) {
+  }
 }

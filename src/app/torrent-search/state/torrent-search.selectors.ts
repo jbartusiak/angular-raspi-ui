@@ -20,8 +20,7 @@ export const getError = createSelector(
 
 export const getEnabledProvidersBindable = createSelector(
   getTorrentSearchFeatureState,
-  state => {
-    return state.allProviders.map(el => {
+  state => state.allProviders.map(el => {
       if (state.enabledProviders.indexOf(el.name) !== -1) {
         return {
           ...el,
@@ -33,8 +32,7 @@ export const getEnabledProvidersBindable = createSelector(
         enabled: false
       };
       }
-    });
-  }
+    })
 );
 
 export const getQuery = createSelector(

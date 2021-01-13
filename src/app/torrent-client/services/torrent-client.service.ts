@@ -24,7 +24,7 @@ export class TorrentClientService {
     return this.http.get<LoadTorrentResponse>(url).pipe(
       map(result => result.torrents)
     );
-  }
+  };
 
   addNewTorrent$ = ({autostart, category, directory, magnet}: NewTorrentForm) => {
     const url = `${this.baseUrl}/transmission/new`;
@@ -37,12 +37,12 @@ export class TorrentClientService {
     console.log('adding new torrent');
 
     return this.http.post(url, requestBody);
-  }
+  };
 
   getTorrentDetails$ = (torrentId: number): Observable<TorrentItemDetailsResponse> => {
     const url = `${this.baseUrl}/transmission/all?id=${torrentId}`;
     return this.http.get<TorrentItemDetailsResponse>(url);
-  }
+  };
 
   startTorrents$ = (ids: number[]) => {
     const url = `${this.baseUrl}/transmission/start`;
@@ -50,7 +50,7 @@ export class TorrentClientService {
       ids,
     };
     return this.http.post(url, requestBody);
-  }
+  };
 
   stopTorrents$ = (ids: number[]) => {
     const url = `${this.baseUrl}/transmission/stop`;
@@ -58,7 +58,7 @@ export class TorrentClientService {
       ids,
     };
     return this.http.post(url, requestBody);
-  }
+  };
 
   deleteTorrents$ = ({ids, deleteLocalData}: DeleteTorrentsForm) => {
     const url = `${this.baseUrl}/transmission/remove`;
@@ -67,5 +67,5 @@ export class TorrentClientService {
       deleteLocalData,
     };
     return this.http.post(url, requestBody);
-  }
+  };
 }

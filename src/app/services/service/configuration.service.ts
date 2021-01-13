@@ -18,14 +18,12 @@ export class ConfigurationService {
     return throwError(err.message);
   }
 
-  fetchConfiguration$ = (): Observable<IService[]> => {
-    return this.http
+  fetchConfiguration$ = (): Observable<IService[]> => this.http
       .get<{ services: { [name: string]: IService } }>(`http://${env.serverIp}:8888/configuration/raspi-ui-dev.json`)
       .pipe(
         map(result => Object.values(result.services)),
         catchError(ConfigurationService.handleError),
       );
-  }
 
   getServiceStatus$ = (service: IService): Observable<IService> => {
     if (service.actuator.health.constructor === String) {
@@ -33,7 +31,7 @@ export class ConfigurationService {
     } else {
       return this.handleCommandHealthCheck$(service);
     }
-  }
+  };
 
   private handleHttpHealthCheck$ = (service: IService): Observable<IService> => {
     const { port, actuator} = service;
@@ -66,7 +64,7 @@ export class ConfigurationService {
         }
       })
     );
-  }
+  };
 
   private handleCommandHealthCheck$ = (service: IService) => {
     const {actuator} = service;
@@ -97,5 +95,5 @@ export class ConfigurationService {
           }
         })
       );
-  }
+  };
 }
