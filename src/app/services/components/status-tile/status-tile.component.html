@@ -6,7 +6,7 @@
     </mat-card-title>
     <mat-card-subtitle class="Subtitle">
       Service address:
-      <a mat-button href="{{ service.uri }}:{{ service.port }}">{{ service.uri }}:{{ service.port }}</a>
+      <a mat-button [href]="serviceUrl">{{ serverUrl }}:{{ service.port }}</a>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
