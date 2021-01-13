@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TorrentItemDetails } from '../models/TorrentDetails';
 import { TorrentFile, TorrentFolder } from '../models/TorrentFile';
-import { partition } from 'lodash';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -32,10 +31,18 @@ export class FileTreeService {
     return of(torrentFolderObservable);
   }
 
+  private partition<T>(files: T[], cb: (file: T) => boolean) {
+    const passing = [];
+    const notPassing = [];
+
+    files.forEach(el => cb(el) ? passing.push(el) : notPassing.push(el));
+    return [passing, notPassing];
+  }
+
   private mapToFileListing(folder: TorrentFolder): TorrentFolder {
     const {folders, files} = folder;
 
-    const [ inSubdirectory, flat ] = partition(files, (file) => file.name.includes('/'));
+    const [ inSubdirectory, flat ] = this.partition(files, (file) => file.name.includes('/'));
     files.length = 0;
 
     files.push(...flat);
