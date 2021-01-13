@@ -19,7 +19,7 @@ import { ClearTorrent, DownloadTorrent } from '../../state/torrent-client.action
     <app-add-item-component (showModal)="handleShowModal()"></app-add-item-component>`
 })
 export class AddItemContainer implements OnInit, OnDestroy {
-  configuration: { categories: string[], directories: string[] };
+  configuration: { categories: string[]; directories: string[] };
 
   private serviceSub: Subscription;
   private torrentSub: Subscription;

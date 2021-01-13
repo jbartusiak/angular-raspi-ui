@@ -8,33 +8,33 @@ import { TorrentClientActionTypes } from '../../torrent-client/state/torrent-cli
   providedIn: 'root'
 })
 export class LoadingService {
-  private _queriesInProgress = 0;
-  private _queriesInProgress$: Subject<number>;
+  private queriesInProgress = 0;
+  private queriesInProgressSubject$: Subject<number>;
 
   private actionsSubscription: Subscription;
 
   constructor(private actions$: Actions) {
-    this._queriesInProgress$ = new Subject<number>();
+    this.queriesInProgressSubject$ = new Subject<number>();
     this.publishNewValue();
     this.initializeActionObserver();
   }
 
   get queriesInProgress$(): Observable<number> {
-    return this._queriesInProgress$.asObservable();
+    return this.queriesInProgressSubject$.asObservable();
   }
 
   beginCall = () => {
-    this._queriesInProgress += 1;
+    this.queriesInProgress += 1;
     this.publishNewValue();
-  }
+  };
 
   endApiCall = () => {
-    this._queriesInProgress -= 1;
+    this.queriesInProgress -= 1;
     this.publishNewValue();
-  }
+  };
 
   private publishNewValue() {
-    this._queriesInProgress$.next(this._queriesInProgress);
+    this.queriesInProgressSubject$.next(this.queriesInProgress);
   }
 
   private initializeActionObserver() {

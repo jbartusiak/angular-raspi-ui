@@ -12,10 +12,6 @@ import { TorrentSearchQuery } from '../models/TorrentSearchQuery';
   providedIn: 'root'
 })
 export class TorrentSearchEffect {
-  constructor(private actions$: Actions,
-              private searchService: TorrentSearchService) {
-  }
-
   @Effect()
   loadProviders$ = this.actions$.pipe(
     ofType(searchActions.TorrentSearchActionTypes.LoadProviders),
@@ -76,4 +72,8 @@ export class TorrentSearchEffect {
       )
     )
   );
+
+  constructor(private actions$: Actions,
+              private searchService: TorrentSearchService) {
+  }
 }

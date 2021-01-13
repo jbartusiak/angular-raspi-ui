@@ -6,16 +6,16 @@ import { Observable, Subject } from 'rxjs';
 })
 export class SelectionControllerService {
   private readonly selections: Set<number>;
-  private readonly _selections$: Subject<Set<number>>;
+  private readonly selectionsSubject$: Subject<Set<number>>;
 
   constructor() {
     this.selections = new Set<number>();
-    this._selections$ = new Subject<Set<number>>();
-    this._selections$.next(this.selections);
+    this.selectionsSubject$ = new Subject<Set<number>>();
+    this.selectionsSubject$.next(this.selections);
   }
 
   get selections$(): Observable<Set<number>> {
-    return this._selections$;
+    return this.selectionsSubject$;
   }
 
   get snapshot(): number[] {
@@ -42,6 +42,6 @@ export class SelectionControllerService {
   }
 
   private publish() {
-    this._selections$.next(this.selections);
+    this.selectionsSubject$.next(this.selections);
   }
 }

@@ -10,5 +10,5 @@ export class SnackbarService {
 
   show = (message: string, duration: number = 2000) => {
     this.snakbar.open(message, 'x', {duration});
-  }
+  };
 }
