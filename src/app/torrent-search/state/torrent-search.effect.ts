@@ -1,4 +1,4 @@
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as searchActions from './torrent-search.actions';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
@@ -12,24 +12,24 @@ import { TorrentSearchQuery } from '../models/TorrentSearchQuery';
   providedIn: 'root'
 })
 export class TorrentSearchEffect {
-  @Effect()
-  loadProviders$ = this.actions$.pipe(
+
+  loadProviders$ = createEffect(() => this.actions$.pipe(
     ofType(searchActions.TorrentSearchActionTypes.LoadProviders),
     mergeMap(() => this.searchService.getAllProviders$().pipe(
       map(result => new searchActions.LoadProvidersSuccess(result))
     ))
-  );
+  ));
 
-  @Effect()
-  loadEnabledProviders$ = this.actions$.pipe(
+
+  loadEnabledProviders$ = createEffect(() => this.actions$.pipe(
     ofType(searchActions.TorrentSearchActionTypes.LoadEnabledProviders),
     mergeMap(() => this.searchService.getEnabledProviders$().pipe(
       map(result => new searchActions.LoadEnabledProvidersSuccess(result.map(el => el.name)))
     ))
-  );
+  ));
 
-  @Effect()
-  updateEnabledProviders$ = this.actions$.pipe(
+
+  updateEnabledProviders$ = createEffect(() => this.actions$.pipe(
     ofType(searchActions.TorrentSearchActionTypes.UpdateEnabledProviders),
     mergeMap((options: { payload: IOptions }) =>
       this.searchService.updateEnabledProviders$(options.payload).pipe(
@@ -38,10 +38,10 @@ export class TorrentSearchEffect {
         ),
       )
     )
-  );
+  ));
 
-  @Effect()
-  performSearch$ = this.actions$.pipe(
+
+  performSearch$ = createEffect(() => this.actions$.pipe(
     ofType(searchActions.TorrentSearchActionTypes.PerformSearch),
     mergeMap(({payload}: { payload: TorrentSearchQuery }) =>
       this.searchService.performSearch$(payload.query, payload.category, payload.resultsLimit).pipe(
@@ -55,10 +55,10 @@ export class TorrentSearchEffect {
         )
       )
     )
-  );
+  ));
 
-  @Effect()
-  getTorrentMagnet$ = this.actions$.pipe(
+
+  getTorrentMagnet$ = createEffect(() => this.actions$.pipe(
     ofType(searchActions.TorrentSearchActionTypes.GetTorrentMagnet),
     mergeMap((action: { payload: Torrent }) =>
       this.searchService.getTorrentMagnet$(action.payload).pipe(
@@ -71,7 +71,7 @@ export class TorrentSearchEffect {
         ])
       )
     )
-  );
+  ));
 
   constructor(private actions$: Actions,
               private searchService: TorrentSearchService) {

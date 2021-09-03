@@ -1,4 +1,4 @@
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import * as servicesActions from './services.actions';
 import { ConfigurationService } from '../service/configuration.service';
@@ -9,30 +9,30 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class ServiceEffects {
-  @Effect()
-  loadServices$ = this.actions$.pipe(
+
+  loadServices$ = createEffect(() => this.actions$.pipe(
     ofType(servicesActions.loadServices),
     mergeMap(() => this.configurationService.fetchConfiguration$().pipe(
       map(services => servicesActions.loadServicesSuccess({services})),
       catchError(err => of(servicesActions.loadServicesFailed({error: err}))),
     ))
-  );
+  ));
 
-  @Effect()
-  getServerStatus$ = this.actions$.pipe(
+
+  getServerStatus$ = createEffect(() => this.actions$.pipe(
     ofType(servicesActions.getServerStatus),
     mergeMap(({server}) => this.configurationService.getServiceStatus$(server).pipe(
       map((result) => servicesActions.getServerStatusSuccess({server: result}))
     ))
-  );
+  ));
 
-  @Effect()
-  getServiceStatus$ = this.actions$.pipe(
+
+  getServiceStatus$ = createEffect(() => this.actions$.pipe(
     ofType(servicesActions.getServiceStatus),
     mergeMap(({service}) => this.configurationService.getServiceStatus$(service).pipe(
       map(result => servicesActions.getServiceStatusSuccess({service: result}))
     ))
-  );
+  ));
 
   constructor(private actions$: Actions,
               private configurationService: ConfigurationService) {
