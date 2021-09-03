@@ -1,0 +1,16 @@
+<div class="Container">
+<h1>Providers</h1>
+<span>Select torrent providers from the list below. Note that default, tested providers are already selected.</span>
+<ul>
+  <li *ngFor="let provider of providers">
+    <mat-checkbox
+      color="primary"
+      class="example-margin"
+      [(ngModel)]="provider.enabled"
+      (change)="handleChange(provider.name, $event.checked)"
+      >
+      {{ provider.name }}
+    </mat-checkbox>
+  </li>
+</ul>
+</div>

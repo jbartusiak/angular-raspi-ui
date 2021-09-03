@@ -1,0 +1,25 @@
+{
+  "npmScope": "angular-raspi-ui2",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*",
+    "tsconfig.base.json": "*"
+  },
+  "projects": {
+    "angular-raspi-ui2": {
+      "tags": []
+    },
+    "angular-raspi-ui2-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "angular-raspi-ui2"
+      ]
+    }
+  }
+}

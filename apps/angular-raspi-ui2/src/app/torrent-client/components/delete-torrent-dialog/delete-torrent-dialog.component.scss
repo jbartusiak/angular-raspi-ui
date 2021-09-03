@@ -1,0 +1,22 @@
+@use '~@angular/material' as mat;
+@import "../../../../palettes";
+
+.List {
+  padding: 0 4px;
+}
+.Item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.Button {
+  min-width: 100px;
+}
+.Actions {
+  margin-bottom: -16px;
+  justify-content: space-around;
+}
+.Warning {
+  color: mat.get-color-from-palette($raspi-app-palette-warn, A200);
+  font-weight: bold;
+}

@@ -1,0 +1,49 @@
+<mat-card>
+  <mat-card-content
+    fxLayout="column"
+    fxLayoutGap="8px"
+    fxLayout.gt-xs="row"
+
+    fxLayoutAlign="center"
+    fxLayoutAlign.gt-xs="start"
+  >
+    <!--    <button mat-icon-button>-->
+    <!--      <mat-icon>check_circle</mat-icon>-->
+    <!--    </button>-->
+    <!--    <span class="divider"> </span>-->
+    <app-function-button
+      label="Start"
+      iconName="play_arrow"
+      color="accent"
+      [disabled]="!selectionService.snapshot.length"
+      (clicked)="handleStart()"
+    ></app-function-button>
+
+    <app-function-button
+      label="Stop"
+      color="warn"
+      iconName="stop"
+      [disabled]="!selectionService.snapshot.length"
+      (clicked)="handleStop()"
+    ></app-function-button>
+
+    <app-function-button
+      label="Delete"
+      color="warn"
+      iconName="delete"
+      flat="true"
+      class="MarginEnd"
+
+      [disabled]="!selectionService.snapshot.length"
+      (clicked)="handleDelete()"
+    ></app-function-button>
+
+    <!--    <span class="divider"> </span>-->
+    <!--    <app-function-button iconName="arrow_upward"></app-function-button>-->
+    <!--    <app-function-button iconName="arrow_downward"></app-function-button>-->
+
+    <!--    <span class="divider"> </span>-->
+
+    <!--    <app-function-button iconName="info"></app-function-button>-->
+  </mat-card-content>
+</mat-card>

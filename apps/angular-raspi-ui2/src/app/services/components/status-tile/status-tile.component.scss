@@ -1,0 +1,31 @@
+.Card {
+  transition: background-color 250ms ease-in;
+  margin: 8px;
+  @media (max-width: 959px) {
+    min-width: 300px;
+  }
+}
+
+.Avatar {
+  align-self: center;
+}
+
+.Icon {
+  width: 100%;
+  height: auto;
+}
+
+.Subtitle {
+  margin-bottom: -8px;
+}
+
+.button-row {
+  display: inline-flex;
+  min-width: 250px;
+  justify-content: space-evenly;
+}
+
+mat-card-content:not(:empty) {
+  padding-top: 16px;
+  padding-bottom: 8px;
+}

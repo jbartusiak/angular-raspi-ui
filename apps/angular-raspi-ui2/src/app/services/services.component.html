@@ -1,0 +1,28 @@
+<app-layout>
+  <div column-a>
+    <div class="Heading">
+      <h1>Server</h1>
+      <span>
+          Configuration, eureka and execution server for Raspberry PI. Verify the server status based
+        on the status indicators color.
+        </span>
+    </div>
+    <app-status-tile
+      icon="assets/img/raspiIcon.png"
+      [service]="server$ | async"
+      [showActions]="false">
+    </app-status-tile>
+  </div>
+  <div column-b>
+    <div class="Heading">
+      <h1>Services</h1>
+      <span>Lists services deployed on the server.</span>
+    </div>
+    <div>
+      <app-status-tile
+        *ngFor="let service of services$ | async"
+        [service]="service"
+      ></app-status-tile>
+    </div>
+  </div>
+</app-layout>

@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Delete torrent(s)</h1>
+
+<mat-dialog-content style="overflow: hidden;">
+  <p>Are you sure you want to delete the following items?</p>
+  <ul class="List">
+    <li *ngFor="let name of data.names" class="Item">{{ name }}</li>
+  </ul>
+  <div style="margin-top: 16px;">
+    <mat-slide-toggle
+      [formControl]="deleteData"
+      color="warn">
+      Delete downloaded data
+    </mat-slide-toggle>
+    <div style="margin-top: 16px" *ngIf="deleteData.value" class="Warning">
+      <p>
+        Warning! This actions is not reversible, all it will delete all downloaded data
+        (even if download is finished)!
+      </p>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<div mat-dialog-actions class="Actions">
+  <button mat-stroked-button (click)="closeDialog()" class="Button">Cancel</button>
+  <button mat-flat-button color="warn" (click)="submitDialog()" class="Button">OK</button>
+</div>

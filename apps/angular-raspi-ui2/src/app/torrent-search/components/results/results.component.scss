@@ -1,0 +1,26 @@
+.Container {
+  margin: 8px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.max-width {
+  max-width: 150px;
+  padding-right: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  @media (min-width: 960px) {
+    max-width: 450px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,21 @@
+<mat-list-item class="ClickItem" matRipple (click)="handleDetails()">
+  <button mat-list-avatar mat-icon-button
+          class="ToggleButton"
+          [class.Downloading]="[1,2,3,4].indexOf(torrent.status)!==-1"
+          [class.Seeding]="[5,6].indexOf(torrent.status)!==-1"
+          [color]="isSelected ? 'primary' : null"
+          (click)="handleSelected($event)">
+    <mat-icon>{{ getIcon() }}</mat-icon>
+  </button>
+  <h1 mat-line>{{ torrent.name }}</h1>
+  <span mat-line>
+        <mat-progress-bar mode="determinate" color="primary" [value]="torrent.percentDone * 100"></mat-progress-bar>
+      </span>
+  <div mat-line>
+    <div *ngIf="displayStatus===2" @statusSwitch>
+      Seeds: {{torrent.peersSendingToUs}} Seeds available: {{torrent.peersConnected}}
+    </div>
+    <div *ngIf="displayStatus===1" @statusSwitch>{{percentDone}} ({{ size }})</div>
+    <div *ngIf="displayStatus===0" @statusSwitch>{{status}} </div>
+  </div>
+</mat-list-item>

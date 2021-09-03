@@ -1,0 +1,25 @@
+@use '~@angular/material' as mat;
+@import "~@angular/material/theming";
+@import "./palettes";
+
+html, body {
+  height: 100%;
+
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  transition: background-color 250ms ease-in;
+}
+
+
+@include mat.core();
+
+$app-theme-light: mat.define-light-theme($raspi-app-palette-primary, $raspi-app-palette-accent, $raspi-app-palette-warn);
+@include mat.all-component-themes($app-theme-light);
+
+.theme-dark {
+  $app-theme-dark: mat.define-dark-theme($raspi-app-palette-primary, $raspi-app-palette-accent, $raspi-app-palette-warn);
+  @include mat.all-component-themes($app-theme-dark);
+}

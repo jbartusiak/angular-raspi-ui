@@ -1,0 +1,15 @@
+.Container {
+  margin: 32px;
+  transition: background-color 250ms ease-in;
+}
+
+.divider {
+  padding-left: 16px;
+  margin-right: 16px;
+}
+
+.MarginEnd {
+  @media (min-width: 600px) {
+    margin-left: auto;
+  }
+}

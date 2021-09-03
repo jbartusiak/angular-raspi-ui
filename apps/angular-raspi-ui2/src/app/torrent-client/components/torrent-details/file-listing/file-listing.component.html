@@ -1,0 +1,42 @@
+<ul [class.AddMargin]="addMargin">
+  <li *ngFor="let folder of fileListing.folders">
+    <div class="Label Clickable">
+      <mat-icon>folder</mat-icon>
+      <mat-checkbox [checked]="folderWanted(folder)"></mat-checkbox>
+      <span (click)="isExpanded=!isExpanded">{{ folder.name }}</span>
+      <div class="MoveToRight">
+        <span>{{folderCompleted(folder)/folderContentsSize(folder) | percent}}</span>
+        <span>
+        <strong>{{folderCompleted(folder) | dataVolume}}</strong>
+        out of
+        <strong>{{ folderContentsSize(folder) | dataVolume }}</strong>
+      </span>
+      </div>
+    </div>
+    <div
+      class="Listing"
+      [class.Collapsed]="!isExpanded"
+      [class.Expanded]="isExpanded">
+      <app-file-listing
+        *ngIf="isExpanded"
+        [addMargin]="true"
+        [fileListing]="folder"
+        [isExpanded]="false"></app-file-listing>
+    </div>
+  </li>
+  <li *ngFor="let file of fileListing.files">
+    <div class="Label">
+      <mat-icon>description</mat-icon>
+      <mat-checkbox [checked]="file.wanted"></mat-checkbox>
+      <span>{{ file.name }}</span>
+      <div class="MoveToRight">
+        <span>{{file.bytesCompleted / file.length | percent}}</span>
+        <span>
+          <strong>{{file.bytesCompleted | dataVolume}}</strong>
+          out of
+          <strong>{{ file.length | dataVolume }}</strong>
+        </span>
+      </div>
+    </div>
+  </li>
+</ul>
