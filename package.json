@@ -44,13 +44,13 @@
     "@ngrx/router-store": "^12.4.0",
     "@ngrx/store": "^12.4.0",
     "@ngrx/store-devtools": "^12.4.0",
+    "@nrwl/angular": "12.8.0",
     "@nrwl/workspace": "12.8.0",
     "lodash": "^4.17.19",
     "rxjs": "~6.5.4",
     "subsink": "^1.0.1",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.4",
-    "@nrwl/angular": "12.8.0"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.4",
@@ -62,8 +62,11 @@
     "@angular/cli": "~12.2.4",
     "@angular/compiler-cli": "~12.2.4",
     "@ngrx/schematics": "12.4.0",
+    "@nrwl/jest": "12.8.0",
+    "@nrwl/workspace": "12.8.0",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/jest": "26.0.24",
     "@types/lodash": "^4.14.158",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "4.3.0",
@@ -74,15 +77,16 @@
     "eslint-plugin-prefer-arrow": "1.2.2",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
+    "jest": "27.0.3",
     "karma": "~6.3.4",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "prettier": "^2.3.1",
     "protractor": "~7.0.0",
+    "ts-jest": "27.0.3",
     "ts-node": "~8.3.0",
-    "typescript": "~4.3.5",
-    "@nrwl/workspace": "12.8.0",
-    "prettier": "^2.3.1"
+    "typescript": "~4.3.5"
   }
 }

@@ -17,10 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "subsink",
-              "lodash"
-            ],
+            "allowedCommonJsDependencies": ["subsink", "lodash"],
             "outputPath": "dist/apps/angular-raspi-ui2",
             "index": "apps/angular-raspi-ui2/src/index.html",
             "main": "apps/angular-raspi-ui2/src/main.ts",
@@ -30,9 +27,7 @@
               "apps/angular-raspi-ui2/src/favicon.ico",
               "apps/angular-raspi-ui2/src/assets"
             ],
-            "styles": [
-              "apps/angular-raspi-ui2/src/styles.scss"
-            ],
+            "styles": ["apps/angular-raspi-ui2/src/styles.scss"],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -89,30 +84,10 @@
             "browserTarget": "angular-raspi-ui2:build"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "apps/angular-raspi-ui2/src/test.ts",
-            "polyfills": "apps/angular-raspi-ui2/src/polyfills.ts",
-            "tsConfig": "apps/angular-raspi-ui2/tsconfig.spec.json",
-            "karmaConfig": "apps/angular-raspi-ui2/karma.conf.js",
-            "assets": [
-              "apps/angular-raspi-ui2/src/favicon.ico",
-              "apps/angular-raspi-ui2/src/assets"
-            ],
-            "styles": [
-              "apps/angular-raspi-ui2/src/styles.scss"
-            ],
-            "scripts": []
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ],
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"],
             "tsConfig": [
               "apps/angular-raspi-ui2/tsconfig.app.json",
               "apps/angular-raspi-ui2/tsconfig.spec.json"
@@ -129,6 +104,14 @@
             "production": {
               "devServerTarget": "angular-raspi-ui2:serve:production"
             }
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/angular-raspi-ui2"],
+          "options": {
+            "jestConfig": "apps/angular-raspi-ui2/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }
@@ -152,10 +135,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ],
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"],
             "tsConfig": "apps/angular-raspi-ui2-e2e/tsconfig.json"
           }
         }
