@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import "~@angular/material/theming";
 @import "./palettes";
 
@@ -13,12 +14,12 @@ body {
 }
 
 
-@include mat-core();
+@include mat.core();
 
-$app-theme-light: mat-light-theme($raspi-app-palette-primary, $raspi-app-palette-accent, $raspi-app-palette-warn);
-@include angular-material-theme($app-theme-light);
+$app-theme-light: mat.define-light-theme($raspi-app-palette-primary, $raspi-app-palette-accent, $raspi-app-palette-warn);
+@include mat.all-component-themes($app-theme-light);
 
 .theme-dark {
-  $app-theme-dark: mat-dark-theme($raspi-app-palette-primary, $raspi-app-palette-accent, $raspi-app-palette-warn);
-  @include angular-material-theme($app-theme-dark);
+  $app-theme-dark: mat.define-dark-theme($raspi-app-palette-primary, $raspi-app-palette-accent, $raspi-app-palette-warn);
+  @include mat.all-component-themes($app-theme-dark);
 }

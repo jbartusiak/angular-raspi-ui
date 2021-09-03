@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import "src/palettes";
 
 .ToggleButton {
@@ -5,12 +6,12 @@
 }
 
 .Downloading {
-  background-color: mat-color($raspi-app-palette-primary, A400);
+  background-color: mat.get-color-from-palette($raspi-app-palette-primary, A400);
   animation: Breathe alternate infinite 1s;
 }
 
 .Seeding {
-  background-color: mat-color($raspi-app-palette-accent, 700);
+  background-color: mat.get-color-from-palette($raspi-app-palette-accent, 700);
   animation: Breathe alternate infinite 1s;
 }
 
