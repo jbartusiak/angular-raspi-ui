@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "nx",
     "start": "ng serve -o",
-    "build": "npm run replacr && ng build --configuration production",
+    "build": "ng build --configuration production",
     "replacr": "node tools/replacer/replace_placeholder_address.js",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",

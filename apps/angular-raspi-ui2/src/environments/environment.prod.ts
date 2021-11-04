@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverIp: '${PLACEHOLDER}',
+  serverIp: 'HOST_IP_ADDRESS',
 };

@@ -7,7 +7,7 @@ fs.readFile(FILE_PATH, (readError, data) => {
   if (readError) {
     return console.error(readError);
   }
-  const result = data.toString().replace(/\${PLACEHOLDER}/g, '192.168.0.29');
+  const result = data.toString().replace(/HOST_IP_ADDRESS/g, '192.168.0.29');
   fs.writeFile(FILE_PATH, result, (writeError) => {
     if (writeError) return console.error(writeError);
   })
