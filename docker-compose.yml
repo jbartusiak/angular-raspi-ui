@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  angular_raspi_ui:
+    container_name: angular-raspi-ui
+    image: satanicus1991/angular-raspi-ui:latest
+    ports:
+      - "80:80/tcp"
+    environment:
+      HOST_IP_ADDRESS: ${HOST_IP_ADDRESS}
+    restart: unless-stopped
