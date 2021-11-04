@@ -5,7 +5,6 @@
     "ng": "nx",
     "start": "ng serve -o",
     "build": "ng build --configuration production",
-    "replacr": "node tools/replacer/replace_placeholder_address.js",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
