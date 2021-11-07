@@ -19,7 +19,6 @@ export const stateMetaReducer = <S, A extends Action = Action>(reducer: ActionRe
     if (onInit) {
       onInit           = false;
       const savedState = getSavedState(LOCAL_STORAGE_KEY);
-      savedState.router = undefined;
       return {
         ...savedState,
         ...nextState,
