@@ -32,7 +32,7 @@ export class TorrentClientService {
     const requestBody = {
       magnet,
       autostart,
-      downloadDir: `/mount/${ directory }/Media/${ category }`,
+      downloadDir: `/mnt/${ directory }/Media/${ category }`,
     };
     console.log('adding new torrent');
 
