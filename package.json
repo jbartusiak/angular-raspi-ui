@@ -1,6 +1,6 @@
 {
   "name": "angular-raspi-ui2",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "scripts": {
     "ng": "nx",
     "start": "ng serve -o",
